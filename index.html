@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>منصّة كيمياء الثاني عشر</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;800&family=Tajawal:wght@400;500;700&display=swap">
+<style>
+/* منصّة دروس: شريط علوي ← بطاقة الدرس الحالي ← شجرة المادة (فصل ← وحدة ← دروس) بألوان درس الهالوجينات نفسها */
+:root {
+  --ink: #1C222C; --panel: #272E3A; --panel2: #313948; --line: #4A5568;
+  --fg: #F3F0EA; --muted: #C5CCD6;
+  --gold: #E0A93A; --teal: #22A091; --on-gold: #1C222C;
+  --display: "Cairo", "Tajawal", "Segoe UI", Tahoma, sans-serif;
+  --body: "Tajawal", "Segoe UI", Tahoma, sans-serif;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) {
+  --ink: #F6F3EC; --panel: #FFFFFF; --panel2: #E9EDF2; --line: #C3CAD4; --fg: #1E2530; --muted: #4E5866;
+  --gold: #9A6410; --teal: #12796C; --on-gold: #FFFFFF; color-scheme: light; } }
+:root[data-theme="light"] {
+  --ink: #F6F3EC; --panel: #FFFFFF; --panel2: #E9EDF2; --line: #C3CAD4; --fg: #1E2530; --muted: #4E5866;
+  --gold: #9A6410; --teal: #12796C; --on-gold: #FFFFFF; color-scheme: light; }
+html, body { background: var(--ink); color: var(--fg); }
+body { font-family: var(--body); font-size: 18px; line-height: 1.65; direction: rtl; }
+.gut { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.wrap { max-width: 1100px; margin: 0 auto; }
+a { color: inherit; }
+.f { unicode-bidi: isolate; direction: ltr; display: inline-block; }
+h1, h2, h3 { font-family: var(--display); margin: 0; line-height: 1.35; text-wrap: balance; }
+p { margin: 0; }
+button, .btn { font: inherit; font-weight: 700; min-height: 48px; padding: 6px 18px; border-radius: 12px; cursor: pointer; border: 2px solid var(--line); background: transparent; color: var(--fg); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+button:hover, .btn:hover { border-color: var(--gold); }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+.btn.gold { background: var(--gold); border-color: var(--gold); color: var(--on-gold); }
+
+.top { background: var(--panel); border-bottom: 1px solid var(--line); padding-block: 10px; }
+.top .wrap { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; justify-content: space-between; }
+.brand { font-family: var(--display); font-weight: 800; color: var(--gold); font-size: 1.2rem; }
+.teacher { color: var(--muted); }
+
+main { padding-block: 24px 48px; }
+main .wrap { display: grid; gap: 28px; }
+.hero { display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: center; }
+@media (max-width: 720px) { .hero { grid-template-columns: 1fr; } .tiles { justify-content: start; } }
+.hero h1 { font-size: clamp(2rem, 5vw, 3rem); }
+.hero h1 span { color: var(--gold); }
+.hero .lead { color: var(--muted); font-size: 1.15rem; max-width: 52ch; margin-top: 6px; }
+.tiles { display: flex; gap: 8px; direction: ltr; justify-content: end; }
+.tile { width: 64px; height: 72px; border-radius: 10px; background: var(--c); color: #1C222C; display: grid; grid-template-rows: auto 1fr; padding: 4px 6px; text-align: center; }
+.tile small { text-align: left; font-size: .7rem; font-weight: 700; }
+.tile b { font-family: var(--display); font-size: 1.6rem; line-height: 1; align-self: center; }
+
+.crumbs { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; color: var(--muted); font-size: .95rem; }
+.crumbs b { color: var(--fg); }
+
+.terms { display: flex; flex-wrap: wrap; gap: 10px; }
+.term { border-radius: 999px; }
+.term[aria-pressed="true"] { background: var(--gold); border-color: var(--gold); color: var(--on-gold); }
+.term:disabled { opacity: .55; cursor: not-allowed; }
+
+.unit { background: var(--panel); border-radius: 16px; padding: 18px; display: grid; gap: 14px; }
+.unit-head { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: baseline; }
+.unit-head .num { background: var(--teal); color: #fff; border-radius: 999px; padding: 2px 14px; font-weight: 700; font-size: .95rem; }
+.unit-head h2 { font-size: 1.5rem; }
+.lessons { display: grid; gap: 12px; }
+.lesson { border: 2px dashed var(--line); border-radius: 14px; padding: 14px 16px; display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; justify-content: space-between; color: var(--muted); }
+.lesson .ln { font-weight: 700; color: var(--fg); }
+.lesson.live { border: 2px solid var(--gold); background: var(--panel2); color: var(--fg); display: grid; gap: 14px; justify-content: stretch; }
+.live-head { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; justify-content: space-between; }
+.live h3 { font-size: 1.4rem; }
+.badge { border: 1px solid var(--line); border-radius: 999px; padding: 1px 12px; font-size: .9rem; color: var(--muted); }
+.badges { display: flex; flex-wrap: wrap; gap: 8px; }
+.periods { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+@media (max-width: 860px) { .periods { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 460px) { .periods { grid-template-columns: 1fr; } }
+.period { display: grid; gap: 4px; background: var(--panel); border: 2px solid var(--line); border-radius: 12px; padding: 10px 12px; text-decoration: none; min-width: 0; }
+.period:hover { border-color: var(--gold); }
+.period .pn { font-family: var(--display); font-weight: 800; color: var(--gold); }
+.period .pd { font-size: .9rem; color: var(--muted); }
+.period .pt { font-weight: 500; }
+.soon { font-size: .9rem; border: 1px solid var(--line); border-radius: 999px; padding: 1px 12px; }
+.note { color: var(--muted); text-align: center; }
+footer { border-top: 1px solid var(--line); padding-block: 16px; color: var(--muted); text-align: center; font-size: .95rem; }
+[hidden] { display: none !important; }
+body { margin: 0; }
+</style>
+
+<div class="top gut">
+  <div class="wrap">
+    <span class="brand">⚗ منصّة كيمياء الثاني عشر</span>
+    <span class="teacher">أ. نورهان زاهر · الثاني عشر</span>
+    <button id="theme" aria-label="بدّلي بين الوضع الفاتح والغامق"></button>
+  </div>
+</div>
+
+<main class="gut">
+  <div class="wrap">
+    <section class="hero">
+      <div>
+        <h1>الكيمياء <span>للصف الثاني عشر</span></h1>
+        <p class="lead">دروس تفاعلية للحصة: شرائح وألعاب ومحاكاة وتجارب، مرتّبة حسب الفصل الدراسي والوحدة والدرس.</p>
+      </div>
+      <div class="tiles" aria-hidden="true">
+        <div class="tile" style="--c:#E8E79A"><small>9</small><b>F</b></div>
+        <div class="tile" style="--c:#B5D86A"><small>17</small><b>Cl</b></div>
+        <div class="tile" style="--c:#C8603E"><small>35</small><b>Br</b></div>
+        <div class="tile" style="--c:#8E6BC4"><small>53</small><b>I</b></div>
+      </div>
+    </section>
+
+    <section id="chemistry" style="display:grid;gap:16px">
+      <nav class="crumbs" aria-label="المسار"><span>الكيمياء</span><span>›</span><b>الفصل الدراسي الأول</b></nav>
+      <div class="terms" role="group" aria-label="الفصل الدراسي">
+        <button class="term" aria-pressed="true">الفصل الدراسي الأول</button>
+        <button class="term" disabled title="يُضاف لاحقاً">الفصل الدراسي الثاني · قريباً</button>
+      </div>
+
+      <article class="unit" id="unit1">
+        <div class="unit-head">
+          <span class="num">الوحدة الأولى</span>
+          <h2>الاتجاهات الدورية في خصائص العناصر</h2>
+        </div>
+        <div class="lessons">
+          <div class="lesson"><span class="ln">الدرس الأول</span><span class="soon">يُضاف قريباً</span></div>
+          <div class="lesson"><span class="ln">الدرس الثاني</span><span class="soon">يُضاف قريباً</span></div>
+
+          <div class="lesson live" id="lesson3">
+            <div class="live-head">
+              <div>
+                <span class="badge">الدرس الثالث</span>
+                <h3>الكيمياء الوصفية لعناصر المجموعة السابعة (الهالوجينات)</h3>
+              </div>
+              <a class="btn gold" href="chemistry/term1/unit1/lesson3.html">ابدئي الدرس ←</a>
+            </div>
+            <div class="badges">
+              <span class="badge">٤ حصص</span><span class="badge">٣٤ شريحة</span><span class="badge">٨ أهداف قابلة للقياس</span>
+              <span class="badge">ألعاب فريقين</span><span class="badge">محاكاة</span><span class="badge">استقصاء</span>
+            </div>
+            <div class="periods">
+              <a class="period" href="chemistry/term1/unit1/lesson3.html#p1"><span class="pn">الحصة الأولى</span><span class="pd">الخميس <span class="f">29/10/2026</span></span><span class="pt">العائلة والقوى بين الجزيئات</span></a>
+              <a class="period" href="chemistry/term1/unit1/lesson3.html#p2"><span class="pn">الحصة الثانية</span><span class="pd">الأحد <span class="f">1/11/2026</span></span><span class="pt">التدرّج في الخصائص والعناصر النقية</span></a>
+              <a class="period" href="chemistry/term1/unit1/lesson3.html#p3"><span class="pn">الحصة الثالثة</span><span class="pd">الاثنين <span class="f">2/11/2026</span></span><span class="pt">العوامل المؤكسدة والهاليدات</span></a>
+              <a class="period" href="chemistry/term1/unit1/lesson3.html#p4"><span class="pn">الحصة الرابعة</span><span class="pd">الثلاثاء <span class="f">3/11/2026</span></span><span class="pt">هاليدات الهيدروجين واستقصاء أيون الهاليد</span></a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <p class="note">بقية الوحدات والدروس تُضاف تباعاً.</p>
+    </section>
+  </div>
+</main>
+
+<footer class="gut">أ. نورهان زاهر · الكيمياء · العام الدراسي <span class="f">2026 / 2027</span></footer>
+
+<script>
+const root = document.documentElement;
+root.dir = "rtl"; root.lang = "ar";
+const btn = document.getElementById("theme");
+function isLight() { const t = root.dataset.theme; return t ? t === "light" : matchMedia("(prefers-color-scheme: light)").matches; }
+function label() { btn.textContent = isLight() ? "🌙 غامق" : "☀ فاتح"; }
+try { const saved = localStorage.getItem("chem-theme"); if (saved) root.dataset.theme = saved; } catch (e) {}
+btn.onclick = () => {
+  const next = isLight() ? "dark" : "light";
+  root.dataset.theme = next;
+  try { localStorage.setItem("chem-theme", next); } catch (e) {}
+  label();
+};
+new MutationObserver(label).observe(root, { attributes: true, attributeFilter: ["data-theme"] });
+label();
+</script>
