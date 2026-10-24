@@ -231,11 +231,12 @@ tr.sel { background: rgba(255,255,255,.07); }
 </style>
 
 <nav class="crumbs gut" aria-label="مكان الدرس في المنصّة">
-  <a href="../../../index.html">🏠 الرئيسية</a><span>›</span><a href="../../../study.html">الدراسة</a><span>›</span><a href="../../index.html">الكيمياء</a><span>›</span><a href="../index.html">الفصل الدراسي الأول</a><span>›</span><a href="index.html">الوحدة الأولى</a><span>›</span><b>الدرس الثالث: الهالوجينات</b>
+  <a href="../../../index.html"><img src="../../../assets/avatar.webp" alt="" width="22" height="22" style="width:22px;height:22px;border-radius:50%;vertical-align:middle;margin-inline-end:6px">الرئيسية</a><span>›</span><a href="../../../study.html">الدراسة</a><span>›</span><a href="../../index.html">الكيمياء</a><span>›</span><a href="../index.html">الفصل الدراسي الأول</a><span>›</span><a href="index.html">الوحدة الأولى</a><span>›</span><b>الدرس الثالث: الهالوجينات</b>
 </nav>
 <header class="gut">
   <span class="brand">⚗ الهالوجينات · المجموعة ١٧</span>
   <div class="parts" role="group" aria-label="الحصة"><button class="pill" data-gopart="1">الحصة الأولى</button><button class="pill" data-gopart="2">الحصة الثانية</button><button class="pill" data-gopart="3">الحصة الثالثة</button><button class="pill" data-gopart="4">الحصة الرابعة</button></div>
+  <button id="fs" class="pill" type="button">⛶ ملء الشاشة</button>
   <button id="theme" class="pill" aria-label="بدّلي بين الوضع الفاتح والغامق"></button>
   <div class="score" aria-label="نقاط الفريقين">
     <div class="team"><span>فريق الفلور</span><b id="sA">0</b><button data-team="A" data-d="1" aria-label="نقطة لفريق الفلور">+١</button><button data-team="A" data-d="-1" aria-label="أنقصي نقطة من فريق الفلور">−</button></div>
@@ -1378,6 +1379,13 @@ $("theme").onclick = () => {
 new MutationObserver(themeLabel).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
 themeLabel();
 
+// ملء الشاشة
+(() => {
+  const b = $("fs"); if (!document.fullscreenEnabled) { b.hidden = true; return; }
+  const lab = () => { b.textContent = document.fullscreenElement ? "↙ تصغير الشاشة" : "⛶ ملء الشاشة"; };
+  b.onclick = () => { (document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen()).catch(() => {}); };
+  document.addEventListener("fullscreenchange", lab); lab();
+})();
 const hp = (location.hash.match(/^#p([1-4])$/) || [])[1];
 go(hp ? slides.findIndex((x) => x.dataset.part === hp) : 0);
 </script>
