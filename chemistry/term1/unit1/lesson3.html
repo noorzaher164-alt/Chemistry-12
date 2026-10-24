@@ -2,14 +2,15 @@
 <html lang="ar" dir="rtl">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>try { document.documentElement.dataset.theme = localStorage.getItem("chem-theme") || "light"; } catch (e) { document.documentElement.dataset.theme = "light"; }</script>
 <title>الدرس الثالث: الهالوجينات</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;800&family=Tajawal:wght@400;500;700&display=swap">
 <style>
-/* شاشة بروجكتور داكنة: شريط علوي (الحصة + نقاط الفريقين) ← شريحة واحدة في المنتصف ← شريط تنقّل سفلي */
+/* ألوان المنصّة (عنّابي ووردي وكريمي)، فاتحة افتراضياً:  شريط علوي (الحصة + نقاط الفريقين) ← شريحة واحدة في المنتصف ← شريط تنقّل سفلي */
 :root {
-  --ink: #1C222C; --panel: #272E3A; --panel2: #313948; --line: #4A5568;
-  --fg: #F3F0EA; --muted: #C5CCD6;
-  --gold: #E0A93A; --teal: #22A091; --ok: #46B07A; --bad: #E0705A; --violet: #A27AD8;
+  --ink: #24161B; --panel: #33212A; --panel2: #432C37; --line: #6A4A57;
+  --fg: #F8ECEF; --muted: #D6BFC6;
+  --gold: #E6A9B9; --teal: #A8546C; --ok: #46B07A; --bad: #E0705A; --violet: #A27AD8;
   --display: "Cairo", "Tajawal", "Segoe UI", Tahoma, sans-serif;
   --body: "Tajawal", "Segoe UI", Tahoma, sans-serif;
   --glass: #E6E1D8; --liquid: rgba(214,240,255,.18);
@@ -17,12 +18,12 @@
 }
 /* النسخة الفاتحة: نفس الهوية بألوان أعمق للذهبي والفيروزي كي يبقى التباين واضحاً */
 @media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) {
-  --ink: #F6F3EC; --panel: #FFFFFF; --panel2: #E9EDF2; --line: #B9C1CC; --fg: #1E2530; --muted: #4E5866;
-  --gold: #9A6410; --teal: #12796C; --ok: #2E8A57; --bad: #C24A33; --glass: #5A6472; --liquid: rgba(90,150,190,.22);
+  --ink: #FBF4F1; --panel: #FFFFFF; --panel2: #F5E6E8; --line: #E0C3C9; --fg: #3B1E28; --muted: #74545F;
+  --gold: #8C1F3F; --teal: #A14A63; --ok: #2E8A57; --bad: #C24A33; --glass: #8A6E76; --liquid: rgba(90,150,190,.22);
   color-scheme: light; } }
 :root[data-theme="light"] {
-  --ink: #F6F3EC; --panel: #FFFFFF; --panel2: #E9EDF2; --line: #B9C1CC; --fg: #1E2530; --muted: #4E5866;
-  --gold: #9A6410; --teal: #12796C; --ok: #2E8A57; --bad: #C24A33; --glass: #5A6472; --liquid: rgba(90,150,190,.22);
+  --ink: #FBF4F1; --panel: #FFFFFF; --panel2: #F5E6E8; --line: #E0C3C9; --fg: #3B1E28; --muted: #74545F;
+  --gold: #8C1F3F; --teal: #A14A63; --ok: #2E8A57; --bad: #C24A33; --glass: #8A6E76; --liquid: rgba(90,150,190,.22);
   color-scheme: light; }
 /* ألوان الرسوم مكتوبة في الشيفرة، فنربطها بالتوكنات من هنا */
 svg [stroke="#E6E1D8"], svg [stroke="#E6F2F0"] { stroke: var(--glass); }
@@ -1365,7 +1366,9 @@ document.documentElement.dir = "rtl"; document.documentElement.lang = "ar";
 // ── الوضع الفاتح والغامق ──
 function isLight() { const t = document.documentElement.dataset.theme; return t ? t === "light" : matchMedia("(prefers-color-scheme: light)").matches; }
 function themeLabel() { $("theme").textContent = isLight() ? "🌙 غامق" : "☀ فاتح"; }
-try { const saved = localStorage.getItem("chem-theme"); if (saved) document.documentElement.dataset.theme = saved; } catch (e) {}
+let savedTheme = null;
+try { savedTheme = localStorage.getItem("chem-theme"); } catch (e) {}
+document.documentElement.dataset.theme = savedTheme || "light";
 $("theme").onclick = () => {
   const next = isLight() ? "dark" : "light";
   document.documentElement.dataset.theme = next;

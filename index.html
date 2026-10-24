@@ -6,7 +6,7 @@
 <title>منصّة أ. نورهان زاهر</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;800&family=Tajawal:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="assets/site.css">
-<script>try { const t = localStorage.getItem("chem-theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
+<script>try { document.documentElement.dataset.theme = localStorage.getItem("chem-theme") || "light"; } catch (e) { document.documentElement.dataset.theme = "light"; }</script>
 </head>
 <body>
 <div class="top gut"><div class="wrap">
@@ -15,16 +15,14 @@
 </div></div>
 <main class="gut"><div class="wrap">
 
-<section class="hero">
-  <div class="tiles" aria-hidden="true">
-    <div class="tile" style="--c:#E8E79A"><small>9</small><b>F</b></div>
-    <div class="tile" style="--c:#B5D86A"><small>17</small><b>Cl</b></div>
-    <div class="tile" style="--c:#C8603E"><small>35</small><b>Br</b></div>
-    <div class="tile" style="--c:#8E6BC4"><small>53</small><b>I</b></div>
+<section class="hero2">
+  <div class="hero-text">
+    <span class="eyebrow">✦ الكيمياء · الصف الثاني عشر</span>
+    <h1>أهلاً بكِ في <span>منصّة أ. نورهان زاهر</span></h1>
+    <p class="lead">دروس تفاعلية للحصة: شرائح وألعاب ومحاكاة وتجارب، تصلين إليها خطوة بخطوة.</p>
+    <a class="btn gold big" href="study.html">📚 الدراسة</a>
   </div>
-  <h1>أهلاً بكِ في <span>منصّة أ. نورهان زاهر</span></h1>
-  <p class="lead">دروس تفاعلية للحصة: شرائح وألعاب ومحاكاة وتجارب، تصلين إليها خطوة بخطوة.</p>
-  <a class="btn gold big" href="study.html">📚 الدراسة</a>
+  <figure class="hero-img"><img src="assets/teacher.webp" alt="معلّمة كيمياء بمعطف المختبر أمام الكتب والأدوات والجدول الدوري" width="1536" height="1024"></figure>
 </section>
 </div></main>
 <footer class="gut">أ. نورهان زاهر · العام الدراسي <span class="f">2026 / 2027</span></footer>
