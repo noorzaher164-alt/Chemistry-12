@@ -123,5 +123,10 @@ a.card:hover { border-color: var(--wine); }
 @keyframes twinkle { 0%, 100% { opacity: .35; transform: scale(.85) } 50% { opacity: 1; transform: scale(1.1) } }
 @keyframes rise { from { opacity: 0; transform: translateY(14px) } to { opacity: 1; transform: none } }
 
+.actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn.ghost { background: var(--paper); color: var(--wine); border: 1.5px solid var(--wine); box-shadow: none; }
+.btn.ghost:hover { background: var(--blush); }
+.embed { border-radius: 24px; overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow); background: var(--paper); }
+.embed iframe { display: block; width: 100%; height: min(78vh, 900px); border: 0; }
 footer { padding-block: 18px; color: var(--muted); text-align: center; font-size: .95rem; border-top: 1px solid var(--line); }
 footer b { color: var(--wine); }
