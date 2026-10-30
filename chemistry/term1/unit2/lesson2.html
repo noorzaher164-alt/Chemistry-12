@@ -72,8 +72,6 @@ svg { display: block; max-width: 100%; height: auto; direction: ltr; }
 .mcard.done { border-color: #2E8A57; background: rgba(46,138,87,.1); cursor: default; }
 .shake { animation: shake .35s; }
 @keyframes shake { 25% { transform: translateX(-6px) } 75% { transform: translateX(6px) } }
-.wheel-btn { width: 54px; height: 54px; border-radius: 50%; border: 3px solid var(--paper); box-shadow: 0 0 0 1.5px var(--line); cursor: pointer; }
-.wheel-btn[aria-pressed="true"] { box-shadow: 0 0 0 4px var(--wine); }
 .hero-q { font-family: var(--display); font-size: clamp(1.6rem, 4vw, 2.4rem); color: var(--fg); text-align: center; line-height: 1.4; }
 .hero-q span { color: var(--wine); }
 .f { unicode-bidi: isolate; direction: ltr; display: inline-block; }
@@ -106,9 +104,9 @@ svg { display: block; max-width: 100%; height: auto; direction: ltr; }
 <!-- ١ الغلاف -->
 <section class="slide">
   <div class="kicker"><span class="chip">الوحدة الثانية · الدرس الثاني</span><span class="chip">التهيئة</span></div>
-  <p class="hero-q">لماذا محلول كبريتات النحاس <span>أزرق</span>…<br>ومحلول كلوريد الكالسيوم <span>عديم اللون</span>؟</p>
+  <p class="hero-q">لماذا محلول كبريتات النحاس <span>أزرق</span>…<br>ومحلول كبريتات الخارصين <span>عديم اللون</span>؟</p>
   <div class="stage" style="padding:12px">
-    <svg viewBox="0 0 520 230" style="max-height:300px;width:auto;margin:0 auto" role="img" aria-label="كأس محلول كبريتات النحاس الأزرق وكأس محلول كلوريد الكالسيوم عديم اللون">
+    <svg viewBox="0 0 520 245" style="max-height:300px;width:auto;margin:0 auto" role="img" aria-label="كأس محلول كبريتات النحاس الأزرق وكأس محلول كبريتات الخارصين عديم اللون">
       <g transform="translate(70 20)">
         <path d="M 10 10 L 10 170 Q 10 190 30 190 L 130 190 Q 150 190 150 170 L 150 10" fill="none" stroke="#8A6E76" stroke-width="5"/>
         <rect x="14" y="70" width="132" height="116" rx="14" fill="#2F7FD0" opacity=".75"/>
@@ -117,14 +115,14 @@ svg { display: block; max-width: 100%; height: auto; direction: ltr; }
       <g transform="translate(300 20)">
         <path d="M 10 10 L 10 170 Q 10 190 30 190 L 130 190 Q 150 190 150 170 L 150 10" fill="none" stroke="#8A6E76" stroke-width="5"/>
         <rect x="14" y="70" width="132" height="116" rx="14" fill="#CFE3EF" opacity=".55"/>
-        <text x="80" y="214" text-anchor="middle" font-size="18" font-weight="700" fill="#3B1E28">CaCl₂(aq)</text>
+        <text x="80" y="214" text-anchor="middle" font-size="18" font-weight="700" fill="#3B1E28">ZnSO₄(aq)</text>
       </g>
     </svg>
   </div>
   <div class="row" style="justify-content:center">
     <button class="pill" data-reveal="hook">ما الفرق بينهما؟ تلميح</button>
   </div>
-  <p class="note" id="hook" hidden>النحاس عنصر انتقالي، وأيونه <span class="f">Cu²⁺</span> فيه أفلاك <span class="f">d</span> مملوءة جزئياً. أمّا <span class="f">Ca²⁺</span> فليس فيه أي إلكترون في أفلاك <span class="f">d</span>. سنكتشف اليوم كيف يصنع ذلك الفرق اللون.</p>
+  <p class="note" id="hook" hidden>النحاس عنصر انتقالي، وأيونه <span class="f">Cu²⁺</span> فيه أفلاك <span class="f">d</span> مملوءة جزئياً. أمّا <span class="f">Zn²⁺</span> فأفلاك <span class="f">d</span> فيه ممتلئة تماماً. سنكتشف اليوم كيف يصنع ذلك الفرق اللون.</p>
 </section>
 
 <!-- ٢ الأهداف -->
@@ -132,7 +130,7 @@ svg { display: block; max-width: 100%; height: auto; direction: ltr; }
   <div class="kicker"><span class="chip">أهداف قابلة للقياس</span></div>
   <h2 class="st">أهداف الدرس</h2>
   <div class="two">
-    <div class="box goalcard"><span class="gnum">الهدف ١</span><p class="gtext">أن تفسّر الطالبة سبب ألوان البلورات والمحاليل المائية لأيونات العناصر الانتقالية بانقسام أفلاك <span class="f">d</span> عند ارتباط الليجندات، وتعلّل عدم تلوّن محلول أيونات الكالسيوم.</p><p><b>معيار النجاح:</b> إجابة صحيحة عن سؤالين من ثلاثة في غلق الهدف.</p></div>
+    <div class="box goalcard"><span class="gnum">الهدف ١</span><p class="gtext">أن تفسّر الطالبة سبب ألوان البلورات والمحاليل المائية لأيونات العناصر الانتقالية بانقسام أفلاك <span class="f">d</span> عند ارتباط الليجندات، وتعلّل عدم تلوّن بعض محاليلها.</p><p><b>معيار النجاح:</b> إجابة صحيحة عن سؤالين من ثلاثة في غلق الهدف.</p></div>
     <div class="box goalcard"><span class="gnum">الهدف ٢</span><p class="gtext">أن تكتب الطالبة التوزيع الإلكتروني لأيونات العناصر الانتقالية، وتحدّد الجسيمات المتساوية إلكترونياً.</p><p><b>معيار النجاح:</b> تكوين الأزواج الثلاثة في اللعبة، وإجابة صحيحة عن سؤالين من ثلاثة.</p></div>
   </div>
 </section>
@@ -177,11 +175,7 @@ svg { display: block; max-width: 100%; height: auto; direction: ltr; }
       <p class="muted" id="ion-why" style="text-align:center"></p>
     </div>
   </div>
-  <div class="box">
-    <h3>لا يمكن للمحلول المائي لأيونات الكالسيوم إظهار لون مميّز، بسبب:</h3>
-    <button class="pill solid" data-reveal="ca-why" style="justify-self:start">أظهري الإجابة</button>
-    <p class="answer" id="ca-why" hidden><span class="f">₂₀Ca : [Ar] 4s²</span> و <span class="f">Ca²⁺ : [Ar]</span>. لأنه لا يحتوي على إلكترونات في الفلك <span class="f">d</span>.</p>
-  </div>
+  <p class="note">القاعدة: يكون المحلول <b>ملوّناً</b> عندما تكون أفلاك <span class="f">d</span> مملوءة <b>جزئياً</b>، ويكون <b>عديم اللون</b> عندما تكون فارغة (مثل <span class="f">Sc³⁺</span>) أو ممتلئة تماماً (مثل <span class="f">Zn²⁺</span>).</p>
 </section>
 
 <!-- ٥ انقسام أفلاك d -->
@@ -204,25 +198,6 @@ svg { display: block; max-width: 100%; height: auto; direction: ltr; }
         <li id="st3" class="muted"><b>يعكس</b> أيون الفلز الانتقالي اللون <b>المتمّم</b> للون الممتص، فنراه.</li>
       </ol>
       <p class="note" id="sp-msg">اضغطي «اربطي الليجندات» لتبدئي.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ٦ عجلة الألوان -->
-<section class="slide">
-  <div class="kicker"><span class="chip goal">الهدف ١</span><span>لعبة</span></div>
-  <h2 class="st">الضوء الأبيض مزيج من الألوان: ما اللون الذي نراه؟</h2>
-  <div class="two">
-    <div class="box">
-      <p>اختاري اللون الذي <b>يمتصّه</b> المحلول من الضوء الأبيض:</p>
-      <div class="row" id="wheel"></div>
-      <p class="muted">يصل إلى عينكِ اللون <b>المتمّم</b>، أي المقابل له في عجلة الألوان.</p>
-      <svg viewBox="0 0 240 240" width="240" style="margin:0 auto" role="img" aria-label="عجلة الألوان" id="wheel-svg"></svg>
-    </div>
-    <div class="box beaker-wrap">
-      <svg viewBox="0 0 200 210" width="200" role="img" aria-label="لون المحلول الذي نراه"><path d="M 30 10 L 30 170 Q 30 190 50 190 L 150 190 Q 170 190 170 170 L 170 10" fill="none" stroke="#8A6E76" stroke-width="5"/><rect id="wh-liq" x="34" y="70" width="132" height="116" rx="14" fill="#2F7FD0" opacity=".8"/></svg>
-      <p class="verdict" id="wh-text"></p>
-      <p class="note">مثال: محلول <span class="f">CuSO₄</span> يمتصّ اللون البرتقالي من الضوء الأبيض، فيعكس المتمّم له: <b>الأزرق</b>.</p>
     </div>
   </div>
 </section>
@@ -362,7 +337,6 @@ const mcq = (q, opts, ans, why) => `<div class="mcq box" data-answer="${ans}"><p
 
 // ── ملوّن أم عديم اللون ──
 const IONS = [
-  { s: "Ca²⁺", z: 20, d: 0, cfg: "[Ar]", col: "#CFE3EF", name: "عديم اللون" },
   { s: "Sc³⁺", z: 21, d: 0, cfg: "[Ar]", col: "#CFE3EF", name: "عديم اللون" },
   { s: "Ti³⁺", z: 22, d: 1, cfg: "[Ar] 3d¹", col: "#8E4FB8", name: "بنفسجي" },
   { s: "Mn²⁺", z: 25, d: 5, cfg: "[Ar] 3d⁵", col: "#F2B8C6", name: "وردي باهت" },
@@ -377,7 +351,7 @@ function dBoxes(n) { // ملء هوند: سهم لأعلى في كل فلك ثم
   for (let i = 0; i < n; i++) b[i % 5] += i < 5 ? "↑" : "↓";
   return b.map((x) => `<span class="orb">${x}</span>`).join("");
 }
-let ionSel = 7;
+let ionSel = 6;
 function ionDraw() {
   $("ion-pick").innerHTML = IONS.map((x, i) => `<button class="pill f" data-i="${i}" aria-pressed="${i === ionSel}">${x.s}</button>`).join("");
   const x = IONS[ionSel];
@@ -419,45 +393,26 @@ function spDraw() {
     el("path", { d: "M 400 210 C 440 170, 440 120, 410 92", stroke: "#2E8A57", "stroke-width": 3, fill: "none", "marker-end": "" }, svg);
     el("path", { d: "M 404 86 L 414 104 L 420 88 Z", fill: "#2E8A57" }, svg);
     const ph = el("g", { class: "photon" }, svg);
-    el("circle", { cx: 360, cy: 160, r: 12, fill: "#F28C28" }, ph);
+    el("circle", { cx: 360, cy: 160, r: 12, fill: "#B8925A" }, ph);
     const pt = el("text", { x: 360, y: 140, "text-anchor": "middle", "font-size": 13, fill: INK }, ph); pt.textContent = "photon";
-    el("rect", { x: 330, y: 250, width: 110, height: 34, rx: 10, fill: "#2F7FD0" }, svg);
-    const ct = el("text", { x: 385, y: 272, "text-anchor": "middle", "font-size": 14, "font-weight": 700, fill: "#fff" }, svg); ct.textContent = "we see: blue";
+
   }
   ["st1", "st2", "st3"].forEach((id, k) => { $(id).classList.toggle("muted", sp.step < k + 1 && !(k === 2 && sp.step >= 2)); });
   $("sp-2").disabled = sp.step !== 1; $("sp-1").disabled = sp.step >= 1;
   $("sp-msg").innerHTML = sp.step === 0 ? "قبل الليجندات: أفلاك d الخمسة لها الطاقة نفسها." :
     sp.step === 1 ? "انفصلت الأفلاك: ثلاثة أقل طاقة (dxy, dyz, dxz) واثنان أعلى طاقة (dx²-y², dz²)." :
-    "امتصّ الإلكترون فوتوناً برتقالياً فقفز إلى فلك أعلى طاقة، فانعكس اللون المتمّم: الأزرق، كما في محلول كبريتات النحاس.";
+    "امتصّ الإلكترون فوتوناً بلون محدّد فقفز إلى فلك أعلى طاقة، فيعكس الأيون اللون المتمّم للون الممتص، فيظهر المحلول ملوّناً.";
 }
 $("sp-1").onclick = () => { sp.step = 1; spDraw(); };
 $("sp-2").onclick = () => { sp.step = 2; spDraw(); };
 $("sp-reset").onclick = () => { sp.step = 0; spDraw(); };
 spDraw();
 
-// ── عجلة الألوان: اللون المتمّم هو المقابل ──
-const WH = [["أحمر", "#D7263D"], ["برتقالي", "#F28C28"], ["أصفر", "#F2D024"], ["أخضر", "#3FA34D"], ["أزرق", "#2F7FD0"], ["بنفسجي", "#7B3FB8"]];
-let whSel = 1;
-function whDraw() {
-  $("wheel").innerHTML = WH.map(([n, c], i) => `<button class="wheel-btn" style="background:${c}" data-w="${i}" aria-pressed="${i === whSel}" aria-label="${n}" title="${n}"></button>`).join("");
-  const svg = $("wheel-svg"); svg.innerHTML = "";
-  WH.forEach(([n, c], i) => {
-    const a0 = (i * 60 - 90) * Math.PI / 180, a1 = ((i + 1) * 60 - 90) * Math.PI / 180, r = 100, cx = 120, cy = 120;
-    el("path", { d: `M ${cx} ${cy} L ${cx + r * Math.cos(a0)} ${cy + r * Math.sin(a0)} A ${r} ${r} 0 0 1 ${cx + r * Math.cos(a1)} ${cy + r * Math.sin(a1)} Z`, fill: c, opacity: i === whSel || i === (whSel + 3) % 6 ? 1 : .3, stroke: "#fff", "stroke-width": 3 }, svg);
-  });
-  el("circle", { cx: 120, cy: 120, r: 30, fill: "#fff" }, svg);
-  const [an, ac] = WH[whSel], [sn, sc] = WH[(whSel + 3) % 6];
-  $("wh-liq").setAttribute("fill", sc);
-  $("wh-text").innerHTML = `يمتصّ: <span style="color:${ac}">${an}</span> ← نرى: <span style="color:${sc}">${sn}</span>`;
-}
-$("wheel").onclick = (e) => { const b = e.target.closest("[data-w]"); if (b) { whSel = Number(b.dataset.w); whDraw(); } };
-whDraw();
-
 // ── غلق الهدف ١ ──
 $("c1").innerHTML = [
   mcq("سبب ألوان محاليل أيونات العناصر الانتقالية:", ["وجود أفلاك d مملوءة جزئياً", "امتلاء أفلاك s", "صغر حجم الأيون"], 0, "وجود أفلاك d المملوءة بشكل جزئي، فتقفز الإلكترونات بين الأفلاك المنفصلة."),
-  mcq("محلول " + f("Ca²⁺") + " عديم اللون لأن:", ["الكالسيوم فلز نشط", "لا يحتوي على إلكترونات في أفلاك d", "أفلاك d ممتلئة تماماً"], 1, f("Ca²⁺ : [Ar]") + " بلا إلكترونات في d."),
-  mcq("محلول يمتصّ اللون البرتقالي، فنراه:", ["برتقالياً", "أزرق", "أحمر"], 1, "نرى اللون المتمّم للون الممتص: الأزرق."),
+  mcq("محلول " + f("Zn²⁺") + " عديم اللون لأن:", ["الخارصين فلز نشط", "أفلاك d فيه ممتلئة تماماً", "أفلاك d فيه مملوءة جزئياً"], 1, f("Zn²⁺ : [Ar] 3d¹⁰") + " فلا تقفز الإلكترونات بين أفلاك d."),
+  mcq("عند ارتباط الليجندات بأيون الفلز الانتقالي، أفلاك d:", ["تنفصل إلى أفلاك أقل طاقة وأعلى طاقة", "تبقى بالطاقة نفسها", "تفقد كل إلكتروناتها"], 0, "تنفصل إلى أفلاك أقل طاقة وأفلاك أعلى طاقة."),
 ].join("");
 
 // ── من الذرّة إلى الأيون ──
@@ -516,7 +471,6 @@ $("c2").innerHTML = [
 const CH = [
   ["ما الليجندات؟", "جزيئات أو أيونات سالبة ترتبط بأيون فلز موجب."],
   ["لماذا محلول " + f("Zn²⁺") + " عديم اللون؟", "لأن أفلاك d فيه ممتلئة تماماً " + f("3d¹⁰") + "، فلا تقفز الإلكترونات بين الأفلاك."],
-  ["محلول يمتصّ اللون الأحمر، ما لونه الذي نراه؟", "المتمّم للأحمر: الأخضر المزرق (السماوي)."],
   ["اكتبي التوزيع الإلكتروني لـ " + f("Mn²⁺"), f("[Ar] 3d⁵")],
   ["اذكري أيوناً متساوياً إلكترونياً مع " + f("Sc³⁺"), f("V⁵⁺") + "، وكلاهما " + f("[Ar]") + "."],
   ["رتّبي خطوات ظهور اللون الثلاث", "انفصال أفلاك d بالليجندات ← قفز الإلكترونات بامتصاص فوتون بلون محدد ← انعكاس اللون المتمّم."],
