@@ -227,6 +227,7 @@ svg { display: block; max-width: 100%; height: auto; direction: ltr; }
     <div class="box">
       <p class="note">عند توزيع الإلكترونات يكون الفلك <span class="f">3d</span> فارغاً، وطاقته أعلى من <span class="f">4s</span>، فيُملأ الفلك <span class="f">4s</span> أولاً.</p>
       <p class="note">وعندما يمتلئ الفلك <span class="f">3d</span> بشكل جزئي تقلّ طاقته وتصبح أقل من <span class="f">4s</span>، لذلك تخرج إلكترونات <span class="f">4s</span> أولاً عند تكوين الأيون.</p>
+      <p class="note" id="cf-ex" hidden style="border-color:#B8925A"></p>
       <p class="answer" id="cf-msg" hidden></p>
     </div>
   </div>
@@ -417,23 +418,30 @@ $("c1").innerHTML = [
 
 // ── من الذرّة إلى الأيون ──
 const ATOMS = [
-  { s: "Fe", z: 26, d: 6, q: 3 }, { s: "Mn", z: 25, d: 5, q: 2 }, { s: "Sc", z: 21, d: 1, q: 3 },
-  { s: "V", z: 23, d: 3, q: 5 }, { s: "Co", z: 27, d: 7, q: 2 }, { s: "Ni", z: 28, d: 8, q: 3 },
+  { s: "Sc", z: 21, s4: 2, d: 1, q: 3 }, { s: "V", z: 23, s4: 2, d: 3, q: 5 }, { s: "Cr", z: 24, s4: 1, d: 5, q: 3 },
+  { s: "Mn", z: 25, s4: 2, d: 5, q: 2 }, { s: "Fe", z: 26, s4: 2, d: 6, q: 3 }, { s: "Co", z: 27, s4: 2, d: 7, q: 2 },
+  { s: "Ni", z: 28, s4: 2, d: 8, q: 3 }, { s: "Cu", z: 29, s4: 1, d: 10, q: 2 },
 ];
+// الكروم والنحاس استثناء: 4s¹ ثم 3d⁵ أو 3d¹⁰ لأن الفلك d نصف الممتلئ أو الممتلئ أكثر استقراراً
 const SUP = { 1: "¹", 2: "²", 3: "³", 4: "⁴", 5: "⁵", 6: "⁶", 7: "⁷", 8: "⁸", 9: "⁹", 10: "¹⁰" };
-let cfSel = 0, cfIon = false;
+let cfSel = 4, cfIon = false;
 function cfDraw() {
-  $("cf-pick").innerHTML = ATOMS.map((a, i) => `<button class="pill f" data-i="${i}" aria-pressed="${i === cfSel}">${a.s} → ${a.s}${SUP[a.q] || ""}⁺</button>`).join("");
+  $("cf-pick").innerHTML = ATOMS.map((a, i) => `<button class="pill f" data-i="${i}" aria-pressed="${i === cfSel}">${a.s} → ${a.s}${a.q === 1 ? "" : SUP[a.q]}⁺</button>`).join("");
   const a = ATOMS[cfSel];
-  let s4 = 2, d = a.d;
-  if (cfIon) { let q = a.q; const fromS = Math.min(2, q); s4 -= fromS; q -= fromS; d -= q; }
+  let s4 = a.s4, d = a.d;
+  const fromS = Math.min(s4, a.q), fromD = a.q - fromS;
+  if (cfIon) { s4 -= fromS; d -= fromD; }
+  const ex = a.s4 === 1;
+  const ionName = `${a.s}${a.q === 1 ? "" : SUP[a.q]}⁺`;
   $("cf-4s").innerHTML = `<span class="orb">${s4 === 2 ? "↑↓" : s4 === 1 ? "↑" : ""}</span>`;
   $("cf-3d").innerHTML = dBoxes(d);
-  const cfg = (x) => `[Ar]${s4 ? " 4s" + SUP[s4] : ""}${d ? " 3d" + SUP[d] : ""}`;
-  $("cf-cfg").innerHTML = cfIon ? `${a.s}${SUP[a.q]}⁺ : ${cfg()}` : `<sub>${a.z}</sub>${a.s} : [Ar] 4s² 3d${SUP[a.d]}`;
+  const cfg = `[Ar]${s4 ? " 4s" + SUP[s4] : ""}${d ? " 3d" + SUP[d] : ""}`;
+  $("cf-cfg").innerHTML = cfIon ? `${ionName} : ${cfg}` : `<sub>${a.z}</sub>${a.s} : ${cfg}`;
   $("cf-go").textContent = cfIon ? "↺ أعيدي الذرّة" : `⚡ انزعي ${a.q} إلكترونات`;
+  $("cf-ex").hidden = !ex;
+  $("cf-ex").innerHTML = ex ? `⚠ <b>استثناء:</b> ${a.s === "Cr" ? "الكروم" : "النحاس"} يُملأ فيه ${f("4s¹")} ثم ${f(a.s === "Cr" ? "3d⁵" : "3d¹⁰")} بدل ${f("4s²")}، لأن الفلك ${f("d")} ${a.s === "Cr" ? "نصف الممتلئ" : "الممتلئ"} أكثر استقراراً.` : "";
   $("cf-msg").hidden = !cfIon;
-  $("cf-msg").innerHTML = cfIon ? `خرج من الذرّة ${a.q} إلكترونات: إلكترونا ${f("4s")} أولاً${a.q > 2 ? "، ثم " + (a.q - 2) + " من " + f("3d") : ""}.` : "";
+  $("cf-msg").innerHTML = cfIon ? `خرج من الذرّة ${a.q} إلكترونات: ${fromS === 1 ? "إلكترون " + f("4s") + " الوحيد" : "إلكترونا " + f("4s")} أولاً${fromD ? "، ثم " + fromD + " من " + f("3d") : ""}.` : "";
 }
 $("cf-pick").onclick = (e) => { const b = e.target.closest("[data-i]"); if (b) { cfSel = Number(b.dataset.i); cfIon = false; cfDraw(); } };
 $("cf-go").onclick = () => { cfIon = !cfIon; cfDraw(); };
@@ -473,6 +481,7 @@ const CH = [
   ["لماذا محلول " + f("Zn²⁺") + " عديم اللون؟", "لأن أفلاك d فيه ممتلئة تماماً " + f("3d¹⁰") + "، فلا تقفز الإلكترونات بين الأفلاك."],
   ["اكتبي التوزيع الإلكتروني لـ " + f("Mn²⁺"), f("[Ar] 3d⁵")],
   ["اذكري أيوناً متساوياً إلكترونياً مع " + f("Sc³⁺"), f("V⁵⁺") + "، وكلاهما " + f("[Ar]") + "."],
+  ["اكتبي التوزيع الإلكتروني لذرّة " + f("₂₄Cr") + " ولماذا هو استثناء؟", f("[Ar] 4s¹ 3d⁵") + "، لأن الفلك d نصف الممتلئ أكثر استقراراً."],
   ["رتّبي خطوات ظهور اللون الثلاث", "انفصال أفلاك d بالليجندات ← قفز الإلكترونات بامتصاص فوتون بلون محدد ← انعكاس اللون المتمّم."],
 ];
 let ci = 0;
