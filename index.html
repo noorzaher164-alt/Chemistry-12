@@ -23,7 +23,7 @@
     <h1>أهلاً بكِ في <span class="accent">منصّة أ. نورهان زاهر</span></h1>
     <p class="lead">حيث تتحوّل الحصة إلى رحلة اكتشاف: شرائح تفاعلية، وألعاب بين الفرق، ومحاكاة وتجارب تصلين إليها خطوة بخطوة.</p>
     <div class="features"><span>🧪 تجارب ومحاكاة</span><span>🏆 ألعاب الفرق</span><span>🎯 أهداف واضحة</span></div>
-    <div class="actions"><a class="btn big" href="study.html">📚 ابدئي الدراسة</a><a class="btn big ghost" href="https://class-qbank.higgsfield.app" target="_blank" rel="noopener">📝 بنك الأسئلة</a></div>
+    <div class="actions"><a class="btn big" href="study.html" data-locked>📚 ابدئي الدراسة</a><a class="btn big ghost" href="https://class-qbank.higgsfield.app" target="_blank" rel="noopener" data-locked>📝 بنك الأسئلة</a></div>
   </div>
   <div class="art" aria-hidden="true">
     <div class="arch"></div>
@@ -34,6 +34,17 @@
     <img class="girl" src="assets/teacher-cut.webp" alt="" width="579" height="635">
   </div>
 </section>
+<div class="lock" id="lock" hidden role="dialog" aria-modal="true" aria-labelledby="lock-t">
+  <form class="lock-card" id="lock-form">
+    <img src="assets/avatar.webp" alt="" width="64" height="64">
+    <h2 id="lock-t">أدخلي رمز الدخول</h2>
+    <p class="muted">الرمز تعطيكِ إياه أ. نورهان</p>
+    <input id="lock-code" type="password" inputmode="numeric" autocomplete="off" maxlength="12" placeholder="••••" aria-label="رمز الدخول" required>
+    <p class="lock-err" id="lock-err" hidden>الرمز غير صحيح، حاولي مرة أخرى.</p>
+    <div class="actions" style="justify-content:center"><button class="btn" type="submit">دخول</button><button class="tbtn" type="button" id="lock-x">إلغاء</button></div>
+  </form>
+</div>
+<script src="assets/lock.js"></script>
 </div></main>
 <footer class="gut"><b>منصّة أ. نورهان زاهر</b> · الكيمياء · العام الدراسي <span class="f">2026 / 2027</span></footer>
 <script src="assets/theme.js"></script>
