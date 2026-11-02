@@ -494,7 +494,7 @@ function obPaint(flash) {
 }
 function setRule(r) { document.querySelectorAll(".rule").forEach((x) => x.classList.toggle("on", x.dataset.rule === r)); }
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const reduce = false; // تطاير الإلكترونات هو الشرح نفسه، فيعمل دائماً
 async function fly(fromEl, toEl, dir) { // يطير الإلكترون من نقطة إلى صندوق
   if (reduce) return;
   const L = $("ob-ladder").getBoundingClientRect(), F = $("ob-fly");

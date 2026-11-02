@@ -608,7 +608,7 @@ const el = (t, a = {}, p) => { const e = document.createElementNS(NS, t); for (c
 const f = (s) => `<span class="f">${s}</span>`;
 const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const reduce = false; // الحركات هنا تبدأ بضغطة مقصودة، فتعمل دائماً
 const TEAL = "#0E6B6A", MINT = "#6FB1AB", SAND = "#C9883A", INK = "#16302F";
 
 // ── التنقّل بين الشرائح والحصص ──
@@ -713,7 +713,7 @@ function blStatic(ballY) {
   hs.forEach((h, i) => {
     const x = 110 + i * 100;
     el("line", { x1: x, y1: Y0 - h * sc, x2: x + 50, y2: Y0 - h * sc, stroke: i ? MINT : TEAL, "stroke-width": 3, "stroke-dasharray": i ? "6 5" : "0" }, svg);
-    const t = el("text", { x: x + 25, y: Y0 - h * sc - 8, "text-anchor": "middle", "font-size": 13, "font-weight": 700, fill: INK }, svg); t.textContent = (i ? "h" + (i + 1) : "h1") + " = " + h.toFixed(2);
+    const t = el("text", { x: x + 25, y: Y0 - h * sc + 18, "text-anchor": "middle", "font-size": 13, "font-weight": 700, fill: INK }, svg); t.textContent = (i ? "h" + (i + 1) : "h1") + " = " + h.toFixed(2) + " m";
   });
   el("circle", { cx: ballY ? ballY[0] : 135, cy: ballY ? ballY[1] : Y0 - h1 * sc - 14, r: 14, fill: TEAL, id: "bl-ball" }, svg);
   $("bl-h1v").textContent = h1.toFixed(1) + " m"; $("bl-crv").textContent = cr.toFixed(2);
