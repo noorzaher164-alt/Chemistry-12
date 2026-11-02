@@ -89,6 +89,9 @@ table.tbl { border-collapse: collapse; width: 100%; }
 .tbl th { background: var(--blush); color: var(--wine); }
 .tblwrap { overflow-x: auto; }
 .tblwrap table { min-width: 560px; }
+.bow-fig { margin: 0; display: grid; gap: 4px; }
+.bow-fig img { width: 100%; height: 230px; object-fit: contain; background: var(--blush); border-radius: 16px; border: 1px solid var(--line); }
+.bow-fig figcaption { font-size: .88rem; }
 .cell-hide { color: transparent; background: repeating-linear-gradient(45deg, var(--blush), var(--blush) 6px, var(--paper) 6px, var(--paper) 12px); cursor: pointer; border-radius: 6px; }
 @media (prefers-reduced-motion: no-preference) { .pop { animation: pop .5s ease; } }
 @keyframes pop { from { transform: scale(.9); opacity: .3 } to { transform: none; opacity: 1 } }
@@ -299,6 +302,7 @@ table.tbl { border-collapse: collapse; width: 100%; }
       <p>الطاقة المختزنة في القوس:</p><div class="meter"><i id="bow-e"></i></div>
       <p class="note" id="bow-msg">حرّكي المؤشر ثم أطلقي السهم.</p>
       <div class="row" id="bow-types"></div>
+      <figure class="bow-fig"><img id="bow-img" src="img/bow-recurve.webp" alt="القوس المنحني" width="458" height="319"><figcaption class="muted" id="bow-cap"></figcaption></figure>
       <p class="muted" id="bow-type"></p>
     </div>
   </div>
@@ -779,13 +783,16 @@ fill("r2", [
 ]);
 
 // القوس
+const BOWIMG = [["bow-long", "(a) القوس الطويل"], ["bow-recurve", "(b) القوس المنحني"], ["bow-compound", "(c) القوس المركّب"]];
 const BOWS = [["الطويل", "القوس التقليدي الطويل يُصنع غالباً من الخشب، واستُخدم قديماً في الصيد والحروب."],
   ["المنحني", "صُمّم بحيث ينحني بالاتجاه المعاكس لاتجاه انطلاق السهم، ممّا يسمح بتخزين مقدار أكبر من الطاقة وإعطاء السهم سرعة وقوة أكبر. يُصنع غالباً من طبقات متعدّدة من مواد مختلفة لتحقيق توازن بين القوة والمرونة والمتانة."],
   ["المركّب", "يحتوي على بكرات لتقليل القوة اللازمة للحفاظ على شدّ الوتر عند السحب الكامل. وتُصنع بعض الأقواس الحديثة من مواد مركّبة تجمع بين القوة والمرونة، كالألياف الزجاجية."]];
 let bowSel = 1, bowRun = 0;
 $("bow-types").innerHTML = BOWS.map(([n], i) => `<button class="pill" data-b="${i}" aria-pressed="${i === bowSel}">القوس ${n}</button>`).join("");
-$("bow-types").onclick = (e) => { const b = e.target.closest("[data-b]"); if (!b) return; bowSel = Number(b.dataset.b); [...$("bow-types").children].forEach((x, k) => x.setAttribute("aria-pressed", k === bowSel)); $("bow-type").textContent = BOWS[bowSel][1]; };
-$("bow-type").textContent = BOWS[bowSel][1];
+function bowShow() { [...$("bow-types").children].forEach((x, k) => x.setAttribute("aria-pressed", k === bowSel)); $("bow-type").textContent = BOWS[bowSel][1];
+  $("bow-img").src = `img/${BOWIMG[bowSel][0]}.webp`; $("bow-img").alt = BOWIMG[bowSel][1]; $("bow-cap").textContent = "الشكل 3-4 " + BOWIMG[bowSel][1]; }
+$("bow-types").onclick = (e) => { const b = e.target.closest("[data-b]"); if (!b) return; bowSel = Number(b.dataset.b); bowShow(); };
+bowShow();
 function bowDraw(arrowX) {
   const svg = $("bow-svg"), p = Number($("bow-pull").value) / 100; svg.innerHTML = "";
   el("circle", { cx: 470, cy: 130, r: 40, fill: "none", stroke: SAND, "stroke-width": 8 }, svg); el("circle", { cx: 470, cy: 130, r: 22, fill: "none", stroke: TEAL, "stroke-width": 8 }, svg); el("circle", { cx: 470, cy: 130, r: 6, fill: "#C24A33" }, svg);
