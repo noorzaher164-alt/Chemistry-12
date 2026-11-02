@@ -8,7 +8,7 @@ themeLabel();
 const fsBtn = document.getElementById("fs");
 if (fsBtn) {
   if (!document.fullscreenEnabled) fsBtn.hidden = true;
-  const fsLabel = () => { fsBtn.textContent = document.fullscreenElement ? "↙ تصغير الشاشة" : "⛶ ملء الشاشة"; };
+  const fsLabel = () => { fsBtn.textContent = document.fullscreenElement ? "🖥️ تصغير الشاشة" : "🖥️ ملء الشاشة"; };
   fsBtn.onclick = () => { (document.fullscreenElement ? document.exitFullscreen() : root.requestFullscreen()).catch(() => {}); };
   document.addEventListener("fullscreenchange", fsLabel); fsLabel();
 }
