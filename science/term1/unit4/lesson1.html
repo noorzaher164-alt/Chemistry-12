@@ -1,0 +1,1094 @@
+<!doctype html>
+<html lang="ar" dir="rtl" data-subject="science">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script src="../../../assets/gate.js" data-root="../../../"></script>
+<title>أدوات الألعاب الرياضية</title>
+<meta name="theme-color" content="#0E6B6A">
+<link rel="icon" href="../../../assets/avatar.webp">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;800&family=Tajawal:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="../../../assets/site.css">
+<script>try { document.documentElement.dataset.theme = localStorage.getItem("chem-theme") || "light"; } catch (e) { document.documentElement.dataset.theme = "light"; }</script>
+<style>
+/* درس بأربع حصص بهوية مادة العلوم: شريط علوي (المسار + الحصص + النقاط) ← شريحة ← تنقّل سفلي */
+html, body { height: 100%; }
+body { min-height: 0; }
+main { overflow-y: auto; padding-block: 18px 26px; }
+.lesson-bar { position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--ink) 86%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); padding-block: 8px; }
+.lesson-bar .wrap { display: grid; gap: 6px; }
+.bar-row { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; justify-content: space-between; }
+.ltitle { font-family: var(--display); font-weight: 800; color: var(--wine); }
+.parts { display: flex; flex-wrap: wrap; gap: 6px; }
+.score { display: flex; gap: 8px; flex-wrap: wrap; }
+.team { display: flex; align-items: center; gap: 6px; background: var(--paper); border: 1px solid var(--line); border-radius: 999px; padding: 2px 4px 2px 12px; }
+.team b { font-family: var(--display); min-width: 1.6em; text-align: center; font-variant-numeric: tabular-nums; color: var(--wine); }
+.team button { min-height: 36px; min-width: 36px; border-radius: 50%; border: 1px solid var(--line); background: var(--blush); color: var(--fg); font: inherit; font-weight: 700; cursor: pointer; }
+.slide { display: grid; gap: 18px; }
+.kicker { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; color: var(--muted); font-size: .95rem; }
+.kicker .chip.goal { background: var(--wine); border-color: var(--wine); color: var(--on-wine); }
+h2.st { font-size: clamp(1.6rem, 3.4vw, 2.2rem); color: var(--wine); }
+.lead { color: var(--muted); font-size: 1.15rem; max-width: 66ch; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+@media (max-width: 880px) { .two, .three { grid-template-columns: 1fr; } }
+.box { background: var(--paper); border: 1px solid var(--line); border-radius: 22px; padding: 18px; display: grid; gap: 12px; align-content: start; min-width: 0; box-shadow: var(--shadow); }
+.box h3 { color: var(--wine); font-size: 1.2rem; }
+.stage { background: linear-gradient(170deg, var(--paper), var(--blush)); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; }
+svg { display: block; max-width: 100%; height: auto; direction: ltr; }
+.row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.pill { font: inherit; font-weight: 700; min-height: 46px; padding: 6px 16px; border-radius: 999px; cursor: pointer; border: 1.5px solid var(--line); background: var(--paper); color: var(--fg); }
+.pill:hover:not(:disabled) { border-color: var(--wine); }
+.pill[aria-pressed="true"] { background: var(--wine); border-color: var(--wine); color: var(--on-wine); }
+.pill:disabled { opacity: .45; cursor: not-allowed; }
+.pill.solid { background: var(--wine); border-color: var(--wine); color: var(--on-wine); }
+.answer { border: 1.5px solid #2E8A57; background: rgba(46,138,87,.1); border-radius: 14px; padding: 10px 14px; }
+.note { border: 1.5px solid var(--mauve); background: var(--blush); border-radius: 14px; padding: 10px 14px; color: var(--fg); }
+.tip { border: 1.5px solid var(--brass); background: color-mix(in srgb, var(--brass) 12%, var(--paper)); border-radius: 14px; padding: 10px 14px; }
+.opt.right { background: #2E8A57 !important; border-color: #2E8A57 !important; color: #fff !important; }
+.opt.wrong { background: #C24A33 !important; border-color: #C24A33 !important; color: #fff !important; }
+.mcq .opts { display: flex; flex-wrap: wrap; gap: 8px; }
+.bottom { position: sticky; bottom: 0; background: color-mix(in srgb, var(--ink) 88%, transparent); backdrop-filter: blur(10px); border-top: 1px solid var(--line); padding-block: 8px; }
+.bottom .wrap { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.dots { display: flex; gap: 5px; flex-wrap: wrap; justify-content: center; }
+.dot { width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid var(--mauve); background: transparent; padding: 0; cursor: pointer; }
+.dot.p2 { border-style: dashed; }
+.dot.on { background: var(--wine); border-color: var(--wine); }
+.counter { color: var(--muted); font-variant-numeric: tabular-nums; }
+.goalcard { border-top: 5px solid var(--wine); }
+.gnum { justify-self: start; background: var(--wine); color: var(--on-wine); border-radius: 999px; padding: 2px 14px; font-weight: 700; }
+.gtext { font-size: 1.12rem; font-weight: 700; }
+.agenda { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.agenda li { display: flex; justify-content: space-between; gap: 12px; border-bottom: 1px dashed var(--line); padding-block: 4px; }
+.agenda li span:last-child { color: var(--brass); font-weight: 700; white-space: nowrap; }
+.hero-q { font-family: var(--display); font-size: clamp(1.7rem, 4.2vw, 2.6rem); text-align: center; line-height: 1.35; }
+.hero-q span { color: var(--wine); }
+.f { unicode-bidi: isolate; direction: ltr; display: inline-block; }
+.formula { direction: ltr; text-align: center; font-size: 1.6rem; font-weight: 700; color: var(--wine); font-family: "Cambria Math", "Times New Roman", serif; }
+.big { font-family: var(--display); font-size: 1.8rem; color: var(--wine); font-variant-numeric: tabular-nums; }
+input[type=range] { width: 100%; accent-color: var(--wine); height: 28px; }
+dl.facts { display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; margin: 0; }
+dl.facts dt { color: var(--muted); } dl.facts dd { margin: 0; font-weight: 700; }
+.meter { height: 18px; border-radius: 999px; background: var(--blush); border: 1px solid var(--line); overflow: hidden; }
+.meter i { display: block; height: 100%; background: var(--wine); border-radius: 999px; transition: width .4s ease; }
+.meter.warm i { background: var(--brass); }
+.timeline { display: grid; gap: 8px; }
+.tl { display: grid; grid-template-columns: 92px 1fr; gap: 10px; align-items: start; text-align: start; font: inherit; background: var(--paper); border: 1.5px solid var(--line); border-radius: 16px; padding: 10px 12px; cursor: pointer; color: var(--fg); }
+.tl b { font-family: var(--display); color: var(--wine); font-size: 1.15rem; }
+.tl span.more { color: var(--muted); }
+.tl[aria-expanded="true"] { border-color: var(--wine); background: var(--blush); }
+.match { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.mcol { display: grid; gap: 8px; align-content: start; }
+.mitem { font: inherit; text-align: start; min-height: 52px; padding: 8px 12px; border-radius: 14px; border: 1.5px solid var(--line); background: var(--paper); color: var(--fg); cursor: pointer; }
+.mitem[aria-pressed="true"] { border-color: var(--wine); background: var(--blush); }
+.mitem.done { border-color: #2E8A57; background: rgba(46,138,87,.1); cursor: default; }
+.shake { animation: shake .35s; }
+@keyframes shake { 25% { transform: translateX(-6px) } 75% { transform: translateX(6px) } }
+table.tbl { border-collapse: collapse; width: 100%; }
+.tbl th, .tbl td { border: 1px solid var(--line); padding: 8px; text-align: start; vertical-align: top; }
+.tbl th { background: var(--blush); color: var(--wine); }
+.tblwrap { overflow-x: auto; }
+.tblwrap table { min-width: 560px; }
+.cell-hide { color: transparent; background: repeating-linear-gradient(45deg, var(--blush), var(--blush) 6px, var(--paper) 6px, var(--paper) 12px); cursor: pointer; border-radius: 6px; }
+@media (prefers-reduced-motion: no-preference) { .pop { animation: pop .5s ease; } }
+@keyframes pop { from { transform: scale(.9); opacity: .3 } to { transform: none; opacity: 1 } }
+</style>
+</head>
+<body>
+<div class="lesson-bar gut"><div class="wrap">
+  <nav class="crumbs" aria-label="مكان الدرس في المنصّة">
+    <a href="../../../index.html">الرئيسية</a><span class="sep">›</span><a href="../../../study.html">الدراسة</a><span class="sep">›</span><a href="../../index.html">العلوم العامة</a><span class="sep">›</span><a href="../index.html">الفصل الدراسي الأول</a><span class="sep">›</span><a href="index.html">الوحدة الرابعة</a><span class="sep">›</span><b>الدرس 4-1</b>
+  </nav>
+  <div class="bar-row">
+    <span class="ltitle">🏅 أدوات الألعاب الرياضية</span>
+    <div class="parts" role="group" aria-label="الحصة">
+      <button class="pill" data-gopart="1">الحصة الأولى</button><button class="pill" data-gopart="2">الثانية</button><button class="pill" data-gopart="3">الثالثة</button><button class="pill" data-gopart="4">الرابعة</button>
+    </div>
+    <div class="score" aria-label="نقاط الفريقين">
+      <div class="team"><span>فريق الكربون</span><b id="sA">0</b><button data-team="A" data-d="1" aria-label="نقطة لفريق الكربون">+</button><button data-team="A" data-d="-1" aria-label="أنقصي نقطة من فريق الكربون">−</button></div>
+      <div class="team"><span>فريق الألومنيوم</span><b id="sB">0</b><button data-team="B" data-d="1" aria-label="نقطة لفريق الألومنيوم">+</button><button data-team="B" data-d="-1" aria-label="أنقصي نقطة من فريق الألومنيوم">−</button></div>
+    </div>
+    <div class="tools"><button class="tbtn" id="fs" type="button">🖥️ ملء الشاشة</button><button class="tbtn" id="theme" type="button" aria-label="بدّلي بين الوضع الفاتح والغامق"></button></div>
+  </div>
+</div></div>
+
+<main class="gut" id="main"><div class="wrap">
+
+<!-- ═════════════ الحصة الأولى: معامل الارتداد (ص 82) ═════════════ -->
+
+<section class="slide" data-part="1">
+  <div class="kicker"><span class="chip">الوحدة الرابعة · المواد في تكنولوجيا الرياضة</span><span class="chip">الدرس 4-1</span></div>
+  <p class="hero-q">لماذا ترتدّ بعض الكرات <span>عالياً</span>،<br>وأخرى بالكاد ترتفع عن الأرض؟</p>
+  <div class="stage"><svg viewBox="0 0 600 240" role="img" aria-label="كرة ترتدّ عن الأرض وكل ارتداد أقل من الذي قبله" id="cover-svg"></svg></div>
+  <p class="lead" style="justify-self:center;text-align:center">في هذا الدرس نكتشف كيف غيّرت المواد الجديدة أدوات الرياضة: من الكرة والقوس والزانة، إلى الرمح والمضرب والحذاء والبدلة والخوذة.</p>
+</section>
+
+<section class="slide" data-part="1">
+  <div class="kicker"><span class="chip">الحصة الأولى</span><span>أهداف قابلة للقياس</span></div>
+  <h2 class="st">أهداف الحصة الأولى: معامل الارتداد</h2>
+  <div class="two">
+    <div class="box goalcard"><span class="gnum">الهدف ١</span><p class="gtext">أن تعرّف الطالبة معامل الارتداد، وتحسبه من السرعتين أو الارتفاعين باستخدام <span class="f">C<sub>R</sub> = v₂ / v₁ = √(h₂ / h₁)</span>.</p><p><b>معيار النجاح:</b> حلّ مسألتين من ثلاث في غلق الهدف حلاً صحيحاً.</p></div>
+    <div class="box goalcard"><span class="gnum">الهدف ٢</span><p class="gtext">أن تفسّر الطالبة لماذا تكون سرعة الارتداد دائماً أقل من سرعة الاصطدام، وتقارن بين المواد بحسب معامل ارتدادها.</p><p><b>معيار النجاح:</b> إجابة صحيحة عن سؤالين من ثلاثة.</p></div>
+  </div>
+  <div class="box"><h3>سير الحصة (٤٥ دقيقة)</h3><ul class="agenda">
+    <li><span>التهيئة: توقّعي الارتداد</span><span>٥ د</span></li>
+    <li><span>الهدف ١: مفهوم معامل الارتداد، والمثال المحلول، ومختبر الكرة + غلق</span><span>٢٠ د</span></li>
+    <li><span>الهدف ٢: أين تذهب الطاقة؟ ومقارنة المواد + غلق</span><span>١٥ د</span></li>
+    <li><span>الغلق الختامي: كرت الخروج</span><span>٥ د</span></li>
+  </ul></div>
+</section>
+
+<section class="slide" data-part="1">
+  <div class="kicker"><span class="chip goal">التهيئة</span><span>توقّعي</span></div>
+  <h2 class="st">توقّعي قبل أن نبدأ</h2>
+  <div class="two">
+    <div class="box mcq" data-answer="2">
+      <p><b>أسقطنا كرة مطاطية من ارتفاع 2 m. إلى أي ارتفاع يمكن أن ترتدّ؟</b></p>
+      <div class="opts"><button class="opt pill">إلى أعلى من 2 m</button><button class="opt pill">إلى 2 m تماماً</button><button class="opt pill">إلى أقل من 2 m</button></div>
+      <div class="row"><button class="check pill solid">أظهري الإجابة</button></div>
+      <p class="why answer" hidden>أقل من 2 m دائماً، لأن الكرة تفقد جزءاً من طاقتها عند كل اصطدام بالأرض.</p>
+    </div>
+    <div class="box">
+      <h3>نقاش سريع للفريقين</h3>
+      <p>تختزن المادّة طاقة عند <b>التمدّد</b> أو <b>الانضغاط</b>. عندما تصطدم الكرة بالأرض تنضغط، ثم تعود إلى حالتها فتنطلق الطاقة وترتدّ.</p>
+      <p class="muted">سؤال للنقاش: لماذا تختار كل رياضة كرة من مادّة مختلفة؟</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-part="1">
+  <div class="kicker"><span class="chip goal">الهدف ١</span><span>المفهوم</span></div>
+  <h2 class="st">معامل الارتداد <span class="f" style="font-size:.6em">Coefficient of restitution (C<sub>R</sub>)</span></h2>
+  <div class="two">
+    <div class="box">
+      <p>يقيس <b>معامل الارتداد</b> نسبة الطاقة المنطلقة عند عودة المادّة إلى حالتها الأصلية.</p>
+      <p>ترتطم كرة مطّاطية بالجدار بسرعة <span class="f">v₁</span> لترتدّ بسرعة <span class="f">v₂</span>. تكون سرعة ارتدادها <span class="f">v₂</span> دائماً أقل من سرعتها <span class="f">v₁</span>، حيث إنّ بعضاً من الطاقة يُفقد دائماً خلال الارتداد.</p>
+      <p>ويمكن أن يُحدَّد أيضاً من ارتفاع صعود الكرة <span class="f">h₂</span> بعد إلقائها من على ارتفاع <span class="f">h₁</span>.</p>
+      <p class="formula">C<sub>R</sub> = v₂ / v₁ = √( h₂ / h₁ )</p>
+      <div class="tblwrap"><table class="tbl"><tr><th>الرمز</th><th>المعنى</th><th>الرمز</th><th>المعنى</th></tr>
+        <tr><td class="f">C<sub>R</sub></td><td>معامل الارتداد</td><td class="f">v₁</td><td>السرعة قبل التصادم</td></tr>
+        <tr><td class="f">h₁</td><td>ارتفاع السقوط قبل التصادم</td><td class="f">v₂</td><td>السرعة بعد التصادم</td></tr>
+        <tr><td class="f">h₂</td><td>ارتفاع الارتداد بعد التصادم</td><td></td><td></td></tr></table></div>
+    </div>
+    <div class="box">
+      <div class="stage"><svg viewBox="0 0 360 250" role="img" aria-label="كرة تسقط من h1 وترتد إلى h2">
+        <line x1="20" y1="225" x2="340" y2="225" stroke="#C9883A" stroke-width="6" stroke-linecap="round"/>
+        <circle cx="90" cy="40" r="18" fill="#0E6B6A"/><circle cx="230" cy="95" r="18" fill="#6FB1AB"/>
+        <path d="M 90 58 Q 140 230 160 207 Q 190 180 230 113" fill="none" stroke="#8AA" stroke-width="2" stroke-dasharray="6 6"/>
+        <g stroke="#16302F" stroke-width="2"><line x1="50" y1="40" x2="50" y2="225"/><line x1="44" y1="40" x2="56" y2="40"/><line x1="44" y1="225" x2="56" y2="225"/>
+        <line x1="270" y1="95" x2="270" y2="225"/><line x1="264" y1="95" x2="276" y2="95"/></g>
+        <text x="30" y="140" font-size="18" font-weight="700" fill="#0E6B6A">h₁</text><text x="280" y="165" font-size="18" font-weight="700" fill="#0E6B6A">h₂</text>
+      </svg></div>
+      <div class="mcq" data-answer="1">
+        <p><b>لماذا تكون <span class="f">v₂</span> دائماً أقل من <span class="f">v₁</span>؟</b></p>
+        <div class="opts"><button class="opt pill">لأن الكرة تكتسب طاقة</button><button class="opt pill">لأن بعض الطاقة يُفقد خلال الارتداد</button><button class="opt pill">لأن الجاذبية تختفي</button></div>
+        <div class="row"><button class="check pill solid">أظهري الإجابة</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-part="1">
+  <div class="kicker"><span class="chip goal">الهدف ١</span><span>مثال (1) من الكتاب</span></div>
+  <h2 class="st">مثال محلول خطوة بخطوة</h2>
+  <div class="two">
+    <div class="box">
+      <p style="font-size:1.15rem">لدينا كرة مصنوعة من نوع من المطّاط معامل ارتداده <b class="f">0.75</b>. ارتدّت الكرة إلى ارتفاع <b class="f">1.5 m</b>. كم يبلغ الارتفاع الذي أُلقيت منه الكرة؟</p>
+      <div class="row"><button class="pill solid" id="ex-next">الخطوة التالية ←</button><button class="pill" id="ex-reset">↺</button></div>
+    </div>
+    <div class="box" id="ex-steps" style="font-size:1.2rem"></div>
+  </div>
+</section>
+
+<section class="slide" data-part="1">
+  <div class="kicker"><span class="chip goal">الهدف ١</span><span>مختبر الكرة المرتدّة</span></div>
+  <h2 class="st">مختبر الكرة المرتدّة</h2>
+  <div class="two">
+    <div class="box">
+      <div class="stage"><svg viewBox="0 0 520 300" role="img" aria-label="كرة ترتد وتُقاس ارتفاعات ارتدادها" id="bl-svg"></svg></div>
+      <div class="row"><button class="pill solid" id="bl-drop">⬇ أسقطي الكرة</button><button class="pill" id="bl-reset">↺</button></div>
+    </div>
+    <div class="box">
+      <label for="bl-h1" class="row" style="justify-content:space-between"><span>ارتفاع الإسقاط <span class="f">h₁</span></span><span class="big f" id="bl-h1v"></span></label>
+      <input type="range" id="bl-h1" min="0.5" max="3" step="0.1" value="2">
+      <label for="bl-cr" class="row" style="justify-content:space-between"><span>معامل الارتداد <span class="f">C<sub>R</sub></span></span><span class="big f" id="bl-crv"></span></label>
+      <input type="range" id="bl-cr" min="0.1" max="0.95" step="0.05" value="0.75">
+      <dl class="facts"><dt>ارتفاع الارتداد الأول <span class="f">h₂</span></dt><dd class="f" id="bl-h2"></dd><dt>الارتداد الثاني</dt><dd class="f" id="bl-h3"></dd><dt>الارتداد الثالث</dt><dd class="f" id="bl-h4"></dd></dl>
+      <p class="tip">جرّبي مثال الكتاب: اجعلي معامل الارتداد <span class="f">0.75</span>، وارتفاع الإسقاط <span class="f">2.7 m</span> تقريباً، فترتدّ الكرة إلى نحو <span class="f">1.5 m</span>.</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-part="1">
+  <div class="kicker"><span class="chip goal">غلق الهدف ١</span><span>٣ دقائق</span></div>
+  <h2 class="st">غلق الهدف ١: احسبي معامل الارتداد</h2>
+  <div class="three" id="c11"></div>
+  <p class="note">✔ معيار النجاح: حلّ مسألتين من ثلاث حلاً صحيحاً.</p>
+</section>
+
+<section class="slide" data-part="1">
+  <div class="kicker"><span class="chip goal">الهدف ٢</span><span>أين تذهب الطاقة؟</span></div>
+  <h2 class="st">لماذا لا ترتدّ الكرة إلى الارتفاع نفسه؟</h2>
+  <div class="two">
+    <div class="box">
+      <p>عند كل اصطدام يُفقد جزء من الطاقة، فيكون <span class="f">C<sub>R</sub></span> دائماً <b>أقل من 1</b>. وكلما كان معامل الارتداد أكبر، ارتدّت الكرة أعلى.</p>
+      <label for="en-cr" class="row" style="justify-content:space-between"><span>معامل الارتداد</span><span class="big f" id="en-crv"></span></label>
+      <input type="range" id="en-cr" min="0.1" max="0.95" step="0.05" value="0.6">
+      <p>الطاقة التي تبقى بعد الاصطدام (<span class="f">h₂ / h₁ = C<sub>R</sub>²</span>):</p>
+      <div class="meter"><i id="en-keep"></i></div><p class="f" id="en-keepv" style="justify-self:end"></p>
+      <p>الطاقة المفقودة في الاصطدام:</p>
+      <div class="meter warm"><i id="en-lost"></i></div><p class="f" id="en-lostv" style="justify-self:end"></p>
+    </div>
+    <div class="box">
+      <h3>قارني بين الحالات</h3>
+      <p class="muted">المسي الحالة لتري أثرها:</p>
+      <div class="row" id="en-cases"></div>
+      <p class="note" id="en-case"></p>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-part="1">
+  <div class="kicker"><span class="chip goal">غلق الهدف ٢</span><span>٣ دقائق</span></div>
+  <h2 class="st">غلق الهدف ٢: الطاقة والمواد</h2>
+  <div class="three" id="c12"></div>
+  <p class="note">✔ معيار النجاح: إجابة صحيحة عن سؤالين من ثلاثة.</p>
+</section>
+
+<section class="slide" data-part="1">
+  <div class="kicker"><span class="chip">الغلق الختامي</span><span>كرت الخروج</span></div>
+  <h2 class="st">كرت خروج الحصة الأولى</h2>
+  <div class="two" id="x1"></div>
+</section>
+
+<!-- ═════════════ الحصة الثانية: قوس الرماية والقفز بالزانة (ص 83-84) ═════════════ -->
+
+<section class="slide" data-part="2">
+  <div class="kicker"><span class="chip">الحصة الثانية</span><span>أهداف قابلة للقياس</span></div>
+  <h2 class="st">أهداف الحصة الثانية: قوس الرماية والقفز بالزانة</h2>
+  <div class="two">
+    <div class="box goalcard"><span class="gnum">الهدف ١</span><p class="gtext">أن تفسّر الطالبة كيف يخزّن القوس والزانة الطاقة عند الانثناء، وتتتبّع تحوّلات الطاقة في القفز بالزانة.</p><p><b>معيار النجاح:</b> ترتيب تحوّلات الطاقة الثلاثة ترتيباً صحيحاً، وإجابة صحيحة عن سؤالين من ثلاثة.</p></div>
+    <div class="box goalcard"><span class="gnum">الهدف ٢</span><p class="gtext">أن تقارن الطالبة بين مواد صناعة الأسهم والزانات من حيث المميّزات والعيوب.</p><p><b>معيار النجاح:</b> مطابقة ٤ مواد من ٥ مع خصائصها.</p></div>
+  </div>
+  <div class="box"><h3>سير الحصة (٤٥ دقيقة)</h3><ul class="agenda">
+    <li><span>التهيئة: مراجعة معامل الارتداد</span><span>٥ د</span></li>
+    <li><span>الهدف ١: محاكاة القوس، ومراحل القفز بالزانة + غلق</span><span>٢٠ د</span></li>
+    <li><span>الهدف ٢: لعبة مواد الأسهم، وتطوّر الزانات + غلق</span><span>١٥ د</span></li>
+    <li><span>الغلق الختامي: كرت الخروج</span><span>٥ د</span></li>
+  </ul></div>
+</section>
+
+<section class="slide" data-part="2">
+  <div class="kicker"><span class="chip goal">التهيئة</span><span>مراجعة</span></div>
+  <h2 class="st">تذكّري من الحصة الماضية</h2>
+  <div class="three" id="r2"></div>
+</section>
+
+<section class="slide" data-part="2">
+  <div class="kicker"><span class="chip goal">الهدف ١</span><span>محاكاة</span></div>
+  <h2 class="st">قوس الرماية: شدّي الوتر وانظري إلى الطاقة</h2>
+  <div class="two">
+    <div class="box">
+      <div class="stage"><svg viewBox="0 0 520 260" role="img" aria-label="قوس يُشدّ وتره ثم ينطلق السهم" id="bow-svg"></svg></div>
+      <label for="bow-pull" class="row" style="justify-content:space-between"><span>مقدار شدّ الوتر</span><span class="big f" id="bow-pv"></span></label>
+      <input type="range" id="bow-pull" min="0" max="100" step="5" value="40">
+      <div class="row"><button class="pill solid" id="bow-fire">🏹 أطلقي السهم</button></div>
+    </div>
+    <div class="box">
+      <p>يخزّن قوس الرماية طاقة وضع مرونية عند شدّه، كما يحدث في النابض. وتنتقل هذه الطاقة إلى السهم عند تحرير الوتر، فيندفع بسرعة نحو الهدف. <b>وكلما ازداد انحناء القوس ازدادت الطاقة المختزنة فيه.</b></p>
+      <p>الطاقة المختزنة في القوس:</p><div class="meter"><i id="bow-e"></i></div>
+      <p class="note" id="bow-msg">حرّكي المؤشر ثم أطلقي السهم.</p>
+      <div class="row" id="bow-types"></div>
+      <p class="muted" id="bow-type"></p>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-part="2">
+  <div class="kicker"><span class="chip goal">الهدف ١</span><span>تحوّلات الطاقة</span></div>
+  <h2 class="st">القفز بالزانة: من الجري إلى العارضة</h2>
+  <div class="two">
+    <div class="box">
+      <div class="stage"><svg viewBox="0 0 520 280" role="img" aria-label="مراحل القفز بالزانة" id="pv-svg"></svg></div>
+      <div class="row"><button class="pill solid" id="pv-next">المرحلة التالية ←</button><button class="pill" id="pv-reset">↺</button></div>
+    </div>
+    <div class="box">
+      <p class="note" id="pv-text"></p>
+      <p><b>طاقة حركية</b></p><div class="meter"><i id="pv-k"></i></div>
+      <p><b>طاقة كامنة مرونية في الزانة</b></p><div class="meter warm"><i id="pv-el"></i></div>
+      <p><b>طاقة وضع (ارتفاع)</b></p><div class="meter"><i id="pv-g" style="background:#6FB1AB"></i></div>
+      <p class="muted">الهدف من القفز بالزانة الوصول إلى أقصى ارتفاع. يجري اللاعب مسافة <span class="f">40 m</span> ثم يضع طرف الزانة في حفرة عمقها <span class="f">1 m</span>.</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-part="2">
+  <div class="kicker"><span class="chip goal">غلق الهدف ١</span><span>٣ دقائق</span></div>
+  <h2 class="st">غلق الهدف ١: رتّبي تحوّلات الطاقة</h2>
+  <div class="two">
+    <div class="box">
+      <p><b>المسي البطاقات بالترتيب الصحيح من البداية إلى النهاية:</b></p>
+      <div class="row" id="ord"></div>
+      <p class="answer" id="ord-msg" hidden></p>
+      <button class="pill" id="ord-reset" style="justify-self:start">↺ من جديد</button>
+    </div>
+    <div class="grid" style="display:grid;gap:12px" id="c21"></div>
+  </div>
+  <p class="note">✔ معيار النجاح: ترتيب التحوّلات الثلاثة صحيحاً، وإجابة صحيحة عن سؤالين من ثلاثة.</p>
+</section>
+
+<section class="slide" data-part="2">
+  <div class="kicker"><span class="chip goal">الهدف ٢</span><span>لعبة مطابقة</span></div>
+  <h2 class="st">مواد صناعة الأسهم: طابقي المادة بوصفها</h2>
+  <p class="lead">المسي مادة، ثم المسي الوصف الذي يناسبها (الجدول 1-4 في الكتاب).</p>
+  <div class="match" id="arrow-match"></div>
+  <div class="row"><button class="pill solid" id="arrow-table">أظهري الجدول كاملاً</button><button class="pill" id="arrow-reset">🔀 من جديد</button></div>
+  <div class="tblwrap" id="arrow-full" hidden></div>
+  <p class="muted">* استقامة السهم تعني مدى بقاء جسم السهم مستقيماً دون انحناء أو اعوجاج على امتداده.</p>
+</section>
+
+<section class="slide" data-part="2">
+  <div class="kicker"><span class="chip goal">الهدف ٢</span><span>رسم بياني تفاعلي</span></div>
+  <h2 class="st">كيف رفعت المواد الجديدة الرقم القياسي في القفز بالزانة؟</h2>
+  <div class="two">
+    <div class="box"><div class="stage"><svg viewBox="0 0 520 320" role="img" aria-label="الأرقام القياسية في القفز بالزانة بحسب مادة الزانة" id="pvc-svg"></svg></div>
+      <p class="muted" style="font-size:.9rem">قيم تقريبية مقروءة من الشكل 7-4 في الكتاب.</p></div>
+    <div class="box">
+      <p class="muted">المسي مادة لتظهر فترتها على الرسم:</p>
+      <div class="row" id="pvc-pick"></div>
+      <p class="note" id="pvc-text"></p>
+      <p>شروط الزانة في المنافسات الأولمبية: أن تكون <b>ناعمة</b>، وقد تكون من مادة واحدة أو مركّبة من مواد متعدّدة، ويمكن أن يكون لها أي طول أو قطر.</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-part="2">
+  <div class="kicker"><span class="chip goal">غلق الهدف ٢</span><span>٣ دقائق</span></div>
+  <h2 class="st">غلق الهدف ٢: أيّ مادة؟</h2>
+  <div class="three" id="c22"></div>
+  <p class="note">✔ معيار النجاح: مطابقة ٤ مواد من ٥ في اللعبة، وإجابة صحيحة عن سؤالين من ثلاثة.</p>
+</section>
+
+<section class="slide" data-part="2">
+  <div class="kicker"><span class="chip">الغلق الختامي</span><span>كرت الخروج</span></div>
+  <h2 class="st">كرت خروج الحصة الثانية</h2>
+  <div class="two" id="x2"></div>
+</section>
+
+<!-- ═════════════ الحصة الثالثة: الرمح ومضارب التنس (ص 85-86) ═════════════ -->
+
+<section class="slide" data-part="3">
+  <div class="kicker"><span class="chip">الحصة الثالثة</span><span>أهداف قابلة للقياس</span></div>
+  <h2 class="st">أهداف الحصة الثالثة: الرمح ومضارب التنس</h2>
+  <div class="two">
+    <div class="box goalcard"><span class="gnum">الهدف ١</span><p class="gtext">أن تفسّر الطالبة أثر تطوير تصميم الرمح ومواده في الأرقام القياسية، وسبب تغيير لوائح تصميمه عام 1986.</p><p><b>معيار النجاح:</b> إجابة صحيحة عن سؤالين من ثلاثة.</p></div>
+    <div class="box goalcard"><span class="gnum">الهدف ٢</span><p class="gtext">أن تقارن الطالبة بين مواد مضارب التنس (الخشب، الفولاذ والألومنيوم، ألياف الكربون)، وتحدّد اتجاه القوة الذي يكون فيه الخشب قوياً.</p><p><b>معيار النجاح:</b> إجابة صحيحة عن سؤالين من ثلاثة.</p></div>
+  </div>
+  <div class="box"><h3>سير الحصة (٤٥ دقيقة)</h3><ul class="agenda">
+    <li><span>التهيئة: مراجعة القوس والزانة</span><span>٥ د</span></li>
+    <li><span>الهدف ١: مراحل رمي الرمح، وخط زمني، ورسم الأرقام القياسية + غلق</span><span>١٨ د</span></li>
+    <li><span>الهدف ٢: قشرة الخشب، وتطوّر مواد المضارب + غلق</span><span>١٧ د</span></li>
+    <li><span>الغلق الختامي: كرت الخروج</span><span>٥ د</span></li>
+  </ul></div>
+</section>
+
+<section class="slide" data-part="3">
+  <div class="kicker"><span class="chip goal">التهيئة</span><span>مراجعة</span></div>
+  <h2 class="st">تذكّري من الحصة الماضية</h2>
+  <div class="three" id="r3"></div>
+</section>
+
+<section class="slide" data-part="3">
+  <div class="kicker"><span class="chip goal">الهدف ١</span><span>خط زمني</span></div>
+  <h2 class="st">الرمح: من الخشب إلى المعدن… ثم لوائح جديدة</h2>
+  <div class="two">
+    <div class="box">
+      <div class="stage"><svg viewBox="0 0 520 220" role="img" aria-label="المراحل الثلاث لرمي الرمح" id="jv-svg"></svg></div>
+      <div class="row"><button class="pill solid" id="jv-go">▶ مراحل الرمي الثلاث</button></div>
+      <p class="muted">يجري اللاعب مسافة <span class="f">40 m</span> إلى نقطة يُطلق عندها الرمح. الرامي الفائز من يسقط رمحه عند أبعد مسافة. ويتطلّب الرمي سرعة وقوة.</p>
+    </div>
+    <div class="box"><p class="muted">المسي كل محطة لتفتحيها:</p><div class="timeline" id="jv-tl"></div></div>
+  </div>
+</section>
+
+<section class="slide" data-part="3">
+  <div class="kicker"><span class="chip goal">الهدف ١</span><span>رسم بياني تفاعلي</span></div>
+  <h2 class="st">ماذا حدث للأرقام القياسية عام 1986؟</h2>
+  <div class="two">
+    <div class="box"><div class="stage"><svg viewBox="0 0 520 320" role="img" aria-label="الأرقام القياسية العالمية لرمي الرمح" id="jvc-svg"></svg></div>
+      <p class="muted" style="font-size:.9rem">قيم تقريبية مقروءة من الشكل 9-4 في الكتاب.</p></div>
+    <div class="box">
+      <div class="mcq" data-answer="1">
+        <p><b>توقّعي: لماذا انخفضت الأرقام القياسية فجأة عام 1986؟</b></p>
+        <div class="opts"><button class="opt pill">ضعف الرياضيين</button><button class="opt pill">تصميم جديد للرمح بلوائح جديدة</button><button class="opt pill">تغيّر طول المضمار</button></div>
+        <div class="row"><button class="check pill solid">أظهري الإجابة</button></div>
+        <p class="why answer" hidden>عام 1984 كان الرقم القياسي <span class="f">104 m</span>، وشكّل سقوطه خطراً على المتنافسين في المضمار. فتطلّبت اللوائح الجديدة عام 1986 تصميماً يسقط فيه الرمح برأسه نحو الأسفل، فانخفض متوسط مسافات الرمي بعشرين متراً تقريباً، وفرض هذا التصميم معايير جديدة للأرقام القياسية.</p>
+      </div>
+      <p class="tip">الرماح من الأمثلة التي أدّت فيها الأدوات والتصاميم الجديدة إلى أرقام قياسية عالية جداً، فكان على الرياضيين تقليلها حفاظاً على السلامة العامة.</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-part="3">
+  <div class="kicker"><span class="chip goal">غلق الهدف ١</span><span>٣ دقائق</span></div>
+  <h2 class="st">غلق الهدف ١: الرمح</h2>
+  <div class="three" id="c31"></div>
+  <p class="note">✔ معيار النجاح: إجابة صحيحة عن سؤالين من ثلاثة.</p>
+</section>
+
+<section class="slide" data-part="3">
+  <div class="kicker"><span class="chip goal">الهدف ٢</span><span>تجربة افتراضية</span></div>
+  <h2 class="st">مضارب التنس: متى يكون الخشب قوياً؟</h2>
+  <div class="two">
+    <div class="box">
+      <div class="stage"><svg viewBox="0 0 520 240" role="img" aria-label="لوح خشب تؤثّر فيه قوة عمودية أو موازية لقشرته" id="gr-svg"></svg></div>
+      <div class="row"><button class="pill" data-gr="perp" aria-pressed="true">قوة عمودية على القشرة</button><button class="pill" data-gr="par">قوة موازية للقشرة</button></div>
+      <button class="pill solid" id="gr-push" style="justify-self:start">💪 أثّري بالقوة</button>
+    </div>
+    <div class="box">
+      <p>صُنع أول مضرب تنس عام <span class="f">1874</span> من قطعة صلبة من الخشب. يُعدّ الخشب مادّة قوية وخفيفة الوزن ومرنة، إلا أن الخشب يكون <b>قوياً فقط عندما تكون القوى المؤثّرة عمودية على القشرة</b>، وهو <b>ضعيف</b> على امتداد سطح قشرته.</p>
+      <p class="note" id="gr-msg">اختاري اتجاه القوة ثم اضغطي «أثّري بالقوة».</p>
+      <p class="muted">من المهمّ عند استخدام الخشب في صناعة الأجسام الانتباه إلى محاذاة قشرة الخشب. وتختلف القشرة وقوة الخشب باختلاف نوع الأشجار التي استُخرج منها.</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-part="3">
+  <div class="kicker"><span class="chip goal">الهدف ٢</span><span>خط زمني</span></div>
+  <h2 class="st">تطوّر مواد مضارب التنس</h2>
+  <div class="two">
+    <div class="box"><div class="timeline" id="rk-tl"></div></div>
+    <div class="box">
+      <h3>ألياف الكربون: لماذا تفوّقت؟</h3>
+      <dl class="facts"><dt>القوة</dt><dd>أقوى بخمس مرات من الفولاذ</dd><dt>الوزن</dt><dd>أقل من مضارب الخشب</dd><dt>التصنيع</dt><dd>تُنسج لتشكّل نسيجاً يمنح القوة في اتجاهات عديدة، وتوضع على شكل طبقات مع صمغ بلاستيكي</dd></dl>
+      <p class="note">استُخدمت كذلك <b>ألياف الزجاج</b> الشبيهة بألياف الكربون، لكنها ليست في قوّتها وخفّتها.</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-part="3">
+  <div class="kicker"><span class="chip goal">غلق الهدف ٢</span><span>٣ دقائق</span></div>
+  <h2 class="st">غلق الهدف ٢: مضارب التنس</h2>
+  <div class="three" id="c32"></div>
+  <p class="note">✔ معيار النجاح: إجابة صحيحة عن سؤالين من ثلاثة.</p>
+</section>
+
+<section class="slide" data-part="3">
+  <div class="kicker"><span class="chip">الغلق الختامي</span><span>كرت الخروج</span></div>
+  <h2 class="st">كرت خروج الحصة الثالثة</h2>
+  <div class="two" id="x3"></div>
+</section>
+
+<!-- ═════════════ الحصة الرابعة: الأحذية والبدلات وأدوات الحماية (ص 87-89) ═════════════ -->
+
+<section class="slide" data-part="4">
+  <div class="kicker"><span class="chip">الحصة الرابعة</span><span>أهداف قابلة للقياس</span></div>
+  <h2 class="st">أهداف الحصة الرابعة: الأحذية والبدلات وأدوات الحماية</h2>
+  <div class="two">
+    <div class="box goalcard"><span class="gnum">الهدف ١</span><p class="gtext">أن تربط الطالبة كل مادة من مواد الأحذية والبدلات الرياضية باستخدامها، وتفسّر فكرة بدلة جلد القرش.</p><p><b>معيار النجاح:</b> مطابقة ٣ مواد من ٤ مع استخداماتها، وإجابة صحيحة عن سؤالين من ثلاثة.</p></div>
+    <div class="box goalcard"><span class="gnum">الهدف ٢</span><p class="gtext">أن تفسّر الطالبة كيف تقلّل أدوات الحماية من تأثير قوة التصادم بزيادة زمن التصادم، وتصف مكوّنات الخوذة الحديثة.</p><p><b>معيار النجاح:</b> إجابة صحيحة عن سؤالين من ثلاثة.</p></div>
+  </div>
+  <div class="box"><h3>سير الحصة (٤٥ دقيقة)</h3><ul class="agenda">
+    <li><span>التهيئة: كم نوعاً من الأحذية الرياضية تمتلكين؟</span><span>٥ د</span></li>
+    <li><span>الهدف ١: الأحذية، والبدلات وجلد القرش + غلق</span><span>١٧ د</span></li>
+    <li><span>الهدف ٢: محاكاة زمن التصادم، والخوذة + غلق</span><span>١٧ د</span></li>
+    <li><span>الغلق الختامي: التحدّي النهائي للدرس</span><span>٦ د</span></li>
+  </ul></div>
+</section>
+
+<section class="slide" data-part="4">
+  <div class="kicker"><span class="chip goal">التهيئة</span><span>سؤال الكتاب</span></div>
+  <h2 class="st">كم نوعاً من الأحذية الرياضية تمتلكين؟</h2>
+  <div class="two">
+    <div class="box">
+      <p>كل فريق يعدّ أنواع الأحذية الرياضية التي يعرفها: للجري، ولكرة السلة، وللتدريب…</p>
+      <div class="row"><button class="pill" id="sh-minus">−</button><span class="big f" id="sh-n">0</span><button class="pill solid" id="sh-plus">+ نوع</button></div>
+    </div>
+    <div class="box"><div class="timeline" id="sh-tl"></div></div>
+  </div>
+</section>
+
+<section class="slide" data-part="4">
+  <div class="kicker"><span class="chip goal">الهدف ١</span><span>لعبة مطابقة</span></div>
+  <h2 class="st">الأحذية والبدلات: طابقي المادة أو التصميم باستخدامه</h2>
+  <div class="two">
+    <div class="box"><h3>الأحذية العصرية (الشكل 13-4)</h3><div class="match" id="shoe-match"></div></div>
+    <div class="box"><h3>مواد البدلات الرياضية</h3><div class="match" id="suit-match"></div></div>
+  </div>
+</section>
+
+<section class="slide" data-part="4">
+  <div class="kicker"><span class="chip goal">الهدف ١</span><span>قصّة علمية</span></div>
+  <h2 class="st">بدلة جلد القرش</h2>
+  <div class="two">
+    <div class="box">
+      <div class="stage"><svg viewBox="0 0 520 220" role="img" aria-label="سطح جلد القرش بتدرّجات مسنّنة والماء ينساب عليه" id="sk-svg"></svg></div>
+      <div class="row"><button class="pill" data-sk="smooth" aria-pressed="true">سطح أملس</button><button class="pill" data-sk="shark">سطح يشبه جلد القرش</button></div>
+    </div>
+    <div class="box">
+      <p>لاحظ العلماء في شركة سبيدو أنّ لجلد سمك القرش الكثير من التدرّجات المسنّنة. يسمح هذا السطح لأسماك القرش بأن تسبح بفعالية أكبر وبأن تزيد من سرعتها وتقلّل من الطاقة التي تستخدمها.</p>
+      <div class="timeline" id="sk-tl"></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-part="4">
+  <div class="kicker"><span class="chip goal">غلق الهدف ١</span><span>٣ دقائق</span></div>
+  <h2 class="st">غلق الهدف ١: الأحذية والبدلات</h2>
+  <div class="three" id="c41"></div>
+  <p class="note">✔ معيار النجاح: مطابقة ٣ مواد من ٤، وإجابة صحيحة عن سؤالين من ثلاثة.</p>
+</section>
+
+<section class="slide" data-part="4">
+  <div class="kicker"><span class="chip goal">الهدف ٢</span><span>محاكاة</span></div>
+  <h2 class="st">يمكنكِ أن تقلّلي من تأثير قوة التصادم بزيادة زمن التصادم</h2>
+  <div class="two">
+    <div class="box">
+      <div class="stage"><svg viewBox="0 0 520 220" role="img" aria-label="جسم يصطدم بحاجز مع حشوة أو بدونها" id="im-svg"></svg></div>
+      <div class="row"><button class="pill" data-pad="0" aria-pressed="true">بدون حشوة</button><button class="pill" data-pad="1">حشوة رقيقة</button><button class="pill" data-pad="2">حشوة سميكة (فوم)</button></div>
+      <button class="pill solid" id="im-go" style="justify-self:start">💥 تصادم</button>
+    </div>
+    <div class="box">
+      <dl class="facts"><dt>زمن التصادم</dt><dd class="f" id="im-t"></dd></dl>
+      <p><b>قوة التصادم المؤثّرة في الجسم:</b></p><div class="meter warm"><i id="im-f"></i></div>
+      <p class="note" id="im-msg"></p>
+      <p class="muted">يمكن لأسطح الحماية أن تقلّل من الخدوش، أمّا الحشوات فتزيد من زمن التصادم، وبالتالي تُقلّل من قوة التصادم وتأثيرها السلبي.</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-part="4">
+  <div class="kicker"><span class="chip goal">الهدف ٢</span><span>استكشاف</span></div>
+  <h2 class="st">خوذة الدرّاجات النارية: تاريخ ومكوّنات</h2>
+  <div class="two">
+    <div class="box"><div class="timeline" id="hm-tl"></div></div>
+    <div class="box">
+      <div class="stage"><svg viewBox="0 0 360 260" role="img" aria-label="طبقات خوذة حديثة" id="hm-svg"></svg></div>
+      <p class="muted">المسي طبقة من الخوذة:</p>
+      <div class="row" id="hm-pick"></div>
+      <p class="note" id="hm-text"></p>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-part="4">
+  <div class="kicker"><span class="chip goal">غلق الهدف ٢</span><span>٣ دقائق</span></div>
+  <h2 class="st">غلق الهدف ٢: أدوات الحماية</h2>
+  <div class="three" id="c42"></div>
+  <p class="note">✔ معيار النجاح: إجابة صحيحة عن سؤالين من ثلاثة.</p>
+</section>
+
+<section class="slide" data-part="4">
+  <div class="kicker"><span class="chip">الغلق الختامي</span><span>المسابقة</span></div>
+  <h2 class="st">التحدّي النهائي للدرس بين الفريقين</h2>
+  <div class="box" style="font-size:1.2rem">
+    <p class="muted" id="ch-n"></p>
+    <p id="ch-q" style="font-size:1.35rem;font-weight:700"></p>
+    <div class="row"><button class="pill solid" id="ch-show">أظهري الإجابة</button></div>
+    <p class="answer" id="ch-a" hidden></p>
+    <div class="row"><button class="pill" data-team="A" data-d="1">+١ لفريق الكربون</button><button class="pill" data-team="B" data-d="1">+١ لفريق الألومنيوم</button><button class="pill" id="ch-next">السؤال التالي ←</button></div>
+  </div>
+  <p class="answer" id="winner" hidden></p>
+</section>
+
+</div></main>
+
+<div class="bottom gut"><div class="wrap">
+  <button class="pill" id="prev">→ السابقة</button>
+  <div class="dots" id="dots"></div>
+  <span class="counter" id="counter"></span>
+  <button class="pill solid" id="next">التالية ←</button>
+</div></div>
+
+<script src="../../../assets/theme.js"></script>
+<script>
+const $ = (id) => document.getElementById(id);
+const NS = "http://www.w3.org/2000/svg";
+const el = (t, a = {}, p) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; };
+const f = (s) => `<span class="f">${s}</span>`;
+const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const TEAL = "#0E6B6A", MINT = "#6FB1AB", SAND = "#C9883A", INK = "#16302F";
+
+// ── التنقّل بين الشرائح والحصص ──
+const slides = [...document.querySelectorAll(".slide")];
+let cur = 0;
+slides.forEach((s, i) => { const d = document.createElement("button"); d.className = "dot" + (Number(s.dataset.part) % 2 === 0 ? " p2" : ""); d.setAttribute("aria-label", "الشريحة " + (i + 1)); d.onclick = () => go(i); $("dots").appendChild(d); });
+function go(i) {
+  cur = Math.max(0, Math.min(slides.length - 1, i));
+  slides.forEach((s, k) => (s.hidden = k !== cur));
+  [...$("dots").children].forEach((d, k) => d.classList.toggle("on", k === cur));
+  $("counter").textContent = `${cur + 1} / ${slides.length}`;
+  $("prev").disabled = cur === 0; $("next").disabled = cur === slides.length - 1;
+  document.querySelectorAll("[data-gopart]").forEach((b) => b.setAttribute("aria-pressed", b.dataset.gopart === slides[cur].dataset.part));
+  $("main").scrollTop = 0;
+}
+$("prev").onclick = () => go(cur - 1); $("next").onclick = () => go(cur + 1);
+document.querySelectorAll("[data-gopart]").forEach((b) => (b.onclick = () => go(slides.findIndex((s) => s.dataset.part === b.dataset.gopart))));
+document.addEventListener("keydown", (e) => { if (e.target.tagName === "INPUT") return; if (e.key === "ArrowLeft") go(cur + 1); if (e.key === "ArrowRight") go(cur - 1); });
+
+// ── النقاط والإظهار والاختيار من متعدد ──
+const score = { A: 0, B: 0 };
+document.addEventListener("click", (e) => {
+  const t = e.target.closest("[data-team]");
+  if (t) { score[t.dataset.team] = Math.max(0, score[t.dataset.team] + Number(t.dataset.d)); $("sA").textContent = score.A; $("sB").textContent = score.B; }
+  const r = e.target.closest("[data-reveal]");
+  if (r) { $(r.dataset.reveal).hidden = false; r.hidden = true; }
+  const o = e.target.closest(".mcq .opt");
+  if (o && !o.closest(".mcq").dataset.locked) for (const b of o.parentElement.children) { b.setAttribute("aria-pressed", b === o); b.dataset.picked = b === o ? "1" : ""; }
+  const c = e.target.closest(".mcq .check");
+  if (c) {
+    const m = c.closest(".mcq"), ans = Number(m.dataset.answer);
+    [...m.querySelectorAll(".opt")].forEach((b, k) => { b.setAttribute("aria-pressed", "false"); if (k === ans) b.classList.add("right"); else if (b.dataset.picked) b.classList.add("wrong"); });
+    m.dataset.locked = "1"; const w = m.querySelector(".why"); if (w) w.hidden = false; c.hidden = true;
+  }
+});
+const mcq = (q, opts, ans, why) => `<div class="mcq box" data-answer="${ans}"><p><b>${q}</b></p><div class="opts">${opts.map((x) => `<button class="opt pill">${x}</button>`).join("")}</div><div class="row"><button class="check pill solid">أظهري الإجابة</button></div>${why ? `<p class="why answer" hidden>${why}</p>` : ""}</div>`;
+const fill = (id, list) => { $(id).innerHTML = list.map((x) => mcq(...x)).join(""); };
+
+// ── خطّ زمني عام: محطات تُفتح باللمس ──
+function timeline(id, items) {
+  $(id).innerHTML = items.map(([y, t, more], i) => `<button class="tl" data-i="${i}" aria-expanded="false"><b class="f">${y}</b><span><b style="font-family:inherit;color:inherit;font-size:1rem">${t}</b><br><span class="more" hidden>${more}</span></span></button>`).join("");
+  $(id).onclick = (e) => { const b = e.target.closest(".tl"); if (!b) return; const open = b.getAttribute("aria-expanded") !== "true"; b.setAttribute("aria-expanded", open); b.querySelector(".more").hidden = !open; };
+}
+
+// ── لعبة مطابقة عامة: يسار المواد، يمين الأوصاف (مخلوطة) ──
+function matchGame(id, pairs) {
+  let pick = null, done = new Set(), order = pairs.map((_, i) => i).sort(() => Math.random() - .5);
+  const draw = () => {
+    $(id).innerHTML = `<div class="mcol">${pairs.map(([a], i) => `<button class="mitem${done.has(i) ? " done" : ""}" data-l="${i}" aria-pressed="${pick === i}" ${done.has(i) ? "disabled" : ""}><b>${a}</b></button>`).join("")}</div>
+      <div class="mcol">${order.map((i) => `<button class="mitem${done.has(i) ? " done" : ""}" data-r="${i}" ${done.has(i) ? "disabled" : ""}>${pairs[i][1]}</button>`).join("")}</div>`;
+  };
+  $(id).onclick = (e) => {
+    const l = e.target.closest("[data-l]"), r = e.target.closest("[data-r]");
+    if (l) { pick = Number(l.dataset.l); draw(); return; }
+    if (r && pick !== null) {
+      if (Number(r.dataset.r) === pick) { done.add(pick); pick = null; draw(); }
+      else { r.classList.remove("shake"); void r.offsetWidth; r.classList.add("shake"); }
+    }
+  };
+  draw();
+  return () => { pick = null; done = new Set(); order.sort(() => Math.random() - .5); draw(); };
+}
+
+// ══════════ الحصة الأولى ══════════
+// الغلاف: كرة ترتد بارتفاعات متناقصة
+(function cover() {
+  const svg = $("cover-svg");
+  el("line", { x1: 20, y1: 220, x2: 580, y2: 220, stroke: SAND, "stroke-width": 6, "stroke-linecap": "round" }, svg);
+  const cr = 0.78;
+  const path = el("path", { d: "", fill: "none", stroke: MINT, "stroke-width": 2, "stroke-dasharray": "5 7" }, svg);
+    let pts = [], X = 40, H = 180, first = true;
+  for (let i = 0; i < 6; i++) { const w = first ? 60 : 30 + H * 0.9; for (let k = 0; k <= 20; k++) { const u = k / 20; const xx = first ? X + w * u : X + w * u; const yy = first ? 40 + 180 * u * u : 220 - 4 * H * u * (1 - u); pts.push([xx, yy]); } X += w; if (!first) H *= cr * cr; else H = 180 * cr * cr; first = false; }
+  path.setAttribute("d", "M " + pts.map((p) => p.join(" ")).join(" L "));
+  const ball = el("circle", { cx: 40, cy: 40, r: 16, fill: TEAL }, svg);
+  if (reduce) return;
+  let i = 0; setInterval(() => { const p = pts[i % pts.length]; ball.setAttribute("cx", p[0]); ball.setAttribute("cy", p[1] - 14); i++; }, 30);
+})();
+
+// المثال المحلول
+const EX = [
+  `نكتب القانون: ${f("C<sub>R</sub> = √( h₂ / h₁ )")}`,
+  `نربّع الطرفين: ${f("C<sub>R</sub>² = h₂ / h₁")}`,
+  `نجعل ${f("h₁")} موضوع القانون: ${f("h₁ = h₂ / C<sub>R</sub>²")}`,
+  `نعوّض: ${f("h₁ = 1.5 m / (0.75)²")}`,
+  `${f("(0.75)² = 0.5625")}، إذن ${f("h₁ = 1.5 / 0.5625 = 2.67 m")}`,
+  `✔ أُلقيت الكرة من ارتفاع ${f("2.67 m")} تقريباً.`,
+];
+let exK = 0;
+const exDraw = () => { $("ex-steps").innerHTML = EX.slice(0, exK).map((x, i) => `<p class="pop">${i + 1}) ${x}</p>`).join("") || '<p class="muted">اضغطي «الخطوة التالية».</p>'; $("ex-next").disabled = exK >= EX.length; };
+$("ex-next").onclick = () => { exK++; exDraw(); }; $("ex-reset").onclick = () => { exK = 0; exDraw(); }; exDraw();
+
+// مختبر الكرة المرتدّة
+const bl = { run: 0 };
+function blStatic(ballY) {
+  const svg = $("bl-svg"), h1 = Number($("bl-h1").value), cr = Number($("bl-cr").value);
+  svg.innerHTML = "";
+  const Y0 = 270, sc = 80; // 1 m = 80 px
+  el("line", { x1: 20, y1: Y0, x2: 500, y2: Y0, stroke: SAND, "stroke-width": 6, "stroke-linecap": "round" }, svg);
+  for (let m = 0; m <= 3; m++) { el("line", { x1: 40, y1: Y0 - m * sc, x2: 48, y2: Y0 - m * sc, stroke: INK }, svg); const t = el("text", { x: 34, y: Y0 - m * sc + 5, "text-anchor": "end", "font-size": 13, fill: INK }, svg); t.textContent = m + " m"; }
+  el("line", { x1: 44, y1: Y0, x2: 44, y2: Y0 - 3 * sc, stroke: INK }, svg);
+  const hs = [h1, h1 * cr * cr, h1 * cr ** 4, h1 * cr ** 6];
+  hs.forEach((h, i) => {
+    const x = 110 + i * 100;
+    el("line", { x1: x, y1: Y0 - h * sc, x2: x + 50, y2: Y0 - h * sc, stroke: i ? MINT : TEAL, "stroke-width": 3, "stroke-dasharray": i ? "6 5" : "0" }, svg);
+    const t = el("text", { x: x + 25, y: Y0 - h * sc - 8, "text-anchor": "middle", "font-size": 13, "font-weight": 700, fill: INK }, svg); t.textContent = (i ? "h" + (i + 1) : "h1") + " = " + h.toFixed(2);
+  });
+  el("circle", { cx: ballY ? ballY[0] : 135, cy: ballY ? ballY[1] : Y0 - h1 * sc - 14, r: 14, fill: TEAL, id: "bl-ball" }, svg);
+  $("bl-h1v").textContent = h1.toFixed(1) + " m"; $("bl-crv").textContent = cr.toFixed(2);
+  $("bl-h2").textContent = hs[1].toFixed(2) + " m"; $("bl-h3").textContent = hs[2].toFixed(2) + " m"; $("bl-h4").textContent = hs[3].toFixed(2) + " m";
+  return { hs, Y0, sc };
+}
+async function blDrop() {
+  const token = ++bl.run, { hs, Y0, sc } = blStatic();
+  if (reduce) return;
+  const ball = $("bl-ball");
+  // سقوط ثم ارتدادات: كل قوس من ارتفاع إلى الأرض إلى الارتفاع التالي
+  let x = 135;
+  for (let i = 0; i < 4; i++) {
+    const hA = hs[i], hB = hs[i + 1] || 0, steps = 26;
+    for (let k = 0; k <= steps && token === bl.run; k++) { const u = k / steps; ball.setAttribute("cy", Y0 - 14 - hA * sc * (1 - u * u)); ball.setAttribute("cx", x + u * 50); await sleep(16); }
+    x += 50;
+    for (let k = 0; k <= steps && token === bl.run && hB > 0.02 && i < 3; k++) { const u = k / steps; ball.setAttribute("cy", Y0 - 14 - hB * sc * (1 - (1 - u) * (1 - u))); ball.setAttribute("cx", x + u * 50); await sleep(16); }
+    x += 50;
+    if (token !== bl.run) return;
+  }
+}
+$("bl-h1").oninput = () => { ++bl.run; blStatic(); }; $("bl-cr").oninput = () => { ++bl.run; blStatic(); };
+$("bl-drop").onclick = blDrop; $("bl-reset").onclick = () => { ++bl.run; $("bl-h1").value = 2; $("bl-cr").value = 0.75; blStatic(); };
+blStatic();
+
+fill("c11", [
+  ["أُسقطت كرة من ارتفاع " + f("2 m") + " فارتدّت إلى " + f("0.5 m") + ". معامل ارتدادها:", [f("0.25"), f("0.5"), f("4")], 1, f("C<sub>R</sub> = √(0.5 / 2) = √0.25 = 0.5")],
+  ["اصطدمت كرة بالجدار بسرعة " + f("10 m/s") + " وارتدّت بسرعة " + f("6 m/s") + ". معامل ارتدادها:", [f("0.6"), f("1.67"), f("16")], 0, f("C<sub>R</sub> = v₂ / v₁ = 6 / 10 = 0.6")],
+  ["كرة معامل ارتدادها " + f("0.8") + " أُسقطت من " + f("1 m") + ". إلى أي ارتفاع ترتدّ؟", [f("0.8 m"), f("0.64 m"), f("1.25 m")], 1, f("h₂ = C<sub>R</sub>² × h₁ = 0.64 × 1 = 0.64 m")],
+]);
+
+// أين تذهب الطاقة؟
+function enDraw() {
+  const cr = Number($("en-cr").value), keep = cr * cr;
+  $("en-crv").textContent = cr.toFixed(2);
+  $("en-keep").style.width = keep * 100 + "%"; $("en-lost").style.width = (1 - keep) * 100 + "%";
+  $("en-keepv").textContent = Math.round(keep * 100) + "%"; $("en-lostv").textContent = Math.round((1 - keep) * 100) + "%";
+}
+$("en-cr").oninput = enDraw; enDraw();
+const CASES = [["C<sub>R</sub> = 1", "لا يمكن أن يحدث في الواقع: يعني أن الكرة لا تفقد أي طاقة وترتدّ إلى الارتفاع نفسه."],
+  ["C<sub>R</sub> قريب من 1", "مادة مرنة جداً: ترتدّ الكرة عالياً وتفقد القليل من طاقتها."],
+  ["C<sub>R</sub> صغير", "مادة تمتصّ الطاقة: ترتدّ قليلاً. يُستفاد منها في الأحذية الرياضية لتقليل تأثير القوة (الحصة الرابعة)."]];
+$("en-cases").innerHTML = CASES.map(([a], i) => `<button class="pill f" data-c="${i}">${a}</button>`).join("");
+$("en-cases").onclick = (e) => { const b = e.target.closest("[data-c]"); if (!b) return; [...$("en-cases").children].forEach((x) => x.setAttribute("aria-pressed", x === b)); $("en-case").innerHTML = CASES[b.dataset.c][1]; };
+$("en-case").textContent = "المسي إحدى الحالات.";
+fill("c12", [
+  ["أيّ هذه القيم لا يمكن أن تكون معامل ارتداد كرة حقيقية؟", [f("0.3"), f("0.8"), f("1.2")], 2, "لأن سرعة الارتداد دائماً أقل من سرعة الاصطدام، فمعامل الارتداد أقل من 1."],
+  ["كرتان أُسقطتا من الارتفاع نفسه، الأولى " + f("C<sub>R</sub> = 0.9") + " والثانية " + f("0.5") + ". أيّهما ترتدّ أعلى؟", ["الأولى", "الثانية", "ترتدّان بالارتفاع نفسه"], 0],
+  ["تكون سرعة الارتداد دائماً أقل من سرعة الاصطدام لأن:", ["بعض الطاقة يُفقد خلال الارتداد", "الكرة تزداد كتلتها", "الأرض تتحرّك"], 0],
+]);
+$("x1").innerHTML = [
+  mcq("معامل الارتداد يقيس:", ["نسبة الطاقة المنطلقة عند عودة المادة إلى حالتها الأصلية", "كتلة الكرة", "سرعة الرياح"], 0),
+  mcq("القانون الصحيح لمعامل الارتداد:", [f("C<sub>R</sub> = v₁ / v₂"), f("C<sub>R</sub> = √(h₂ / h₁)"), f("C<sub>R</sub> = h₁ × h₂")], 1),
+  mcq("كرة " + f("C<sub>R</sub> = 0.5") + " ارتدّت إلى " + f("0.5 m") + ". من أي ارتفاع أُسقطت؟", [f("1 m"), f("2 m"), f("0.25 m")], 1, f("h₁ = 0.5 / 0.25 = 2 m")),
+  mcq("كلما زاد معامل ارتداد المادة:", ["ارتدّت الكرة أعلى", "ارتدّت أقل", "لا يتغيّر الارتداد"], 0),
+].join("");
+
+// ══════════ الحصة الثانية ══════════
+fill("r2", [
+  ["معامل الارتداد دائماً:", ["أكبر من 1", "أقل من 1", "يساوي صفراً"], 1],
+  ["كرة " + f("C<sub>R</sub> = 0.6") + " أُسقطت من " + f("2 m") + "، ارتفاع ارتدادها:", [f("1.2 m"), f("0.72 m"), f("0.36 m")], 1, f("0.36 × 2 = 0.72 m")],
+  ["تختزن المادّة طاقة عند:", ["التمدّد أو الانضغاط", "التسخين فقط", "الطلاء"], 0],
+]);
+
+// القوس
+const BOWS = [["الطويل", "القوس التقليدي الطويل يُصنع غالباً من الخشب، واستُخدم قديماً في الصيد والحروب."],
+  ["المنحني", "صُمّم بحيث ينحني بالاتجاه المعاكس لاتجاه انطلاق السهم، ممّا يسمح بتخزين مقدار أكبر من الطاقة وإعطاء السهم سرعة وقوة أكبر. يُصنع غالباً من طبقات متعدّدة من مواد مختلفة لتحقيق توازن بين القوة والمرونة والمتانة."],
+  ["المركّب", "يحتوي على بكرات لتقليل القوة اللازمة للحفاظ على شدّ الوتر عند السحب الكامل. وتُصنع بعض الأقواس الحديثة من مواد مركّبة تجمع بين القوة والمرونة، كالألياف الزجاجية."]];
+let bowSel = 1, bowRun = 0;
+$("bow-types").innerHTML = BOWS.map(([n], i) => `<button class="pill" data-b="${i}" aria-pressed="${i === bowSel}">القوس ${n}</button>`).join("");
+$("bow-types").onclick = (e) => { const b = e.target.closest("[data-b]"); if (!b) return; bowSel = Number(b.dataset.b); [...$("bow-types").children].forEach((x, k) => x.setAttribute("aria-pressed", k === bowSel)); $("bow-type").textContent = BOWS[bowSel][1]; };
+$("bow-type").textContent = BOWS[bowSel][1];
+function bowDraw(arrowX) {
+  const svg = $("bow-svg"), p = Number($("bow-pull").value) / 100; svg.innerHTML = "";
+  el("circle", { cx: 470, cy: 130, r: 40, fill: "none", stroke: SAND, "stroke-width": 8 }, svg); el("circle", { cx: 470, cy: 130, r: 22, fill: "none", stroke: TEAL, "stroke-width": 8 }, svg); el("circle", { cx: 470, cy: 130, r: 6, fill: "#C24A33" }, svg);
+  const bx = 120, bend = 30 + p * 40, sx = bx - 6 - p * 70;
+  el("path", { d: `M ${bx} 40 Q ${bx + bend} 130 ${bx} 220`, fill: "none", stroke: "#7A5230", "stroke-width": 9, "stroke-linecap": "round" }, svg);
+  el("path", { d: `M ${bx} 40 L ${arrowX == null ? sx : bx} 130 L ${bx} 220`, fill: "none", stroke: INK, "stroke-width": 2 }, svg);
+  const ax = arrowX == null ? sx : arrowX;
+  const g = el("g", {}, svg);
+  el("line", { x1: ax, y1: 130, x2: ax + 150, y2: 130, stroke: INK, "stroke-width": 4 }, g);
+  el("path", { d: `M ${ax + 150} 122 L ${ax + 168} 130 L ${ax + 150} 138 Z`, fill: INK }, g);
+  el("path", { d: `M ${ax} 130 l -8 -9 h 18 z M ${ax} 130 l -8 9 h 18 z`, fill: "#C24A33" }, g);
+  $("bow-pv").textContent = Math.round(p * 100) + "%"; $("bow-e").style.width = p * p * 100 + "%";
+}
+$("bow-pull").oninput = () => { ++bowRun; bowDraw(); $("bow-msg").textContent = "كلما ازداد انحناء القوس ازدادت الطاقة المختزنة فيه."; };
+$("bow-fire").onclick = async () => {
+  const p = Number($("bow-pull").value) / 100, token = ++bowRun;
+  if (p === 0) { $("bow-msg").textContent = "لم تشدّي الوتر! لا توجد طاقة مختزنة لتنتقل إلى السهم."; return; }
+  const dist = 120 + p * 180; // يصل أبعد كلما زادت الطاقة
+  $("bow-msg").innerHTML = `تحرّر الوتر، فانتقلت الطاقة المختزنة إلى السهم ${p > .7 ? "فانطلق بسرعة كبيرة وأصاب الهدف 🎯" : p > .35 ? "فانطلق، لكن الشدّ الأكبر يعطيه سرعة أكبر." : "فانطلق ببطء، ولم يصل بعيداً."}`;
+  const start = 120 - 6 - p * 70;
+  for (let k = 0; k <= 30 && token === bowRun; k++) { bowDraw(start + (dist - start + 120) * (k / 30) - (p > .7 ? 0 : 0)); await sleep(reduce ? 0 : 18); }
+};
+bowDraw();
+
+// القفز بالزانة: أربع مراحل
+const PV = [
+  ["الجري", [0.9, 0, 0.05], "يجري اللاعب على المضمار فيكتسب <b>طاقة حركية</b>."],
+  ["تثبيت الزانة وانحناؤها", [0.35, 0.6, 0.1], "بمجرّد أن «تثبّت» الزانة في الحفرة، تسبّب الطاقة الحركية الناتجة عن جري اللاعب انحناءً في الزانة، لتختزن بذلك <b>طاقة كامنة</b>."],
+  ["استقامة الزانة والصعود", [0.15, 0.2, 0.7], "يقفز اللاعب عندها على الزانة في الهواء إلى أن تصبح مستقيمة، فتتحوّل الطاقة إلى <b>طاقة وضع</b> بارتفاعه."],
+  ["تجاوز العارضة", [0.1, 0, 0.9], "عند أعلى ارتفاع يصل إليه، يترك اللاعب الزانة محاولاً تجاوز العارضة من دون أن يتسبّب في سقوطها."],
+];
+let pvK = 0;
+function pvDraw() {
+  const svg = $("pv-svg"); svg.innerHTML = "";
+  el("line", { x1: 10, y1: 250, x2: 510, y2: 250, stroke: SAND, "stroke-width": 6 }, svg);
+  el("rect", { x: 300, y: 246, width: 24, height: 12, fill: INK }, svg);
+  el("line", { x1: 430, y1: 250, x2: 430, y2: 80, stroke: INK, "stroke-width": 4 }, svg); el("line", { x1: 490, y1: 250, x2: 490, y2: 80, stroke: INK, "stroke-width": 4 }, svg);
+  el("line", { x1: 425, y1: 88, x2: 495, y2: 88, stroke: "#C24A33", "stroke-width": 5 }, svg);
+  const pole = (d) => el("path", { d, fill: "none", stroke: TEAL, "stroke-width": 6, "stroke-linecap": "round" }, svg);
+  const person = (x, y, rot = 0) => { const g = el("g", { transform: `translate(${x} ${y}) rotate(${rot})` }, svg); el("circle", { cx: 0, cy: -38, r: 10, fill: INK }, g); el("path", { d: "M 0 -28 L 0 8 M 0 -18 L 16 -8 M 0 -18 L -14 -6 M 0 8 L 12 30 M 0 8 L -10 30", stroke: INK, "stroke-width": 6, "stroke-linecap": "round", fill: "none" }, g); };
+  if (pvK === 0) { person(90, 220); pole("M 100 205 L 230 150"); for (let i = 0; i < 4; i++) el("line", { x1: 40 - i * 8, y1: 200 + i * 10, x2: 70 - i * 8, y2: 200 + i * 10, stroke: MINT, "stroke-width": 3 }, svg); }
+  if (pvK === 1) { pole("M 312 250 Q 230 170 250 120"); person(255, 150, -20); }
+  if (pvK === 2) { pole("M 312 250 L 330 90"); person(345, 95, -70); }
+  if (pvK === 3) { pole("M 312 250 L 290 120"); person(460, 72, -100); el("text", { x: 460, y: 40, "text-anchor": "middle", "font-size": 22 }, svg).textContent = "✔"; }
+  const [k, e, g] = PV[pvK][1];
+  $("pv-k").style.width = k * 100 + "%"; $("pv-el").style.width = e * 100 + "%"; $("pv-g").style.width = g * 100 + "%";
+  $("pv-text").innerHTML = `<b>${pvK + 1}) ${PV[pvK][0]}:</b> ${PV[pvK][2]}`;
+  $("pv-next").disabled = pvK === PV.length - 1;
+}
+$("pv-next").onclick = () => { pvK++; pvDraw(); }; $("pv-reset").onclick = () => { pvK = 0; pvDraw(); }; pvDraw();
+
+// ترتيب تحوّلات الطاقة
+const ORD = ["طاقة حركية (الجري)", "طاقة كامنة مرونية (انحناء الزانة)", "طاقة وضع (الارتفاع)"];
+let ordPicked = [], ordShuffle = [];
+function ordDraw() {
+  $("ord").innerHTML = ordShuffle.map((i) => { const k = ordPicked.indexOf(i); return `<button class="pill" data-o="${i}" ${k >= 0 ? 'aria-pressed="true" disabled' : ""}>${k >= 0 ? k + 1 + ") " : ""}${ORD[i]}</button>`; }).join("");
+}
+$("ord").onclick = (e) => { const b = e.target.closest("[data-o]"); if (!b) return; const i = Number(b.dataset.o);
+  if (i === ordPicked.length) { ordPicked.push(i); ordDraw(); if (ordPicked.length === 3) { $("ord-msg").hidden = false; $("ord-msg").textContent = "✔ ترتيب صحيح: حركية ← كامنة مرونية ← وضع."; } }
+  else { b.classList.remove("shake"); void b.offsetWidth; b.classList.add("shake"); } };
+$("ord-reset").onclick = () => { ordPicked = []; ordShuffle = [2, 0, 1].sort(() => Math.random() - .5); $("ord-msg").hidden = true; ordDraw(); };
+$("ord-reset").onclick();
+fill("c21", [
+  ["يخزّن القوس طاقة عند شدّه، وهذه الطاقة:", ["طاقة وضع مرونية", "طاقة كيميائية", "طاقة ضوئية"], 0],
+  ["كلما ازداد انحناء القوس:", ["قلّت الطاقة المختزنة", "ازدادت الطاقة المختزنة", "لا تتغيّر الطاقة"], 1],
+]);
+
+// مواد الأسهم (الجدول 1-4)
+const ARROWS = [["الخشب", "منخفض التكلفة، سهل التصنيع", "قد ينشقّ أو ينثني بسهولة"],
+  ["الألومنيوم", "مستقيم ومتجانس، متين نسبياً", "أعلى تكلفة من الخشب، ينحني بالصدمات القوية"],
+  ["ألياف الزجاج", "منخفضة التكلفة نسبياً، لا تتشوّه", "أقل استقامة من بعض المواد الحديثة"],
+  ["ألياف الكربون", "خفيفة جداً وقوية وعالية الاستقامة", "قد تتشقّق عند الصدمات القوية، مرتفعة التكلفة"],
+  ["مركّب الكربون والألومنيوم (كربيد الألومنيوم)", "القوة والاستقامة وخفّة الوزن", "تكلفة باهظة جداً، يُستخدم في المنافسات فقط"]];
+const resetArrows = matchGame("arrow-match", ARROWS.map(([m, a, d]) => [m, `<b>✔</b> ${a}<br><b>✖</b> ${d}`]));
+$("arrow-reset").onclick = () => { resetArrows(); $("arrow-full").hidden = true; };
+$("arrow-table").onclick = () => { $("arrow-full").hidden = false; $("arrow-full").innerHTML = `<table class="tbl"><tr><th>المادة</th><th>المميّزات</th><th>العيوب</th></tr>${ARROWS.map((r) => `<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join("")}</table>`; };
+
+// رسم بياني: الزانة
+function chart(svgId, data, opt) {
+  const svg = $(svgId); svg.innerHTML = "";
+  const X0 = 50, X1 = 500, Y0 = 280, Y1 = 20, [xa, xb] = opt.x, [ya, yb] = opt.y;
+  const sx = (x) => X0 + (x - xa) / (xb - xa) * (X1 - X0), sy = (y) => Y0 - (y - ya) / (yb - ya) * (Y0 - Y1);
+  for (let y = ya; y <= yb + 1e-9; y += opt.yStep) { el("line", { x1: X0, y1: sy(y), x2: X1, y2: sy(y), stroke: css("--line") || "#ddd" }, svg); el("text", { x: X0 - 6, y: sy(y) + 4, "text-anchor": "end", "font-size": 11, fill: INK }, svg).textContent = y; }
+  for (let x = xa; x <= xb; x += opt.xStep) el("text", { x: sx(x), y: Y0 + 16, "text-anchor": "middle", "font-size": 11, fill: INK }, svg).textContent = x;
+  el("text", { x: 14, y: 14, "font-size": 12, fill: INK }, svg).textContent = "(m)";
+  const bands = el("g", {}, svg);
+  el("polyline", { points: data.map(([x, y]) => sx(x) + "," + sy(y)).join(" "), fill: "none", stroke: TEAL, "stroke-width": 2.5 }, svg);
+  data.forEach(([x, y]) => el("circle", { cx: sx(x), cy: sy(y), r: 3.5, fill: TEAL }, svg));
+  return { bands, sx, sy, X0, X1, Y0, Y1 };
+}
+const PVD = [[1912, 4.02], [1920, 4.09], [1927, 4.25], [1936, 4.6], [1942, 4.77], [1957, 4.82], [1961, 4.83], [1962, 4.94], [1963, 5.2], [1964, 5.28], [1966, 5.34], [1968, 5.44], [1970, 5.46], [1972, 5.63], [1976, 5.7], [1980, 5.78], [1983, 5.83], [1985, 6.0], [1988, 6.06], [1991, 6.1], [1994, 6.14], [2014, 6.16], [2019, 6.16]];
+const PVM = [["الخشب", 1910, 1925, "أقدم الزانات كانت خشبية، وكان الناس يستخدمونها لتجاوز الجداول والعوائق المائية."],
+  ["الخيزران", 1925, 1957, "أُستعيض عن الزانات الخشبية بزانات من الخيزران الأكثر مرونة."],
+  ["الألومنيوم", 1957, 1962, "زانات الألومنيوم ذات الوزن الخفيف."],
+  ["ألياف الزجاج", 1962, 1985, "أُتبعت الألومنيوم بزانات مرنة من الألياف الزجاجية، فارتفعت الأرقام بسرعة."],
+  ["ألياف الكربون والمواد المركّبة", 1985, 2019, "سمحت للرياضيين بالوصول إلى أقصى ارتفاع في هذه اللعبة باستخدام المواد الجديدة."]];
+const pvc = chart("pvc-svg", PVD, { x: [1910, 2020], y: [4, 6.5], xStep: 20, yStep: 0.5 });
+$("pvc-pick").innerHTML = PVM.map(([n], i) => `<button class="pill" data-m="${i}">${n}</button>`).join("");
+$("pvc-pick").onclick = (e) => { const b = e.target.closest("[data-m]"); if (!b) return; const [n, a, z, t] = PVM[b.dataset.m];
+  [...$("pvc-pick").children].forEach((x) => x.setAttribute("aria-pressed", x === b)); pvc.bands.innerHTML = "";
+  el("rect", { x: pvc.sx(a), y: pvc.Y1, width: pvc.sx(z) - pvc.sx(a), height: pvc.Y0 - pvc.Y1, fill: MINT, opacity: .25 }, pvc.bands);
+  $("pvc-text").innerHTML = `<b>${n}:</b> ${t}`; };
+$("pvc-text").textContent = "المسي مادة لتري فترتها.";
+fill("c22", [
+  ["سهم خفيف جداً وقوي وعالي الاستقامة، لكنه قد يتشقّق عند الصدمات القوية ومرتفع التكلفة:", ["الخشب", "ألياف الكربون", "الألومنيوم"], 1],
+  ["أُستعيض عن الزانات الخشبية بزانات من:", ["الفولاذ", "الخيزران الأكثر مرونة", "البلاستيك"], 1],
+  ["مادة أسهم تُستخدم في المنافسات فقط لأن تكلفتها باهظة جداً:", ["مركّب الكربون والألومنيوم", "ألياف الزجاج", "الخشب"], 0],
+]);
+$("x2").innerHTML = [
+  mcq("يخزّن القوس طاقة وضع مرونية عند شدّه كما يحدث في:", ["النابض", "المصباح", "البطارية"], 0),
+  mcq("ما الذي يميّز القوس المركّب؟", ["بكرات تقلّل القوة اللازمة للحفاظ على شدّ الوتر", "أنه من الخشب فقط", "لا يحتاج إلى وتر"], 0),
+  mcq("في القفز بالزانة، ماذا تختزن الزانة عند انحنائها؟", ["طاقة كامنة", "طاقة حرارية", "لا تختزن طاقة"], 0),
+  mcq("من شروط الزانة في المنافسات الأولمبية أن تكون:", ["ناعمة", "خشبية فقط", "بطول محدّد"], 0),
+].join("");
+
+// ══════════ الحصة الثالثة ══════════
+fill("r3", [
+  ["كلما ازداد انحناء القوس، فإن الطاقة المختزنة فيه:", ["تزداد", "تقل"], 0],
+  ["ترتيب تحوّلات الطاقة في القفز بالزانة:", ["حركية ← كامنة ← وضع", "وضع ← حركية ← كامنة", "كامنة ← وضع ← حركية"], 0],
+  ["أخفّ مادة وأعلاها استقامة لصناعة الأسهم:", ["الخشب", "ألياف الكربون", "ألياف الزجاج"], 1],
+]);
+// مراحل رمي الرمح
+async function javelin(stage) {
+  const svg = $("jv-svg"); svg.innerHTML = "";
+  el("line", { x1: 10, y1: 200, x2: 510, y2: 200, stroke: SAND, "stroke-width": 5 }, svg);
+  const fig = (x, armRot, jav) => { const g = el("g", { transform: `translate(${x} 150)` }, svg); el("circle", { cx: 0, cy: -38, r: 10, fill: INK }, g);
+    el("path", { d: "M 0 -28 L 0 8 M 0 8 L 14 48 M 0 8 L -12 48", stroke: INK, "stroke-width": 6, "stroke-linecap": "round", fill: "none" }, g);
+    const a = el("g", { transform: `rotate(${armRot} 0 -20)` }, g); el("line", { x1: 0, y1: -20, x2: -26, y2: -20, stroke: INK, "stroke-width": 6, "stroke-linecap": "round" }, a);
+    if (jav) el("line", { x1: -70, y1: -6, x2: 60, y2: -40, stroke: "#7A5230", "stroke-width": 3 }, a); };
+  if (stage >= 0) fig(90, -10, true);
+  if (stage >= 1) fig(250, -40, true);
+  if (stage >= 2) { fig(410, 60, false); el("line", { x1: 430, y1: 70, x2: 505, y2: 40, stroke: "#7A5230", "stroke-width": 3 }, svg); }
+  ["١ الجري", "٢ الاستعداد", "٣ الرمي"].forEach((t, i) => { if (stage >= i) el("text", { x: 90 + i * 160, y: 218, "text-anchor": "middle", "font-size": 14, "font-weight": 700, fill: TEAL }, svg).textContent = t; });
+}
+$("jv-go").onclick = async () => { for (let s = 0; s < 3; s++) { await javelin(s); await sleep(reduce ? 0 : 700); } };
+javelin(2);
+timeline("jv-tl", [
+  ["708 ق.م", "الألعاب الأولمبية القديمة", "لا تزال رياضة رمي الرمح جزءاً من المنافسات منذ الألعاب الأولمبية القديمة في العام 708 قبل الميلاد."],
+  ["1908", "الألعاب الأولمبية الحديثة", "أُدخلت لعبة رمي الرمح على الألعاب الأولمبية الحديثة. كانت الرماح مصنوعة من الخشب الصلب ومزوّدة برأس فولاذي."],
+  ["التحسينات الأولى", "دقة التصنيع والبنية الهوائية", "اشتملت التحسينات الأولية للرماح على دقة أكبر في التصنيع وبنية ديناميكية هوائية أفضل."],
+  ["الستينيات", "الرمح المعدني الأجوف", "شهدت الرماح تطوّراً غير متوقّع: تقاعد أحد حاملي الرقم القياسي العالمي عن الرياضة ليدير أعمالاً تجارية في تصنيع الأدوات الرياضية، وابتكر الرمح المعدني الأجوف. أصبحت الرماح الجديدة تنتقل لمسافات أبعد، مع مسار أكثر استقامة في التحليق، حتى إنها في بعض الأحيان لا تسقط على رؤوسها إطلاقاً."],
+  ["1984", "رقم قياسي 104 m", "كان الرقم القياسي المحقّق لرمي الرمح 104 m، وقد شكّل سقوطه خطراً على أحد المتنافسين على المضمار."],
+  ["1986", "لوائح تصميم جديدة", "تطلّبت اللوائح الجديدة لتصميم الرمح أن يكون سقوطه بشكل رأسي نحو الأسفل. خفّض التصميم الجديد متوسط مسافات الرمي بعشرين متراً، وفرض معايير جديدة للأرقام القياسية."],
+]);
+const JVD = [[1912, 62], [1920, 66], [1928, 69], [1930, 72], [1932, 74], [1934, 76], [1936, 77], [1938, 78], [1953, 80], [1955, 81], [1956, 84], [1959, 86], [1964, 87], [1968, 92], [1972, 94], [1976, 95], [1980, 97], [1983, 99], [1984, 104], [1986, 86], [1987, 87], [1990, 89], [1991, 90], [1992, 91], [1993, 95]];
+const jvc = chart("jvc-svg", JVD, { x: [1910, 2000], y: [60, 110], xStep: 10, yStep: 5 });
+el("line", { x1: jvc.sx(1986), y1: jvc.Y1, x2: jvc.sx(1986), y2: jvc.Y0, stroke: "#C24A33", "stroke-width": 2, "stroke-dasharray": "5 5" }, jvc.bands);
+el("text", { x: jvc.sx(1986) - 6, y: jvc.sy(84) + 22, "text-anchor": "end", "font-size": 13, "font-weight": 700, fill: "#C24A33" }, $("jvc-svg")).textContent = "1986";
+fill("c31", [
+  ["كانت رماح العام 1908 مصنوعة من:", ["الخشب الصلب برأس فولاذي", "الألومنيوم", "ألياف الكربون"], 0],
+  ["ما الذي أضافه الرمح المعدني الأجوف؟", ["مسافات أبعد ومسار أكثر استقامة", "وزناً أكبر", "سقوطاً أسرع على رأسه"], 0],
+  ["لماذا غُيّرت لوائح تصميم الرمح عام 1986؟", ["لزيادة الأرقام القياسية", "حفاظاً على السلامة لأن سقوطه أصبح خطراً", "لتقليل التكلفة"], 1],
+]);
+// قشرة الخشب
+let grDir = "perp";
+function grDraw(state) {
+  const svg = $("gr-svg"); svg.innerHTML = "";
+  const broken = state === "push" && grDir === "par";
+  const g1 = el("g", {}, svg), wood = "#C8955B";
+  if (!broken) { el("rect", { x: 110, y: 110, width: 300, height: 60, rx: 6, fill: wood, stroke: "#8A5A2B", "stroke-width": 2 }, g1); }
+  else { el("path", { d: "M 110 110 h 140 l 12 30 l -12 30 h -140 z", fill: wood, stroke: "#8A5A2B", "stroke-width": 2, transform: "rotate(-6 250 140)" }, g1); el("path", { d: "M 270 110 h 140 v 60 h -140 l 12 -30 z", fill: wood, stroke: "#8A5A2B", "stroke-width": 2, transform: "rotate(6 270 140)" }, g1); el("text", { x: 260, y: 215, "text-anchor": "middle", "font-size": 16, "font-weight": 700, fill: "#C24A33" }, svg).textContent = "كسر!"; }
+  // خطوط القشرة: موازية للطول
+  for (let i = 0; i < 6; i++) el("path", { d: `M 116 ${118 + i * 9} C 200 ${112 + i * 9}, 300 ${124 + i * 9}, 404 ${118 + i * 9}`, stroke: "#8A5A2B", "stroke-width": 1.4, fill: "none", opacity: broken ? .3 : .8 }, g1);
+  el("text", { x: 260, y: 100, "text-anchor": "middle", "font-size": 13, fill: "#8A5A2B" }, svg).textContent = "قشرة الخشب ←";
+  const col = state === "push" ? (broken ? "#C24A33" : "#2E8A57") : TEAL;
+  if (grDir === "perp") { el("line", { x1: 260, y1: 30, x2: 260, y2: 100, stroke: col, "stroke-width": 6 }, svg); el("path", { d: "M 248 92 L 260 108 L 272 92 Z", fill: col }, svg); }
+  else { el("line", { x1: 30, y1: 140, x2: 100, y2: 140, stroke: col, "stroke-width": 6 }, svg); el("path", { d: "M 92 128 L 108 140 L 92 152 Z", fill: col }, svg); }
+  el("text", { x: 260, y: 22, "text-anchor": "middle", "font-size": 14, "font-weight": 700, fill: col }, svg).textContent = "قوّة";
+}
+document.querySelectorAll("[data-gr]").forEach((b) => (b.onclick = () => { grDir = b.dataset.gr; document.querySelectorAll("[data-gr]").forEach((x) => x.setAttribute("aria-pressed", x === b)); grDraw(); $("gr-msg").textContent = "اضغطي «أثّري بالقوة»."; }));
+$("gr-push").onclick = () => { grDraw("push"); $("gr-msg").innerHTML = grDir === "perp" ? "✔ صمد الخشب: القوة <b>عمودية</b> على القشرة، فالخشب قوي في هذا الاتجاه." : "✖ انكسر الخشب: القوة <b>موازية</b> للقشرة، والخشب ضعيف جداً على امتداد سطح قشرته."; };
+grDraw();
+timeline("rk-tl", [
+  ["1874", "الخشب", "صُنع أول مضرب تنس من قطعة صلبة من الخشب: قوي وخفيف ومرن، لكنه قوي فقط عندما تكون القوى عمودية على القشرة."],
+  ["1968", "الفولاذ", "صُنع مضرب الفولاذ."],
+  ["السبعينيات", "الألومنيوم", "استُخدم مضرب من الألومنيوم ولاقى رواجاً كبيراً."],
+  ["1980", "ألياف الكربون", "إلى أن حصل تقدّم أساسي ومفاجئ في العام 1980 حيث صُنع مضرب التنس بألياف الكربون: أقوى بخمس مرات من الفولاذ، والمضارب المصنوعة منه أكثر اتساقاً وأقل وزناً من مضارب الخشب."],
+]);
+fill("c32", [
+  ["يكون الخشب قوياً عندما تكون القوى المؤثّرة:", ["عمودية على القشرة", "موازية للقشرة", "في أي اتجاه"], 0],
+  ["ألياف الكربون أقوى من الفولاذ بنحو:", ["مرتين", "خمس مرات", "عشر مرات"], 1],
+  ["الترتيب الزمني الصحيح لمواد مضارب التنس:", ["الخشب ← الفولاذ ← الألومنيوم ← ألياف الكربون", "ألياف الكربون ← الخشب ← الفولاذ", "الألومنيوم ← الخشب ← ألياف الكربون"], 0],
+]);
+$("x3").innerHTML = [
+  mcq("في أي عام أُدخل رمي الرمح على الألعاب الأولمبية الحديثة؟", [f("1908"), f("1984"), f("1986")], 0),
+  mcq("تصميم الرمح بعد 1986 يجعله يسقط:", ["برأسه نحو الأسفل", "على جانبه", "بعيداً أكثر"], 0),
+  mcq("لماذا استُبدلت ألياف الكربون بالخشب في المضارب؟", ["أقوى وأخفّ وزناً", "أرخص فقط", "أثقل وأكثر ثباتاً"], 0),
+  mcq("ألياف الزجاج مقارنة بألياف الكربون:", ["أقوى وأخفّ", "ليست في قوّتها وخفّتها", "مماثلة تماماً"], 1),
+].join("");
+
+// ══════════ الحصة الرابعة ══════════
+let shN = 0;
+$("sh-plus").onclick = () => { shN++; $("sh-n").textContent = shN; }; $("sh-minus").onclick = () => { shN = Math.max(0, shN - 1); $("sh-n").textContent = shN; };
+timeline("sh-tl", [
+  ["1800", "النعال المطّاطية", "طوّرت البحرية الملكية البريطانية تركيب النعال المطّاطية للأحذية، والمعروفة باسم «الأحذية المسطّحة»، والتي أصبحت شائعة في الألعاب الرياضية."],
+  ["1892", "حذاء «كيدس»", "قامت شركة مطّاط أمريكية بصناعة أحذية مغطّاة بالقماش تُسمّى «كيدس»."],
+  ["الأربعينيات", "السنيكرز", "طُوّرت في أربعينيات القرن الماضي وأصبحت تُسمّى سنيكرز. أمّنت النعال المطاطية احتكاكاً أكبر على الأرضيات الخشبية الصلبة."],
+  ["اليوم", "البوليمرات الصناعية", "استُبدل المطّاط بعدد من البوليمرات الصناعية بخصائص مصمّمة لمختلف الاستخدامات، واستخدام البلاستيك ومادة الفوم سمح بصنع أحذية متخصّصة للغاية."],
+]);
+matchGame("shoe-match", [
+  ["(a) أحذية برقبة عالية", "تمنح الحماية لكاحل القدم في رياضة كرة السلة، واستُبدلت الأنسجة القطنية بأنسجة صناعية أقوى"],
+  ["(b) أحذية التدريب", "النعل العريض لثبات أفضل على أسطح غير مستوية، يُصنع من بوليمر الفوم الصلب والخفيف"],
+  ["(c) أحذية بكعب داعم", "كعب إضافي من مواد ذات معامل ارتداد منخفض لتقليل تأثير القوة في الجري الطويل"],
+]);
+matchGame("suit-match", [
+  ["النايلون", "لبدلات السحب والاحتكاك وبدلات التمرين، ويُمزج عادة مع السباندكس لإكسابها المرونة"],
+  ["السباندكس", "لبدلات المنافسات الرياضية، ويُعرف أيضاً باسم «إليستين» أو «ليكرا»"],
+  ["بولي بيوتيلين تيريفثالات (PBT)", "نوع من البوليستر المرن (مطاطي)، يُستخدم لبدلات اللياقة والسباق"],
+  ["البولي استر (البوليستر)", "لبدلات المتنافسين، وإن كان الاختيار الدائم والرائج للسباندكس في بدلات السباحين"],
+]);
+// جلد القرش: جزيئات ماء تنساب
+let skMode = "smooth", skT = 0;
+function skDraw() {
+  const svg = $("sk-svg"); svg.innerHTML = "";
+  if (skMode === "shark") { let d = "M 10 150"; for (let x = 10; x < 510; x += 26) d += ` L ${x + 18} 132 L ${x + 26} 150`; el("path", { d: d + " L 510 220 L 10 220 Z", fill: "#7C8A8E" }, svg); }
+  else el("rect", { x: 10, y: 150, width: 500, height: 70, fill: "#7C8A8E" }, svg);
+  const speed = skMode === "shark" ? 2.2 : 1.2;
+  for (let r = 0; r < 4; r++) for (let i = 0; i < 9; i++) { const x = (i * 60 + skT * speed * (1 + r * .2)) % 520; el("circle", { cx: x, cy: 40 + r * 24, r: 5, fill: "#5FA3D8", opacity: .75 }, svg); }
+  el("text", { x: 260, y: 200, "text-anchor": "middle", "font-size": 15, "font-weight": 700, fill: "#fff" }, svg).textContent = skMode === "shark" ? "ينساب الماء أسرع ✔" : "سطح أملس";
+}
+document.querySelectorAll("[data-sk]").forEach((b) => (b.onclick = () => { skMode = b.dataset.sk; document.querySelectorAll("[data-sk]").forEach((x) => x.setAttribute("aria-pressed", x === b)); skDraw(); }));
+setInterval(() => { if (!reduce && slides[cur].contains($("sk-svg"))) { skT += 4; skDraw(); } }, 60); skDraw();
+timeline("sk-tl", [
+  ["2008", "بدلات تحاكي جلد القرش", "صنع العلماء بدلات للسباحين مع أسطح مشابهة. وتنافس السبّاحون في الألعاب الأولمبية مرتدين بدلات جسم كاملة، فأعطتهم ميزات إضافية."],
+  ["2009", "أكثر من 130 رقماً قياسياً", "حصد السبّاحون الذين لبسوا تلك البدلات معظم الميداليات، وحطّموا أكثر من 130 رقماً قياسياً عالمياً في السباحة."],
+  ["بعد ذلك", "ضوابط شديدة", "تمّ لاحقاً وضع ضوابط شديدة لاستخدام هذه البدلات، لأنّ المنافسات يجب أن تعتمد على الرياضيين أنفسهم أكثر من اعتمادها على الأدوات المستخدَمة."],
+]);
+fill("c41", [
+  ["مادة تُستخدم في بدلات المنافسات الرياضية وتُعرف باسم «ليكرا»:", ["النايلون", "السباندكس", "البوليستر"], 1],
+  ["كعب الحذاء الداعم للجري الطويل يُصنع من مواد معامل ارتدادها:", ["مرتفع", "منخفض", "يساوي 1"], 1, "معامل ارتداد منخفض لتقليل تأثير القوة على القدم."],
+  ["لماذا وُضعت ضوابط شديدة لبدلات جلد القرش؟", ["لأنها غالية", "لأن المنافسات يجب أن تعتمد على الرياضيين أنفسهم أكثر من الأدوات", "لأنها تمزّقت"], 1],
+]);
+// زمن التصادم
+const PADS = [["بدون حشوة", 0.01], ["حشوة رقيقة", 0.04], ["حشوة سميكة (فوم)", 0.1]];
+let pad = 0, imRun = 0;
+function imDraw(x) {
+  const svg = $("im-svg"); svg.innerHTML = "";
+  el("rect", { x: 470, y: 30, width: 30, height: 170, fill: "#7C8A8E" }, svg);
+  const th = [0, 14, 34][pad];
+  if (th) el("rect", { x: 470 - th, y: 50, width: th, height: 130, rx: 6, fill: SAND, opacity: .85 }, svg);
+  el("circle", { cx: x == null ? 80 : x, cy: 115, r: 32, fill: TEAL }, svg);
+  el("text", { x: x == null ? 80 : x, y: 121, "text-anchor": "middle", "font-size": 16, "font-weight": 800, fill: "#fff" }, svg).textContent = "جسم";
+  const t = PADS[pad][1]; $("im-t").textContent = (t * 1000) + " ms";
+}
+const forceOf = (t) => 0.01 / t; // القوة نسبية: الزمن الأطول ← قوة أقل
+document.querySelectorAll("[data-pad]").forEach((b) => (b.onclick = () => { pad = Number(b.dataset.pad); document.querySelectorAll("[data-pad]").forEach((x) => x.setAttribute("aria-pressed", x === b)); ++imRun; imDraw(); $("im-f").style.width = "0%"; $("im-msg").textContent = "اضغطي «تصادم»."; }));
+$("im-go").onclick = async () => {
+  const token = ++imRun, th = [0, 14, 34][pad], stopX = 470 - th - 32;
+  for (let k = 0; k <= 24 && token === imRun; k++) { imDraw(80 + (stopX - 80) * (k / 24)); await sleep(reduce ? 0 : 16); }
+  const F = forceOf(PADS[pad][1]);
+  $("im-f").style.width = F * 100 + "%";
+  $("im-msg").innerHTML = pad === 0 ? "توقّف الجسم فجأة في زمن قصير جداً، فكانت <b>قوة التصادم كبيرة</b>." : pad === 1 ? "الحشوة زادت زمن التصادم قليلاً، فقلّت القوة." : "الفوم زاد زمن التصادم كثيراً، فصارت <b>قوة التصادم أصغر بكثير</b> وقلّ تأثيرها السلبي.";
+};
+imDraw();
+// الخوذة
+timeline("hm-tl", [
+  ["200 km/h", "سرعة خطرة", "تُعدّ سباقات الدرّاجات النارية من الرياضات المثيرة والخطيرة، خاصة عندما تتجاوز سرعة راكب الدرّاجة 200 km/h."],
+  ["العشرينيات والثلاثينيات", "أولى الخوذ", "ظهرت أولى الخوذ مصنوعة من الجلد وحشوات صوفية. كان وجه راكبي الدرّاجات مكشوفاً، ويرتدون نظارات واقية من الجلد والزجاج. كانت الحماية متدنّية، ما أدّى إلى حوادث خطيرة ومميتة."],
+  ["1935", "حادث لورنس", "أدّى موت ضابط الجيش البريطاني والدبلوماسي توماس إدوارد لورنس بحادث درّاجة نارية طفيف إلى جذب الاهتمام العالمي لأهمية الخوذ."],
+  ["1953", "أول خوذة صلبة", "ابتُكرت أولى الخوذ الماصّة للصدمات التي استُخدم في صناعتها مادة الفوم."],
+]);
+const HL = [["الهيكل الخارجي", "يُصنع من الألياف الزجاجية المتينة أو من ألياف الكربون. يحوّل أي قوة تصادم إلى طاقة يمتصّها الفوم في الداخل.", "#0E6B6A"],
+  ["طبقة الفوم", "تمتصّ الطاقة، ويتغيّر شكلها بحسب قوة التصادم.", "#C9883A"],
+  ["درع الوجه", "يغطّي الوجه كله، ويُصنع من مادة بولي كربونات المقاومة للصدمات.", "#6FB1AB"]];
+let hmSel = 0;
+function hmDraw() {
+  const svg = $("hm-svg"); svg.innerHTML = "";
+  const op = (i) => (hmSel === i ? 1 : .35);
+  el("path", { d: "M 60 190 C 50 60, 300 40, 300 170 L 300 210 L 60 210 Z", fill: HL[0][2], opacity: op(0) }, svg);
+  el("path", { d: "M 80 190 C 75 85, 280 70, 280 175 L 280 205 L 80 205 Z", fill: HL[1][2], opacity: op(1) }, svg);
+  el("path", { d: "M 100 195 C 100 105, 262 98, 262 180 L 262 205 L 100 205 Z", fill: "#FFFFFF", opacity: .9 }, svg);
+  el("path", { d: "M 230 120 C 300 120, 320 170, 300 200 L 220 200 Z", fill: HL[2][2], opacity: op(2) * .85, stroke: "#fff", "stroke-width": 2 }, svg);
+  $("hm-text").innerHTML = `<b>${HL[hmSel][0]}:</b> ${HL[hmSel][1]}`;
+  $("hm-pick").innerHTML = HL.map(([n], i) => `<button class="pill" data-h="${i}" aria-pressed="${i === hmSel}">${n}</button>`).join("");
+}
+$("hm-pick").onclick = (e) => { const b = e.target.closest("[data-h]"); if (b) { hmSel = Number(b.dataset.h); hmDraw(); } };
+hmDraw();
+fill("c42", [
+  ["كيف تقلّل الحشوات من تأثير قوة التصادم؟", ["تقلّل زمن التصادم", "تزيد زمن التصادم", "تزيد سرعة الجسم"], 1],
+  ["مادة الطبقة التي تمتصّ الطاقة داخل الخوذة:", ["الفوم", "الفولاذ", "الخشب"], 0],
+  ["درع الوجه في الخوذة الحديثة يُصنع من:", ["الجلد", "البولي كربونات المقاومة للصدمات", "الصوف"], 1],
+]);
+
+// التحدّي النهائي
+const CH = [
+  ["اكتبي قانون معامل الارتداد بدلالة السرعتين والارتفاعين.", f("C<sub>R</sub> = v₂ / v₁ = √(h₂ / h₁)")],
+  ["كرة " + f("C<sub>R</sub> = 0.5") + " أُسقطت من " + f("4 m") + ". إلى أي ارتفاع ترتدّ؟", f("h₂ = 0.25 × 4 = 1 m")],
+  ["لماذا يخزّن القوس المنحني طاقة أكبر؟", "لأنه مصمّم بحيث ينحني بالاتجاه المعاكس لاتجاه انطلاق السهم، ممّا يسمح بتخزين مقدار أكبر من الطاقة."],
+  ["رتّبي تحوّلات الطاقة في القفز بالزانة.", "طاقة حركية ← طاقة كامنة في الزانة المنحنية ← طاقة وضع."],
+  ["ما سبب تغيير لوائح تصميم الرمح عام 1986؟", "الحفاظ على السلامة: كان الرمح يقطع مسافات خطرة (104 m)، فصُمّم ليسقط برأسه نحو الأسفل."],
+  ["متى يكون الخشب قوياً في مضرب التنس؟", "عندما تكون القوى المؤثّرة عمودية على القشرة."],
+  ["اذكري مادة لبدلات الرياضيين واستخدامها.", "مثلاً: السباندكس لبدلات المنافسات (ليكرا)، أو النايلون لبدلات التمرين."],
+  ["كيف تحمي الحشوات جسم الرياضي؟", "تزيد زمن التصادم فتقلّ قوة التصادم وتأثيرها السلبي."],
+];
+let ci = 0;
+function ch() { $("ch-n").textContent = `السؤال ${ci + 1} من ${CH.length}`; $("ch-q").innerHTML = CH[ci][0]; $("ch-a").innerHTML = CH[ci][1]; $("ch-a").hidden = true; $("ch-show").hidden = false; $("ch-next").textContent = ci === CH.length - 1 ? "أعلني الفريق الفائز 🏆" : "السؤال التالي ←"; }
+$("ch-show").onclick = () => { $("ch-a").hidden = false; $("ch-show").hidden = true; };
+$("ch-next").onclick = () => { if (ci < CH.length - 1) { ci++; ch(); return; } $("winner").hidden = false;
+  $("winner").innerHTML = score.A === score.B ? `تعادل رائع! ${score.A} – ${score.B} 🎉` : `🏆 فاز ${score.A > score.B ? "فريق الكربون" : "فريق الألومنيوم"} بنتيجة ${Math.max(score.A, score.B)} مقابل ${Math.min(score.A, score.B)}. أحسنتنّ!`; };
+ch();
+
+const hp = (location.hash.match(/^#p([1-4])$/) || [])[1];
+go(hp ? slides.findIndex((s) => s.dataset.part === hp) : 0);
+</script>
+</body>
+</html>

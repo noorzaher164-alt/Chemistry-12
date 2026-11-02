@@ -137,5 +137,18 @@ a.card:hover { border-color: var(--wine); }
 .lock-err { color: #C24A33; font-weight: 700; }
 .shake { animation: shake .35s; }
 @keyframes shake { 25% { transform: translateX(-8px) } 75% { transform: translateX(8px) } }
+/* مادة العلوم: هوية خضراء مزرقة بالمكوّنات نفسها */
+:root[data-subject="science"] {
+  --ink: #F3F8F7; --paper: #FFFFFF; --blush: #E3F1EF; --rose: #C5E3DF; --mauve: #6FB1AB;
+  --line: #CDE2DE; --fg: #16302F; --muted: #4D6967; --wine: #0E6B6A; --wine-2: #0A5150; --brass: #C9883A;
+  --on-wine: #FFFFFF; --shadow: 0 18px 40px rgba(14, 107, 106, .14);
+}
+:root[data-subject="science"][data-theme="dark"] {
+  --ink: #0F1E1E; --paper: #162A2A; --blush: #1C3535; --rose: #24494A; --mauve: #5FA39D;
+  --line: #2E5050; --fg: #E8F5F3; --muted: #B5CFCC; --wine: #7FD3C8; --wine-2: #A6E3DA; --brass: #E0A75A;
+  --on-wine: #0F1E1E; --shadow: 0 18px 40px rgba(0,0,0,.35);
+}
+.card.sci { border-top: 5px solid #0E6B6A; } .card.sci .ic { background: radial-gradient(circle at 35% 30%, #fff, #C5E3DF); color: #0E6B6A; }
+.card.chem { border-top: 5px solid #8C1F3F; }
 footer { padding-block: 18px; color: var(--muted); text-align: center; font-size: .95rem; border-top: 1px solid var(--line); }
 footer b { color: var(--wine); }
