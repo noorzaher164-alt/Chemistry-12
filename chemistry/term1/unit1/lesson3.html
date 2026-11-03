@@ -210,6 +210,10 @@ tr.sel { background: rgba(255,255,255,.07); }
 .crumbs a { color: var(--gold); text-decoration: none; }
 .crumbs a:hover { text-decoration: underline; }
 .crumbs b { color: var(--fg); }
+.htype { justify-items: center; text-align: center; }
+.htype .hnum { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: var(--gold); color: var(--panel); font-weight: 800; }
+.htype svg { width: 100%; max-width: 240px; }
+.htype .answer { text-align: start; }
 .fill-gas { opacity: 0; }
 .prep-grid { grid-template-columns: 1.7fr 1fr; }
 @media (max-width: 860px) { .prep-grid { grid-template-columns: 1fr; } }
@@ -514,6 +518,49 @@ tr.sel { background: rgba(255,255,255,.07); }
   <h2>أيونية أم تساهمية؟</h2>
   <p class="lead">الهالوجينات تكوّن روابط <b>أيونية</b> عندما تتفاعل مع الفلزات، وروابط <b>تساهمية</b> مع اللافلزات. صنّفي كل مركّب:</p>
   <div class="three" id="bond-grid"></div>
+</section>
+
+<section class="slide" data-part="2">
+  <div class="kicker"><span class="chip">الحصة الثانية</span><span class="chip goal">الهدف ٢</span><span class="chip time">⏱ ٥ د</span><span>أنواع الهاليدات</span></div>
+  <h2>الهالوجينات تكوّن ثلاثة أنواع من الهاليدات</h2>
+  <div class="three">
+    <div class="box htype">
+      <span class="hnum">١</span><h3>هاليد فلز</h3>
+      <svg viewBox="0 0 220 150" role="img" aria-label="بلورة كلوريد الصوديوم: أيونات صوديوم موجبة وكلوريد سالبة متبادلة">
+        <g id="lat"></g>
+      </svg>
+      <p><b>مثال:</b> <span class="f">NaCl</span> ، <span class="f">KBr</span> ، <span class="f">MgCl₂</span></p>
+      <p class="answer"><b>الرابطة: أيونية</b>. ينتقل إلكترون من الفلز إلى الهالوجين فيتكوّن <span class="f">Na⁺</span> و<span class="f">Cl⁻</span> في شبكة بلورية.</p>
+    </div>
+    <div class="box htype">
+      <span class="hnum">٢</span><h3>هاليد عضوي (هالو ألكان)</h3>
+      <svg viewBox="0 0 220 150" role="img" aria-label="جزيء كلورو ميثان: ذرة كربون ترتبط بثلاث ذرات هيدروجين وذرة كلور">
+        <g stroke="#7A6870" stroke-width="4"><line x1="110" y1="75" x2="110" y2="25"/><line x1="110" y1="75" x2="60" y2="105"/><line x1="110" y1="75" x2="160" y2="105"/><line x1="110" y1="75" x2="110" y2="128"/></g>
+        <circle cx="110" cy="75" r="20" fill="#3B3F48"/><text x="110" y="81" text-anchor="middle" font-size="16" font-weight="700" fill="#fff">C</text>
+        <g fill="#E8E6E2" stroke="#9A9A9A"><circle cx="110" cy="22" r="12"/><circle cx="58" cy="107" r="12"/><circle cx="162" cy="107" r="12"/></g>
+        <g font-size="13" font-weight="700" fill="#333" text-anchor="middle"><text x="110" y="27">H</text><text x="58" y="112">H</text><text x="162" y="112">H</text></g>
+        <circle cx="110" cy="130" r="16" fill="#B5D86A"/><text x="110" y="135" text-anchor="middle" font-size="13" font-weight="700" fill="#1C222C">Cl</text>
+      </svg>
+      <p><b>مثال:</b> <span class="f">CH₃Cl</span> (كلورو ميثان)، <span class="f">C₂H₅Br</span></p>
+      <p class="answer"><b>الرابطة: تساهمية</b>. يحلّ الهالوجين محل ذرة هيدروجين في الألكان، فيرتبط بالكربون بمشاركة الإلكترونات.</p>
+    </div>
+    <div class="box htype">
+      <span class="hnum">٣</span><h3>هاليد فلز انتقالي</h3>
+      <svg viewBox="0 0 220 150" role="img" aria-label="كلوريد الحديد الثنائي والثلاثي: الحديد له أكثر من شحنة">
+        <g transform="translate(58 70)"><circle r="26" fill="#B7562E"/><text y="6" text-anchor="middle" font-size="15" font-weight="800" fill="#fff">Fe²⁺</text>
+          <g fill="#B5D86A"><circle cx="-42" cy="0" r="12"/><circle cx="42" cy="0" r="12"/></g><g font-size="9" font-weight="700" fill="#1C222C" text-anchor="middle"><text x="-42" y="3">Cl⁻</text><text x="42" y="3">Cl⁻</text></g></g>
+        <g transform="translate(165 70)"><circle r="26" fill="#8A3A1C"/><text y="6" text-anchor="middle" font-size="15" font-weight="800" fill="#fff">Fe³⁺</text>
+          <g fill="#B5D86A"><circle cx="0" cy="-40" r="12"/><circle cx="-36" cy="22" r="12"/><circle cx="36" cy="22" r="12"/></g><g font-size="9" font-weight="700" fill="#1C222C" text-anchor="middle"><text x="0" y="-37">Cl⁻</text><text x="-36" y="25">Cl⁻</text><text x="36" y="25">Cl⁻</text></g></g>
+        <text x="58" y="138" text-anchor="middle" font-size="13" font-weight="700" fill="#555">FeCl₂</text><text x="165" y="138" text-anchor="middle" font-size="13" font-weight="700" fill="#555">FeCl₃</text>
+      </svg>
+      <p><b>مثال:</b> <span class="f">FeCl₂</span> و<span class="f">FeCl₃</span> ، <span class="f">CuCl</span> و<span class="f">CuCl₂</span></p>
+      <p class="answer"><b>الرابطة: أيونية غالباً</b>، ويتميّز بأن للفلز الانتقالي <b>أكثر من شحنة</b> (حالة تأكسد)، فيكوّن أكثر من هاليد.</p>
+    </div>
+  </div>
+  <div class="box">
+    <h3>سؤال تصنيف: إلى أيّ نوع ينتمي كل مركّب؟</h3>
+    <div class="three" id="htype-q"></div>
+  </div>
 </section>
 
 <section class="slide" data-part="2">
@@ -1000,6 +1047,20 @@ const TRENDS = [
   ["نصف القطر الذري", 0, "يزداد بزيادة عدد مستويات الطاقة."],
 ];
 $("trend-grid").innerHTML = TRENDS.map(([q, a, w]) => mcqHTML(q, ["↑ تزداد", "↓ تقل"], a, w)).join("");
+
+// ── أنواع الهاليدات الثلاثة ──
+(function () {
+  const g = document.getElementById("lat");
+  for (let r = 0; r < 4; r++) for (let c = 0; c < 6; c++) {
+    const na = (r + c) % 2 === 0, x = 25 + c * 34, y = 22 + r * 34;
+    el("circle", { cx: x, cy: y, r: na ? 10 : 15, fill: na ? "#8E6BC4" : "#B5D86A" }, g);
+    const t = el("text", { x, y: y + 4, "text-anchor": "middle", "font-size": 9, "font-weight": 700, fill: "#1C222C" }, g); t.textContent = na ? "Na⁺" : "Cl⁻";
+  }
+  const T = ["هاليد فلز", "هاليد عضوي (هالو ألكان)", "هاليد فلز انتقالي"];
+  const Q = [["KI", 0, "هاليد فلز: البوتاسيوم فلز، والرابطة أيونية."], ["CH₃Br", 1, "هاليد عضوي: هالو ألكان، والرابطة تساهمية."], ["CuCl₂", 2, "هاليد فلز انتقالي: النحاس له شحنتان (CuCl و CuCl₂)."],
+             ["C₂H₅Cl", 1, "هاليد عضوي: كلورو إيثان، رابطة تساهمية."], ["CaF₂", 0, "هاليد فلز: الكالسيوم فلز، رابطة أيونية."], ["FeBr₃", 2, "هاليد فلز انتقالي: الحديد له أكثر من شحنة."]];
+  document.getElementById("htype-q").innerHTML = Q.map(([c, a, w]) => mcqHTML(f(c), T, a, w)).join("");
+})();
 
 // ── أيونية أم تساهمية ──
 const BONDS = [["NaCl", 0], ["Cl₂", 1, "تساهمية غير قطبية"], ["KBr", 0], ["HCl", 1], ["MgCl₂", 0], ["ICl", 1]];
