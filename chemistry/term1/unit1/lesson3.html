@@ -214,6 +214,19 @@ tr.sel { background: rgba(255,255,255,.07); }
 .htype .hnum { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: var(--gold); color: var(--panel); font-weight: 800; }
 .htype svg { width: 100%; max-width: 240px; }
 .htype .answer { text-align: start; }
+.hxbars { display: grid; gap: 10px; }
+.hxbar { display: grid; grid-template-columns: 190px 1fr 70px; gap: 10px; align-items: center; }
+.hxbar .tr { height: 16px; border-radius: 999px; background: var(--panel2); overflow: hidden; }
+.hxbar .tr i { display: block; height: 100%; border-radius: 999px; background: var(--gold); transition: width .6s ease; }
+.hxbar b { font-variant-numeric: tabular-nums; direction: ltr; text-align: end; }
+.chain { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+.chain li button { width: 100%; text-align: start; font: inherit; border: 1.5px solid var(--line); background: var(--panel); color: var(--fg); border-radius: 12px; padding: 8px 12px; cursor: pointer; min-height: 48px; }
+.chain li button .ch-t { color: transparent; text-shadow: 0 0 8px var(--muted); transition: color .4s, text-shadow .4s; }
+.chain li button.on { border-color: var(--teal); background: var(--panel2); }
+.chain li button.on .ch-t { color: var(--fg); text-shadow: none; }
+.chain li:not(:last-child)::after { content: "↓"; display: block; text-align: center; color: var(--gold); font-weight: 800; }
+#hx-table td, #hx-table th { white-space: nowrap; }
+#hx-table td.up { color: #2E8A57; font-weight: 700; } #hx-table td.dn { color: #C24A33; font-weight: 700; }
 .fill-gas { opacity: 0; }
 .prep-grid { grid-template-columns: 1.7fr 1fr; }
 @media (max-width: 860px) { .prep-grid { grid-template-columns: 1fr; } }
@@ -744,6 +757,30 @@ tr.sel { background: rgba(255,255,255,.07); }
 </section>
 
 <section class="slide" data-part="4">
+  <div class="kicker"><span class="chip">الحصة الرابعة</span><span class="chip goal">الهدف ١</span><span class="chip time">⏱ ٥ د</span><span>ربط الخصائص</span></div>
+  <h2>سلسلة واحدة تربط الخصائص: من الفلور إلى اليود في <span class="f">H–X</span></h2>
+  <div class="two">
+    <div class="box">
+      <p class="muted">اختاري هاليد هيدروجين لتري قيمه:</p>
+      <div class="row" id="hx-pick" role="group" aria-label="هاليد الهيدروجين"></div>
+      <div id="hx-bars" class="hxbars"></div>
+      <p class="muted" style="font-size:.9rem">السالبية الكهربائية بمقياس باولنغ (H = 2.20)، وطول الرابطة تقريبي بالبيكومتر.</p>
+    </div>
+    <div class="box">
+      <h3>المسي كل حلقة في السلسلة لتظهر</h3>
+      <ol class="chain" id="hx-chain"></ol>
+      <div class="row"><button class="pill" id="hx-all">أظهري السلسلة كاملة</button><button class="pill" id="hx-hide">↺ أخفي</button></div>
+    </div>
+  </div>
+  <div class="box">
+    <h3>جدول المقارنة بالنزول من <span class="f">HF</span> إلى <span class="f">HI</span></h3>
+    <div class="tablewrap"><table id="hx-table"></table></div>
+    <p class="warnbox"><b>انتبهي:</b> فرق السالبية الكهربائية في <span class="f">HF</span> هو الأكبر، فرابطته الأكثر قطبية، ومع ذلك هو <b>أضعف</b> الأحماض الأربعة، لأن رابطته الأقصر والأقوى (565 kJ/mol) تجعل تفكّكه في الماء صعباً. الحمضية هنا تتحكّم فيها <b>قوة الرابطة</b> لا القطبية.</p>
+  </div>
+  <div class="three" id="hx-q"></div>
+</section>
+
+<section class="slide" data-part="4">
   <div class="kicker"><span class="chip">الحصة الرابعة</span><span class="chip goal">الهدف ١</span><span class="chip time">⏱ ٥ د</span></div>
   <h2>تحضير هاليدات الهيدروجين</h2>
   <div class="two prep-grid">
@@ -1236,6 +1273,50 @@ function hsDraw() {
     "تفكّكت: " + broken.map(f).join("، ") + (broken.length < 4 ? ". الأطول رابطةً يتفكك أولاً لأنه الأقل في المحتوى الحراري." : ". " + f("HF") + " آخرها لأنه الأعلى في المحتوى الحراري والأقصر رابطة، فهو الأعلى ثباتاً حرارياً.");
 }
 $("hs-heat").oninput = hsDraw; hsDraw();
+
+// ── سلسلة الخصائص لهاليدات الهيدروجين ──
+(function () {
+  const D = { F: { en: 3.98, len: 92, h: 565 }, Cl: { en: 3.16, len: 127, h: 428 }, Br: { en: 2.96, len: 141, h: 362 }, I: { en: 2.66, len: 161, h: 295 } };
+  const KEYS = ["F", "Cl", "Br", "I"]; let sel = "F";
+  const rows = [
+    ["فرق السالبية الكهربائية", (x) => D[x].en - 2.2, 1.8, (v) => v.toFixed(2)],
+    ["طول الرابطة (pm)", (x) => D[x].len, 170, (v) => v],
+    ["المحتوى الحراري (kJ/mol)", (x) => D[x].h, 600, (v) => v],
+    ["الاستقرار الحراري", (x) => 4 - KEYS.indexOf(x), 4, (v) => ["", "الأقل", "أقل", "عالٍ", "الأعلى"][v]],
+    ["سهولة التفكّك الحراري", (x) => KEYS.indexOf(x) + 1, 4, (v) => ["", "الأصعب", "صعب", "أسهل", "الأسهل"][v]],
+    ["قوة الحمض في الماء", (x) => KEYS.indexOf(x) + 1, 4, (v) => ["", "ضعيف", "قوي", "أقوى", "الأقوى"][v]],
+  ];
+  function draw() {
+    document.getElementById("hx-pick").innerHTML = KEYS.map((x) => `<button class="pill f" data-x="${x}" aria-pressed="${x === sel}">H${x}</button>`).join("");
+    document.getElementById("hx-bars").innerHTML = rows.map(([n, fn, mx, fmt]) => { const v = fn(sel); return `<div class="hxbar"><span>${n}</span><span class="tr"><i style="width:${(v / mx) * 100}%"></i></span><b>${fmt(v)}</b></div>`; }).join("");
+  }
+  document.getElementById("hx-pick").onclick = (e) => { const b = e.target.closest("[data-x]"); if (b) { sel = b.dataset.x; draw(); } };
+  draw();
+  const CH = [
+    ["بالنزول من F إلى I: يزداد نصف القطر الذري", "فيزداد طول الرابطة H–X."],
+    ["يقلّ فرق السالبية الكهربائية", "بين H والهالوجين، فتقلّ قطبية الرابطة."],
+    ["تضعف الرابطة H–X", "لأنها أطول، فيقلّ جذب النواة للإلكترونات المشتركة."],
+    ["يقلّ المحتوى الحراري للرابطة", "565 ← 428 ← 362 ← 295 kJ/mol: طاقة أقل لكسرها."],
+    ["يقلّ الاستقرار الحراري", "HF الأعلى استقراراً، وHI الأقل."],
+    ["يسهل التفكّك الحراري", "HI يتفكّك بالتسخين أولاً، وHF آخرها."],
+    ["تزداد الحمضية", "يسهل تفكّك الرابطة في الماء وإنتاج H⁺، فيقلّ pH: HI الأقوى، وHF الأضعف."],
+  ];
+  const ol = document.getElementById("hx-chain");
+  ol.innerHTML = CH.map(([a, b], i) => `<li><button data-c="${i}"><b>${a}</b><br><span class="ch-t">${b}</span></button></li>`).join("");
+  ol.onclick = (e) => { const b = e.target.closest("[data-c]"); if (b) b.classList.toggle("on"); };
+  document.getElementById("hx-all").onclick = () => ol.querySelectorAll("button").forEach((b) => b.classList.add("on"));
+  document.getElementById("hx-hide").onclick = () => ol.querySelectorAll("button").forEach((b) => b.classList.remove("on"));
+  const T = [["الخاصية", "HF", "HCl", "HBr", "HI", "الاتجاه"],
+    ["فرق السالبية الكهربائية", "1.78", "0.96", "0.76", "0.46", "↓ يقلّ"], ["طول الرابطة", "الأقصر", "", "", "الأطول", "↑ يزداد"],
+    ["المحتوى الحراري (kJ/mol)", "565", "428", "362", "295", "↓ يقلّ"], ["الاستقرار الحراري", "الأعلى", "", "", "الأقل", "↓ يقلّ"],
+    ["سهولة التفكّك الحراري", "الأصعب", "", "", "الأسهل", "↑ تزداد"], ["الحمضية (قوة الحمض)", "الأضعف", "قوي", "أقوى", "الأقوى", "↑ تزداد"]];
+  document.getElementById("hx-table").innerHTML = T.map((r, i) => `<tr>${r.map((c, j) => i === 0 ? `<th class="${j > 0 && j < 5 ? "f" : ""}">${c}</th>` : `<td class="${j === 5 ? (c.startsWith("↑") ? "up" : "dn") : j > 0 ? "f" : ""}">${c}</td>`).join("")}</tr>`).join("");
+  document.getElementById("hx-q").innerHTML = [
+    mcqHTML("أيّها الأعلى استقراراً حرارياً؟", [f("HF"), f("HCl"), f("HI")], 0, "HF: أعلى محتوى حراري للرابطة (565 kJ/mol)."),
+    mcqHTML("لماذا يتفكّك " + f("HI") + " بالتسخين أسهل من " + f("HCl") + "؟", ["رابطته أطول وأضعف ومحتواها الحراري أقل", "لأنه أكثر قطبية", "لأن فرق السالبية فيه أكبر"], 0),
+    mcqHTML(f("HF") + " فرق السالبية فيه الأكبر، لكنه أضعف حمض لأن:", ["رابطته قوية جداً فيصعب تفكّكها في الماء", "لا يذوب في الماء", "طول رابطته الأكبر"], 0, "الحمضية تعتمد على سهولة كسر الرابطة H–X في الماء."),
+  ].join("");
+})();
 
 // ── التحضير ──
 let pS = "Cl";
