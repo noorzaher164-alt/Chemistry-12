@@ -236,6 +236,7 @@ tr.sel { background: rgba(255,255,255,.07); }
 @media (max-width: 1000px) { .four { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .four { grid-template-columns: 1fr; } }
 .warm .mcq { padding: 12px; gap: 6px; } .warm .mcq p { font-size: 1.02rem; } .warm .opt { min-height: 40px; padding: 4px 12px; font-size: .95rem; } .warm .check { min-height: 40px; }
+.rulebox { border-top: 5px solid var(--gold); }
 .calm { max-width: 900px; justify-self: center; width: 100%; justify-items: center; text-align: center; }
 .xscore { font-weight: 700; color: var(--gold); }
 .xpick .done-ok { border-color: #2E8A57; } .xpick .done-no { border-color: #C24A33; }
@@ -886,6 +887,11 @@ tr.sel { background: rgba(255,255,255,.07); }
 <section class="slide" data-part="4">
   <div class="kicker"><span class="chip">الحصة الرابعة</span><span class="chip goal">الهدف ٢</span><span class="chip time">⏱ ٣ د</span><span>المعادلة الكاملة</span></div>
   <h2>١) المعادلة الكاملة: نترات الفضة مع ملح الهاليد</h2>
+  <div class="box calm rulebox">
+    <h3>القاعدة</h3>
+    <p class="eqrule" dir="ltr">AgNO₃(aq) + NaX(aq) → AgX(s) + NaNO₃(aq)</p>
+    <p><span class="f">AgCl(s)</span> راسب أبيض · <span class="f">AgBr(s)</span> راسب أبيض كريمي · <span class="f">AgI(s)</span> راسب أصفر · مع الفلوريد لا يتكوّن راسب لأن <span class="f">AgF(aq)</span> ذائب</p>
+  </div>
   <div class="box calm">
     <div class="row" id="eq-salt" role="group" aria-label="الملح"></div>
     <div class="eqline" id="eq-line" dir="ltr"></div>
@@ -897,25 +903,14 @@ tr.sel { background: rgba(255,255,255,.07); }
 </section>
 
 <section class="slide" data-part="4">
-  <div class="kicker"><span class="chip">الحصة الرابعة</span><span class="chip goal">الهدف ٢</span><span class="chip time">⏱ ٣ د</span><span>المعادلة الأيونية</span></div>
-  <h2>٢) المعادلة الأيونية: نحذف الأيونات المتفرّجة</h2>
-  <div class="box calm">
-    <div class="row" id="ion-salt" role="group" aria-label="الملح"></div>
-    <div class="eqline ionline" id="ion-line" dir="ltr"></div>
-    <div class="row"><button class="solid" id="ion-go">احذفي الأيونات المتفرّجة</button><button class="pill" id="ion-reset">↺</button></div>
-    <p class="eqrule" id="ion-net" dir="ltr" hidden></p>
-  </div>
-</section>
-
-<section class="slide" data-part="4">
   <div class="kicker"><span class="chip">الحصة الرابعة</span><span class="chip goal">الهدف ٢</span><span class="chip time">⏱ ٢ د</span><span>ذوبان الراسب</span></div>
-  <h2>٣) معادلة ذوبان الراسب في الأمونيا</h2>
+  <h2>٢) معادلة ذوبان الراسب في الأمونيا</h2>
   <div class="three" id="nh3-cards"></div>
 </section>
 
 <section class="slide" data-part="4">
   <div class="kicker"><span class="chip">الحصة الرابعة</span><span class="chip goal">الهدف ٢</span><span class="chip time">⏱ ٢ د</span><span>تدرّبي</span></div>
-  <h2>٤) تدرّبي: اكتبي المعادلة الأيونية في دفترك</h2>
+  <h2>٣) تدرّبي: اكتبي المعادلة في دفترك</h2>
   <div class="four" id="eq-practice"></div>
 </section>
 
@@ -1444,7 +1439,7 @@ function xStatus(t) {
   const d = XH[t.h], v = xview(t), lines = [], known = xm === "known";
   if (!t.ag) return `<p class="xstat">محلول عديم اللون، ابدئي بإضافة نترات الفضة ${f("AgNO₃")}</p>`;
   lines.push(d.ppt ? `<span class="xchip" style="background:${PCOL[d.col][0]};border-color:${PCOL[d.col][1]}">${PNAME[d.col]}</span>` : `<span class="xchip" style="background:#E9EDF2;border-color:#AEB9C5">لا يتكوّن راسب</span>`);
-  if (known) lines.push(d.ppt ? f(`Ag⁺(aq) + ${t.h}⁻(aq) → Ag${t.h}(s)`) : `${f("AgF(aq)")} ملح ذائب`);
+  if (known) { const m = d.salt.replace(t.h, ""); lines.push(f(`AgNO₃(aq) + ${d.salt}(aq) → Ag${t.h}(${d.ppt ? "s" : "aq"}) + ${m}NO₃(aq)`)); }
   if (d.ppt && t.dil) lines.push(d.sol === "dilute" ? "✓ يذوب في الأمونيا المخفّفة" : "✗ لا يذوب في الأمونيا المخفّفة");
   if (d.ppt && t.con) lines.push(d.sol === "conc" ? "✓ يذوب في الأمونيا المركّزة" : "✗ لا يذوب في الأمونيا المركّزة");
   if (v.dissolved && known) lines.push(f(`Ag${t.h}(s) + 2NH₃(aq) → [Ag(NH₃)₂]⁺(aq) + ${t.h}⁻(aq)`));
@@ -1521,19 +1516,6 @@ xResetAll();
     if (b.dataset.o === slots()[step].a) { step++; draw(); } else { b.classList.remove("shake"); void b.offsetWidth; b.classList.add("shake", "opt", "wrong"); } };
   $("eq-reset").onclick = () => { step = 0; draw(); };
   draw();
-  // ٢) المعادلة الأيونية
-  let y = "Cl";
-  function drawIon() {
-    saltBtns("ion-salt", y);
-    const [m, , p] = SALTS[y], sp = (t) => `<span class="sp">${t}</span>`;
-    $("ion-line").classList.remove("cut"); $("ion-net").hidden = true;
-    $("ion-line").innerHTML = `<span>Ag⁺(aq) +</span>${sp("NO₃⁻(aq)")}<span>+</span>${sp(m + "⁺(aq)")}<span>+ ${y}⁻(aq) →</span><span>${p}</span><span>+</span>${sp(m + "⁺(aq)")}<span>+</span>${sp("NO₃⁻(aq)")}`;
-    $("ion-net").innerHTML = y === "F" ? "لا يتكوّن راسب، فلا توجد معادلة أيونية نهائية" : `Ag⁺(aq) + ${y}⁻(aq) → ${p}`;
-  }
-  $("ion-salt").onclick = (e) => { const b = e.target.closest("[data-x]"); if (b) { y = b.dataset.x; drawIon(); } };
-  $("ion-go").onclick = () => { $("ion-line").classList.add("cut"); setTimeout(() => { $("ion-net").hidden = false; }, 600); };
-  $("ion-reset").onclick = drawIon;
-  drawIon();
   // ٣) ذوبان الراسب في الأمونيا
   const NH = [["Cl", "AgCl(s)", "يذوب في الأمونيا المخفّفة", true], ["Br", "AgBr(s)", "يذوب في الأمونيا المركّزة فقط", true], ["I", "AgI(s)", "لا يذوب في الأمونيا", false]];
   $("nh3-cards").innerHTML = NH.map(([k, p, t, ok], i) => `<div class="box nh3"><h3>${f(p)}</h3><p>${t}</p>
@@ -1542,11 +1524,11 @@ xResetAll();
   // ٤) تدريب
   $("eq-practice").innerHTML = KEYS.map((k, i) => `<div class="box nh3"><h3 dir="ltr">AgNO₃(aq) + ${SALTS[k][1]}(aq)</h3>
     <button class="pill solid" data-reveal="pr-${i}">أظهري الإجابة</button>
-    <p class="eqrule" id="pr-${i}" dir="ltr" hidden>${k === "F" ? "AgF(aq) : لا يتكوّن راسب" : `Ag⁺(aq) + ${k}⁻(aq) → ${SALTS[k][2]}`}</p></div>`).join("");
+    <p class="eqrule" id="pr-${i}" dir="ltr" hidden>${`AgNO₃(aq) + ${SALTS[k][1]}(aq) → ${SALTS[k][2]} + ${SALTS[k][0]}NO₃(aq)`}${k === "F" ? "<br>لا يتكوّن راسب" : ""}</p></div>`).join("");
   // غلق الهدف الثاني
   $("eq-c2").innerHTML = [
     mcqHTML("أكملي: " + f("AgNO₃(aq) + KBr(aq) →"), [f("AgBr(s) + KNO₃(aq)"), f("Ag(s) + KBrNO₃(aq)"), f("AgK(s) + BrNO₃(aq)")], 0),
-    mcqHTML("المعادلة الأيونية لتفاعل أيون اليوديد مع نترات الفضة:", [f("Ag⁺(aq) + I⁻(aq) → AgI(s)"), f("Ag(s) + I₂(s) → AgI(s)"), f("K⁺(aq) + NO₃⁻(aq) → KNO₃(s)")], 0),
+    mcqHTML("أكملي: " + f("AgNO₃(aq) + KI(aq) →"), [f("AgI(s) + KNO₃(aq)"), f("Ag(s) + KINO₃(aq)"), f("AgK(s) + INO₃(aq)")], 0, "يتكوّن راسب AgI الأصفر."),
     mcqHTML("ناتج " + f("AgNO₃(aq) + NaF(aq)") + ":", [f("AgF(s)") + " راسب", f("AgF(aq) + NaNO₃(aq)"), f("Ag(s) + F₂(g)")], 1, "فلوريد الفضة ملح ذائب."),
   ].join("");
 })();
