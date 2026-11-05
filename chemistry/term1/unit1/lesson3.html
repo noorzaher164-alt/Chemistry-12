@@ -1525,8 +1525,8 @@ xResetAll();
   $("nh3-cards").innerHTML = NH.map(([k, p, t, ok]) => `<div class="box nh3row"><div class="nh3head"><h3>${f(p)}</h3><p>${t}</p></div>
     <p class="nh3eq" dir="ltr">${ok ? `${p} + 2NH₃(aq) → [Ag(NH₃)₂]⁺(aq) + ${k}⁻(aq)` : "لا يحدث ذوبان"}</p></div>`).join("");
   // ٤) تدريب
-  $("eq-practice").innerHTML = KEYS.map((k, i) => `<div class="box nh3row prrow"><p class="nh3eq" dir="ltr" style="color:var(--fg)">AgNO₃(aq) + ${SALTS[k][1]}(aq) →</p>
-    <div><button class="pill solid" data-reveal="pr-${i}">أظهري الإجابة</button>
+  $("eq-practice").innerHTML = KEYS.map((k, i) => `<div class="box nh3row prrow" dir="ltr"><p class="nh3eq" style="color:var(--fg)">AgNO₃(aq) + ${SALTS[k][1]}(aq) →</p>
+    <div dir="rtl" style="display:grid;justify-items:center;gap:6px"><button class="pill solid" data-reveal="pr-${i}">أظهري الإجابة</button>
     <p class="nh3eq" id="pr-${i}" dir="ltr" hidden>${SALTS[k][2]} + ${SALTS[k][0]}NO₃(aq)${k === "F" ? '<br><span style="font-size:1rem;color:var(--muted)">لا يتكوّن راسب</span>' : ""}</p></div></div>`).join("");
   // غلق الهدف الثاني
   $("eq-c2").innerHTML = [
