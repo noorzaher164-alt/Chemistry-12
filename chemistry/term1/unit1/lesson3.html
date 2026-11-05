@@ -227,6 +227,11 @@ tr.sel { background: rgba(255,255,255,.07); }
 .chain li:not(:last-child)::after { content: "↓"; display: block; text-align: center; color: var(--gold); font-weight: 800; }
 #hx-table td, #hx-table th { white-space: nowrap; }
 #hx-table td.up { color: #2E8A57; font-weight: 700; } #hx-table td.dn { color: #C24A33; font-weight: 700; }
+.eqline { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: center; font-size: 1.35rem; font-weight: 700; min-height: 64px; background: var(--panel2); border-radius: 14px; padding: 10px; }
+.eqline .slot { min-width: 90px; text-align: center; border: 2px dashed var(--gold); border-radius: 10px; padding: 2px 10px; color: var(--muted); }
+.eqline .slot.ok { border-style: solid; border-color: #2E8A57; color: var(--fg); background: rgba(46,138,87,.12); }
+.eqline .slot.now { box-shadow: 0 0 0 3px var(--gold); }
+.eqrule { text-align: center; font-size: 1.25rem; font-weight: 700; color: var(--gold); }
 .fill-gas { opacity: 0; }
 .prep-grid { grid-template-columns: 1.7fr 1fr; }
 @media (max-width: 860px) { .prep-grid { grid-template-columns: 1fr; } }
@@ -594,7 +599,7 @@ tr.sel { background: rgba(255,255,255,.07); }
   <div class="two"><div class="box goalcard"><span class="gnum">الهدف ١</span><p class="gtext">أن تتنبّأ الطالبة بحدوث تفاعل الإحلال بين هالوجين ومحلول هاليد اعتماداً على تدرّج قوة الهالوجينات كعوامل مؤكسدة، وتكتب معادلته.</p>
       <p><b>معيار النجاح:</b> تكتشف الخطأ في معادلة إحلال وتصحّحه، وتكمل معادلة إحلال صحيحة.</p><p class="muted"><b>الغلق:</b> اكتشفي الخطأ</p></div><div class="box goalcard"><span class="gnum">الهدف ٢</span><p class="gtext">أن تصنّف الطالبة الهاليدات إلى هاليدات فلزات كأملاح، وهاليدات عناصر انتقالية، وهاليدات هيدروجين، وتقارن بين خصائصها.</p>
       <p><b>معيار النجاح:</b> تجيب إجابة صحيحة عن سؤالين من ثلاثة في غلق الهدف.</p><p class="muted"><b>الغلق:</b> ثلاثة أسئلة سريعة</p></div></div>
-  <div class="box"><h3>سير الحصة (٤٥ دقيقة)</h3><ul class="agenda"><li><span>التهيئة: مراجعة سريعة</span><span>٥ د</span></li><li><span>الهدف ١: العوامل المؤكسدة، ولعبة من يطرد من؟، والإحلال في الأنابيب + غلق</span><span>٢٠ د</span></li><li><span>الهدف ٢: فرز الهاليدات + غلق</span><span>١٣ د</span></li><li><span>الغلق الختامي: كرت الخروج</span><span>٥ د</span></li></ul></div>
+  <div class="box"><h3>سير الحصة (٤٥ دقيقة)</h3><ul class="agenda"><li><span>التهيئة: مراجعة سريعة</span><span>٤ د</span></li><li><span>الهدف ١: العوامل المؤكسدة، ولعبة من يطرد من؟، والإحلال في الأنابيب + غلق</span><span>١٥ د</span></li><li><span>الهدف ٢: فرز الهاليدات، ثم هاليدات الهيدروجين (الاستقرار الحراري والحمضية والتحضير) + غلق</span><span>٢٢ د</span></li><li><span>الغلق الختامي: كرت الخروج</span><span>٤ د</span></li></ul></div>
   
 </section>
 
@@ -707,29 +712,7 @@ tr.sel { background: rgba(255,255,255,.07); }
 </section>
 
 <section class="slide" data-part="3">
-  <div class="kicker"><span class="chip">الحصة الثالثة</span><span class="chip goal">الغلق الختامي</span><span class="chip time">⏱ ٥ د</span><span>كرت الخروج</span></div>
-  <h2>كرت خروج الحصة الثالثة</h2>
-  <div class="three"><div class="mcq box" data-answer="0"><p><b>أكملي: <span class="f">Br₂ + 2NaI →</span></b></p><div class="opts"><button class="opt pill"><span class="f">2NaBr + I₂</span></button><button class="opt pill">no reaction</button><button class="opt pill"><span class="f">2NaBr + Br₂</span></button></div><div class="row"><button class="check solid">أظهري الإجابة</button></div><p class="why answer" hidden>البروم أقوى كعامل مؤكسد من اليود فيحلّ محله.</p></div><div class="mcq box" data-answer="0"><p><b>أقوى الهالوجينات كعامل مؤكسد:</b></p><div class="opts"><button class="opt pill"><span class="f">F₂</span></button><button class="opt pill"><span class="f">I₂</span></button><button class="opt pill"><span class="f">Br₂</span></button></div><div class="row"><button class="check solid">أظهري الإجابة</button></div></div><div class="mcq box" data-answer="1"><p><b><span class="f">CuCl₂</span> من هاليدات:</b></p><div class="opts"><button class="opt pill">الفلزات كأملاح</button><button class="opt pill">العناصر الانتقالية</button><button class="opt pill">الهيدروجين</button></div><div class="row"><button class="check solid">أظهري الإجابة</button></div></div></div>
-</section>
-
-<section class="slide" data-part="4">
-  <div class="kicker"><span class="chip">الحصة الرابعة</span><span class="chip time">📅 الثلاثاء <span class="f">3/11/2026</span></span><span>أهداف قابلة للقياس</span></div>
-  <h2>أهداف الحصة الرابعة: هاليدات الهيدروجين واستقصاء أيون الهاليد</h2>
-  <div class="two"><div class="box goalcard"><span class="gnum">الهدف ١</span><p class="gtext">أن تفسّر الطالبة تدرّج الاستقرار الحراري والحمضية لهاليدات الهيدروجين بدلالة طول الرابطة وقوتها، وتكتب معادلة تحضيرها.</p>
-      <p><b>معيار النجاح:</b> تجيب إجابة صحيحة عن سؤالين من ثلاثة في غلق الهدف.</p><p class="muted"><b>الغلق:</b> ثلاثة أسئلة سريعة</p></div><div class="box goalcard"><span class="gnum">الهدف ٢</span><p class="gtext">أن تستقصي الطالبة نوع أيون الهاليد في محلول مجهول باستخدام محلول نترات الفضة <span class="f">AgNO₃</span> ثم محلول الأمونيا المخفّف والمركّز، وتحدّده من لون الراسب وذوبانه.</p>
-      <p><b>معيار النجاح:</b> تحدّد أيون الهاليد في عيّنتين مجهولتين من وصف الملاحظات.</p><p class="muted"><b>الغلق:</b> عيّنتان مجهولتان</p></div></div>
-  <div class="box"><h3>سير الحصة (٤٥ دقيقة)</h3><ul class="agenda"><li><span>التهيئة: مراجعة سريعة</span><span>٥ د</span></li><li><span>الهدف ١: الاستقرار الحراري والحمضية، وتحضير هاليدات الهيدروجين + غلق</span><span>١٥ د</span></li><li><span>الهدف ٢: استقصاء الكشف عن أيون الهاليد + غلق</span><span>١٨ د</span></li><li><span>الغلق الختامي: التحدّي النهائي بين الفريقين</span><span>٦ د</span></li></ul></div>
-  
-</section>
-
-<section class="slide" data-part="4">
-  <div class="kicker"><span class="chip">الحصة الرابعة</span><span class="chip goal">التهيئة</span><span class="chip time">⏱ ٥ د</span><span>مراجعة</span></div>
-  <h2>تذكّري من الحصة الماضية</h2>
-  <div class="three"><div class="mcq box" data-answer="0"><p><b>أكملي: <span class="f">Cl₂ + 2KI →</span></b></p><div class="opts"><button class="opt pill"><span class="f">2KCl + I₂</span></button><button class="opt pill">no reaction</button></div><div class="row"><button class="check solid">أظهري الإجابة</button></div></div><div class="mcq box" data-answer="0"><p><b><span class="f">HCl</span> من:</b></p><div class="opts"><button class="opt pill">هاليدات الهيدروجين</button><button class="opt pill">هاليدات الفلزات كأملاح</button><button class="opt pill">هاليدات العناصر الانتقالية</button></div><div class="row"><button class="check solid">أظهري الإجابة</button></div></div><div class="mcq box" data-answer="0"><p><b>اللون الذي يظهر في المحلول عند تكوّن البروم:</b></p><div class="opts"><button class="opt pill">برتقالي</button><button class="opt pill">بنفسجي</button><button class="opt pill">عديم اللون</button></div><div class="row"><button class="check solid">أظهري الإجابة</button></div></div></div>
-</section>
-
-<section class="slide" data-part="4">
-  <div class="kicker"><span class="chip">الحصة الرابعة</span><span class="chip goal">الهدف ١</span><span class="chip time">⏱ ٧ د</span><span>محاكاة</span></div>
+  <div class="kicker"><span class="chip">الحصة الثالثة</span><span class="chip goal">الهدف ٢ · تكملة</span><span class="chip time">⏱ ٧ د</span><span>محاكاة</span></div>
   <h2>الاستقرار الحراري والحمضية لهاليدات الهيدروجين <span class="f">H–X</span></h2>
   <div class="two">
     <div class="box">
@@ -756,8 +739,8 @@ tr.sel { background: rgba(255,255,255,.07); }
   </div>
 </section>
 
-<section class="slide" data-part="4">
-  <div class="kicker"><span class="chip">الحصة الرابعة</span><span class="chip goal">الهدف ١</span><span class="chip time">⏱ ٥ د</span><span>ربط الخصائص</span></div>
+<section class="slide" data-part="3">
+  <div class="kicker"><span class="chip">الحصة الثالثة</span><span class="chip goal">الهدف ٢ · تكملة</span><span class="chip time">⏱ ٥ د</span><span>ربط الخصائص</span></div>
   <h2>سلسلة واحدة تربط الخصائص: من الفلور إلى اليود في <span class="f">H–X</span></h2>
   <div class="two">
     <div class="box">
@@ -780,8 +763,8 @@ tr.sel { background: rgba(255,255,255,.07); }
   <div class="three" id="hx-q"></div>
 </section>
 
-<section class="slide" data-part="4">
-  <div class="kicker"><span class="chip">الحصة الرابعة</span><span class="chip goal">الهدف ١</span><span class="chip time">⏱ ٥ د</span></div>
+<section class="slide" data-part="3">
+  <div class="kicker"><span class="chip">الحصة الثالثة</span><span class="chip goal">الهدف ٢ · تكملة</span><span class="chip time">⏱ ٥ د</span></div>
   <h2>تحضير هاليدات الهيدروجين</h2>
   <div class="two prep-grid">
   <div class="box">
@@ -834,14 +817,36 @@ tr.sel { background: rgba(255,255,255,.07); }
   </div>
 </section>
 
-<section class="slide" data-part="4">
-  <div class="kicker"><span class="chip">الحصة الرابعة</span><span class="chip goal">غلق الهدف ١</span><span class="chip time">⏱ ٣ د</span></div>
-  <h2>غلق الهدف ١: الاستقرار والحمضية والتحضير</h2>
+<section class="slide" data-part="3">
+  <div class="kicker"><span class="chip">الحصة الثالثة</span><span class="chip goal">غلق</span><span class="chip time">⏱ ٣ د</span></div>
+  <h2>غلق: الاستقرار والحمضية والتحضير</h2>
   <div class="three"><div class="mcq box" data-answer="0"><p><b>أعلى هاليدات الهيدروجين استقراراً حرارياً:</b></p><div class="opts"><button class="opt pill"><span class="f">HF</span></button><button class="opt pill"><span class="f">HI</span></button><button class="opt pill"><span class="f">HBr</span></button></div><div class="row"><button class="check solid">أظهري الإجابة</button></div><p class="why answer" hidden><span class="f">HF</span>: رابطته الأقصر والأقوى (565 kJ/mol).</p></div><div class="mcq box" data-answer="2"><p><b>أقوى هاليدات الهيدروجين حمضاً في الماء:</b></p><div class="opts"><button class="opt pill"><span class="f">HF</span></button><button class="opt pill"><span class="f">HCl</span></button><button class="opt pill"><span class="f">HI</span></button></div><div class="row"><button class="check solid">أظهري الإجابة</button></div><p class="why answer" hidden><span class="f">HI</span>: رابطته الأضعف فيتفكك بسهولة ويعطي <span class="f">H⁺</span>.</p></div><div class="mcq box" data-answer="0"><p><b>أكملي: <span class="f">H₂SO₄ + NaBr →</span></b></p><div class="opts"><button class="opt pill"><span class="f">NaHSO₄ + HBr</span></button><button class="opt pill"><span class="f">Na₂SO₄ + Br₂</span></button><button class="opt pill"><span class="f">NaOH + HBr</span></button></div><div class="row"><button class="check solid">أظهري الإجابة</button></div></div></div><p class="note">✔ معيار النجاح: تجيب إجابة صحيحة عن سؤالين من ثلاثة في غلق الهدف.</p>
 </section>
 
+<section class="slide" data-part="3">
+  <div class="kicker"><span class="chip">الحصة الثالثة</span><span class="chip goal">الغلق الختامي</span><span class="chip time">⏱ ٥ د</span><span>كرت الخروج</span></div>
+  <h2>كرت خروج الحصة الثالثة</h2>
+  <div class="three"><div class="mcq box" data-answer="0"><p><b>أكملي: <span class="f">Br₂ + 2NaI →</span></b></p><div class="opts"><button class="opt pill"><span class="f">2NaBr + I₂</span></button><button class="opt pill">no reaction</button><button class="opt pill"><span class="f">2NaBr + Br₂</span></button></div><div class="row"><button class="check solid">أظهري الإجابة</button></div><p class="why answer" hidden>البروم أقوى كعامل مؤكسد من اليود فيحلّ محله.</p></div><div class="mcq box" data-answer="0"><p><b>أقوى الهالوجينات كعامل مؤكسد:</b></p><div class="opts"><button class="opt pill"><span class="f">F₂</span></button><button class="opt pill"><span class="f">I₂</span></button><button class="opt pill"><span class="f">Br₂</span></button></div><div class="row"><button class="check solid">أظهري الإجابة</button></div></div><div class="mcq box" data-answer="1"><p><b><span class="f">CuCl₂</span> من هاليدات:</b></p><div class="opts"><button class="opt pill">الفلزات كأملاح</button><button class="opt pill">العناصر الانتقالية</button><button class="opt pill">الهيدروجين</button></div><div class="row"><button class="check solid">أظهري الإجابة</button></div></div></div>
+</section>
+
 <section class="slide" data-part="4">
-  <div class="kicker"><span class="chip">الحصة الرابعة</span><span class="chip goal">الهدف ٢</span><span class="chip time">⏱ ١٥ د</span><span>استقصاء</span></div>
+  <div class="kicker"><span class="chip">الحصة الرابعة</span><span class="chip time">📅 الثلاثاء <span class="f">3/11/2026</span></span><span>أهداف قابلة للقياس</span></div>
+  <h2>أهداف الحصة الرابعة: استقصاء الكشف عن أيون الهاليد</h2>
+  <div class="two"><div class="box goalcard"><span class="gnum">الهدف ١</span><p class="gtext">تكشف عن الهاليدات باستخدام محلول نترات الفضة ومحلول الأمونيا.</p>
+      <p><b>معيار النجاح:</b> تحدّد أيون الهاليد في عيّنتين مجهولتين.</p><p class="muted"><b>الغلق:</b> عيّنتان مجهولتان</p></div><div class="box goalcard"><span class="gnum">الهدف ٢</span><p class="gtext">تكتب معادلة تفاعل أيونات الهاليدات مع محلول نترات الفضة.</p>
+      <p><b>معيار النجاح:</b> تكتب معادلتين من ثلاث بشكل صحيح.</p><p class="muted"><b>الغلق:</b> أكملي المعادلة</p></div></div>
+  <div class="box"><h3>سير الحصة (٤٥ دقيقة)</h3><ul class="agenda"><li><span>التهيئة: مراجعة سريعة</span><span>٥ د</span></li><li><span>الهدف ١: الاستقصاء بخطواته الخمس، والعيّنة المجهولة + غلق</span><span>٢٠ د</span></li><li><span>الهدف ٢: كتابة معادلات تفاعل أيونات الهاليدات مع نترات الفضة + غلق</span><span>١٣ د</span></li><li><span>الغلق الختامي: التحدّي النهائي</span><span>٧ د</span></li></ul></div>
+  
+</section>
+
+<section class="slide" data-part="4">
+  <div class="kicker"><span class="chip">الحصة الرابعة</span><span class="chip goal">التهيئة</span><span class="chip time">⏱ ٥ د</span><span>مراجعة</span></div>
+  <h2>تذكّري من الحصة الماضية</h2>
+  <div class="three"><div class="mcq box" data-answer="0"><p><b>أكملي: <span class="f">Cl₂ + 2KI →</span></b></p><div class="opts"><button class="opt pill"><span class="f">2KCl + I₂</span></button><button class="opt pill">no reaction</button></div><div class="row"><button class="check solid">أظهري الإجابة</button></div></div><div class="mcq box" data-answer="0"><p><b><span class="f">HCl</span> من:</b></p><div class="opts"><button class="opt pill">هاليدات الهيدروجين</button><button class="opt pill">هاليدات الفلزات كأملاح</button><button class="opt pill">هاليدات العناصر الانتقالية</button></div><div class="row"><button class="check solid">أظهري الإجابة</button></div></div><div class="mcq box" data-answer="0"><p><b>اللون الذي يظهر في المحلول عند تكوّن البروم:</b></p><div class="opts"><button class="opt pill">برتقالي</button><button class="opt pill">بنفسجي</button><button class="opt pill">عديم اللون</button></div><div class="row"><button class="check solid">أظهري الإجابة</button></div></div></div>
+</section>
+
+<section class="slide" data-part="4">
+  <div class="kicker"><span class="chip">الحصة الرابعة</span><span class="chip goal">الهدف ١</span><span class="chip time">⏱ ١٧ د</span><span>استقصاء</span></div>
   <h2>استقصاء: الكشف عن أيون الهاليد بنترات الفضة <span class="f">AgNO₃</span> والأمونيا <span class="f">NH₃</span></h2>
   <div class="inq">
     <div><b>١ سؤال الاستقصاء</b><span>كيف نميّز أيونات الهاليد في محاليل عديمة اللون؟</span></div>
@@ -883,13 +888,45 @@ tr.sel { background: rgba(255,255,255,.07); }
 </section>
 
 <section class="slide" data-part="4">
-  <div class="kicker"><span class="chip">الحصة الرابعة</span><span class="chip goal">غلق الهدف ٢</span><span class="chip time">⏱ ٣ د</span></div>
-  <h2>غلق الهدف ٢: عيّنتان مجهولتان</h2>
-  <p class="lead">كل مجموعة تكتب اسم الأيون على السبورة الصغيرة خلال دقيقة، ثم تُظهر المعلّمة الإجابة.</p><div class="three"><div class="mcq box" data-answer="3"><p><b>العيّنة أ: تكوّن راسب أصفر، لا يذوب في الأمونيا المخفّفة ولا المركّزة.</b></p><div class="opts"><button class="opt pill"><span class="f">F⁻</span></button><button class="opt pill"><span class="f">Cl⁻</span></button><button class="opt pill"><span class="f">Br⁻</span></button><button class="opt pill"><span class="f">I⁻</span></button></div><div class="row"><button class="check solid">أظهري الإجابة</button></div><p class="why answer" hidden>اليوديد <span class="f">I⁻</span> (راسب <span class="f">AgI</span>)</p></div><div class="mcq box" data-answer="0"><p><b>العيّنة ب: لم يتكوّن أي راسب عند إضافة <span class="f">AgNO₃</span>.</b></p><div class="opts"><button class="opt pill"><span class="f">F⁻</span></button><button class="opt pill"><span class="f">Cl⁻</span></button><button class="opt pill"><span class="f">Br⁻</span></button><button class="opt pill"><span class="f">I⁻</span></button></div><div class="row"><button class="check solid">أظهري الإجابة</button></div><p class="why answer" hidden>الفلوريد <span class="f">F⁻</span>، لأن <span class="f">AgF</span> ملح ذائب.</p></div><div class="mcq box" data-answer="1"><p><b>سؤال إضافي: راسب أبيض ذاب في الأمونيا المخفّفة.</b></p><div class="opts"><button class="opt pill"><span class="f">F⁻</span></button><button class="opt pill"><span class="f">Cl⁻</span></button><button class="opt pill"><span class="f">Br⁻</span></button><button class="opt pill"><span class="f">I⁻</span></button></div><div class="row"><button class="check solid">أظهري الإجابة</button></div><p class="why answer" hidden>الكلوريد <span class="f">Cl⁻</span> (راسب <span class="f">AgCl</span>)</p></div></div><p class="note">✔ معيار النجاح: تحدّد أيون الهاليد في عيّنتين مجهولتين من وصف الملاحظات.</p>
+  <div class="kicker"><span class="chip">الحصة الرابعة</span><span class="chip goal">غلق الهدف ١</span><span class="chip time">⏱ ٣ د</span></div>
+  <h2>غلق الهدف ١: عيّنتان مجهولتان</h2>
+  <p class="lead">كل مجموعة تكتب اسم الأيون على السبورة الصغيرة خلال دقيقة، ثم تُظهر المعلّمة الإجابة.</p><div class="three"><div class="mcq box" data-answer="3"><p><b>العيّنة أ: تكوّن راسب أصفر، لا يذوب في الأمونيا المخفّفة ولا المركّزة.</b></p><div class="opts"><button class="opt pill"><span class="f">F⁻</span></button><button class="opt pill"><span class="f">Cl⁻</span></button><button class="opt pill"><span class="f">Br⁻</span></button><button class="opt pill"><span class="f">I⁻</span></button></div><div class="row"><button class="check solid">أظهري الإجابة</button></div><p class="why answer" hidden>اليوديد <span class="f">I⁻</span> (راسب <span class="f">AgI</span>)</p></div><div class="mcq box" data-answer="0"><p><b>العيّنة ب: لم يتكوّن أي راسب عند إضافة <span class="f">AgNO₃</span>.</b></p><div class="opts"><button class="opt pill"><span class="f">F⁻</span></button><button class="opt pill"><span class="f">Cl⁻</span></button><button class="opt pill"><span class="f">Br⁻</span></button><button class="opt pill"><span class="f">I⁻</span></button></div><div class="row"><button class="check solid">أظهري الإجابة</button></div><p class="why answer" hidden>الفلوريد <span class="f">F⁻</span>، لأن <span class="f">AgF</span> ملح ذائب.</p></div><div class="mcq box" data-answer="1"><p><b>سؤال إضافي: راسب أبيض ذاب في الأمونيا المخفّفة.</b></p><div class="opts"><button class="opt pill"><span class="f">F⁻</span></button><button class="opt pill"><span class="f">Cl⁻</span></button><button class="opt pill"><span class="f">Br⁻</span></button><button class="opt pill"><span class="f">I⁻</span></button></div><div class="row"><button class="check solid">أظهري الإجابة</button></div><p class="why answer" hidden>الكلوريد <span class="f">Cl⁻</span> (راسب <span class="f">AgCl</span>)</p></div></div><p class="note">✔ معيار النجاح: تحدّد أيون الهاليد في عيّنتين مجهولتين.</p>
 </section>
 
 <section class="slide" data-part="4">
-  <div class="kicker"><span class="chip">الحصة الرابعة</span><span class="chip goal">الغلق الختامي</span><span class="chip time">⏱ ٦ د</span><span>المسابقة الختامية</span></div>
+  <div class="kicker"><span class="chip">الحصة الرابعة</span><span class="chip goal">الهدف ٢</span><span class="chip time">⏱ ١٠ د</span><span>بناء المعادلة</span></div>
+  <h2>اكتبي معادلة تفاعل أيون الهاليد مع نترات الفضة</h2>
+  <div class="two">
+    <div class="box">
+      <p class="muted">اختاري الملح، ثم ابني المعادلة خطوة بخطوة باختيار الناتج الصحيح:</p>
+      <div class="row" id="eq-salt" role="group" aria-label="الملح"></div>
+      <div class="eqline" id="eq-line" dir="ltr"></div>
+      <p class="muted" id="eq-ask"></p>
+      <div class="row" id="eq-opts"></div>
+      <p class="answer" id="eq-done" hidden></p>
+      <div class="row"><button class="pill" id="eq-reset">↺ من جديد</button></div>
+    </div>
+    <div class="box">
+      <h3>القاعدة</h3>
+      <p class="note">المعادلة الكاملة:</p>
+      <p class="eqrule" dir="ltr">AgNO₃(aq) + NaX(aq) → AgX(s) + NaNO₃(aq)</p>
+      <p class="note">المعادلة الأيونية النهائية (بعد حذف الأيونات المتفرّجة <span class="f">Na⁺</span> و<span class="f">NO₃⁻</span>):</p>
+      <p class="eqrule" dir="ltr">Ag⁺(aq) + X⁻(aq) → AgX(s)</p>
+      <ul class="clean"><li><span class="f">AgCl(s)</span> راسب أبيض · <span class="f">AgBr(s)</span> راسب أبيض كريمي · <span class="f">AgI(s)</span> راسب أصفر</li>
+      <li>مع الفلوريد لا يتكوّن راسب، لأن <span class="f">AgF</span> ذائب: <span class="f">AgF(aq)</span></li></ul>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-part="4">
+  <div class="kicker"><span class="chip">الحصة الرابعة</span><span class="chip goal">غلق الهدف ٢</span><span class="chip time">⏱ ٣ د</span></div>
+  <h2>غلق الهدف ٢: أكملي المعادلة</h2>
+  <div class="three" id="eq-c2"></div>
+  <p class="note">✔ معيار النجاح: تكتب معادلتين من ثلاث بشكل صحيح.</p>
+</section>
+
+<section class="slide" data-part="4">
+  <div class="kicker"><span class="chip">الحصة الرابعة</span><span class="chip goal">الغلق الختامي</span><span class="chip time">⏱ ٧ د</span><span>المسابقة الختامية</span></div>
   <h2>التحدّي النهائي بين الفريقين</h2>
   <div class="box" style="font-size:1.25rem">
     <p class="muted" id="ch-n"></p>
@@ -1462,6 +1499,40 @@ $("x-reveal").onclick = () => {
   $("x-ans").hidden = false; $("x-reveal").hidden = true;
 };
 xResetAll();
+
+// ── بناء معادلة تفاعل أيون الهاليد مع نترات الفضة ──
+(function () {
+  const SALTS = { Cl: ["NaCl", "AgCl(s)", "راسب أبيض"], Br: ["KBr", "AgBr(s)", "راسب أبيض كريمي"], I: ["KI", "AgI(s)", "راسب أصفر"], F: ["NaF", "AgF(aq)", "لا يتكوّن راسب: فلوريد الفضة ذائب"] };
+  let x = "Cl", step = 0;
+  const metal = () => SALTS[x][0].startsWith("Na") ? "Na" : "K";
+  const slots = () => [
+    { q: "ما الناتج الذي يحتوي على الفضة؟", a: SALTS[x][1], opts: [SALTS[x][1], "Ag(s)", "Ag" + x + "₂(s)", metal() + "Ag(aq)"] },
+    { q: "ما الناتج الثاني؟", a: metal() + "NO₃(aq)", opts: [metal() + "NO₃(aq)", metal() + "₂NO₃(aq)", "HNO₃(aq)", metal() + "(s)"] },
+    { q: "المعادلة الأيونية النهائية: ما الذي يتفاعل فعلاً؟", a: "Ag⁺(aq) + " + x + "⁻(aq)", opts: ["Ag⁺(aq) + " + x + "⁻(aq)", metal() + "⁺(aq) + NO₃⁻(aq)", "Ag⁺(aq) + NO₃⁻(aq)"] },
+  ];
+  function draw() {
+    document.getElementById("eq-salt").innerHTML = Object.keys(SALTS).map((k) => `<button class="pill f" data-x="${k}" aria-pressed="${k === x}">${SALTS[k][0]}</button>`).join("");
+    const S = slots(), sl = (i) => `<span class="slot ${step > i ? "ok" : step === i ? "now" : ""}">${step > i ? S[i].a : "؟"}</span>`;
+    document.getElementById("eq-line").innerHTML = step < 2
+      ? `<span>AgNO₃(aq) + ${SALTS[x][0]}(aq) →</span>${sl(0)}<span>+</span>${sl(1)}`
+      : `<span>AgNO₃(aq) + ${SALTS[x][0]}(aq) → ${S[0].a} + ${S[1].a}</span><span style="flex-basis:100%;height:0"></span>${sl(2)}<span>→ ${SALTS[x][1]}</span>`;
+    const done = step >= S.length;
+    document.getElementById("eq-ask").textContent = done ? "" : S[step].q;
+    document.getElementById("eq-opts").innerHTML = done ? "" : S[step].opts.slice().sort(() => Math.random() - .5).map((o) => `<button class="pill f" data-o="${o}">${o}</button>`).join("");
+    const d = document.getElementById("eq-done"); d.hidden = !done;
+    if (done) d.innerHTML = `✔ أحسنتِ! ${SALTS[x][2]}.<br>${f("Ag⁺(aq) + " + x + "⁻(aq) → " + SALTS[x][1])}`;
+  }
+  document.getElementById("eq-salt").onclick = (e) => { const b = e.target.closest("[data-x]"); if (b) { x = b.dataset.x; step = 0; draw(); } };
+  document.getElementById("eq-opts").onclick = (e) => { const b = e.target.closest("[data-o]"); if (!b) return;
+    if (b.dataset.o === slots()[step].a) { step++; draw(); } else { b.classList.remove("shake"); void b.offsetWidth; b.classList.add("shake"); b.classList.add("opt", "wrong"); } };
+  document.getElementById("eq-reset").onclick = () => { step = 0; draw(); };
+  draw();
+  document.getElementById("eq-c2").innerHTML = [
+    mcqHTML("أكملي: " + f("AgNO₃(aq) + KBr(aq) →"), [f("AgBr(s) + KNO₃(aq)"), f("Ag(s) + KBrNO₃"), f("AgK(s) + BrNO₃(aq)")], 0, "يتكوّن راسب AgBr الأبيض الكريمي."),
+    mcqHTML("المعادلة الأيونية لتفاعل أيون اليوديد مع نترات الفضة:", [f("Ag⁺(aq) + I⁻(aq) → AgI(s)"), f("Ag(s) + I₂ → AgI"), f("K⁺ + NO₃⁻ → KNO₃")], 0, "راسب أصفر من AgI."),
+    mcqHTML("ناتج " + f("AgNO₃(aq) + NaF(aq)") + ":", [f("AgF(s)") + " راسب", f("AgF(aq) + NaNO₃(aq)") + " بلا راسب", f("Ag(s) + F₂")], 1, "فلوريد الفضة ملح ذائب."),
+  ].join("");
+})();
 
 // ── التحدّي النهائي ──
 const CH = [
