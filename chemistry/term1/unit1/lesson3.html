@@ -232,6 +232,17 @@ tr.sel { background: rgba(255,255,255,.07); }
 .eqline .slot.ok { border-style: solid; border-color: #2E8A57; color: var(--fg); background: rgba(46,138,87,.12); }
 .eqline .slot.now { box-shadow: 0 0 0 3px var(--gold); }
 .eqrule { text-align: center; font-size: 1.25rem; font-weight: 700; color: var(--gold); }
+.four { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 1000px) { .four { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .four { grid-template-columns: 1fr; } }
+.warm .mcq { padding: 12px; gap: 6px; } .warm .mcq p { font-size: 1.02rem; } .warm .opt { min-height: 40px; padding: 4px 12px; font-size: .95rem; } .warm .check { min-height: 40px; }
+.calm { max-width: 900px; justify-self: center; width: 100%; justify-items: center; text-align: center; }
+.xscore { font-weight: 700; color: var(--gold); }
+.xpick .done-ok { border-color: #2E8A57; } .xpick .done-no { border-color: #C24A33; }
+.ionline .sp { transition: opacity .6s, text-decoration-color .6s; text-decoration: line-through; text-decoration-color: transparent; text-decoration-thickness: 3px; }
+.ionline.cut .sp { opacity: .35; text-decoration-color: #C24A33; }
+.nh3 { text-align: center; justify-items: center; }
+.nh3 .eqrule { font-size: .95rem; white-space: nowrap; overflow-x: auto; max-width: 100%; }
 .fill-gas { opacity: 0; }
 .prep-grid { grid-template-columns: 1.7fr 1fr; }
 @media (max-width: 860px) { .prep-grid { grid-template-columns: 1fr; } }
@@ -302,9 +313,7 @@ tr.sel { background: rgba(255,255,255,.07); }
 <section class="slide" data-part="1">
   <div class="kicker"><span class="chip">الحصة الأولى</span><span class="chip time">📅 الخميس <span class="f">29/10/2026</span></span><span>أهداف قابلة للقياس</span></div>
   <h2>أهداف الحصة الأولى: العائلة والقوى بين الجزيئات</h2>
-  <div class="two"><div class="box goalcard"><span class="gnum">الهدف ١</span><p class="gtext">أن تصف الطالبة الخصائص الفيزيائية لعناصر الهالوجينات (الحالة واللون) واستخداماتها، وتكتب توزيعها الإلكتروني العام <span class="f">ns² np⁵</span>.</p>
-      <p><b>معيار النجاح:</b> تجيب إجابة صحيحة عن سؤالين من ثلاثة في غلق الهدف.</p><p class="muted"><b>الغلق:</b> ثلاثة أسئلة سريعة</p></div><div class="box goalcard"><span class="gnum">الهدف ٢</span><p class="gtext">أن تفسّر الطالبة اختلاف الحالة الفيزيائية للهالوجينات (غاز – سائل – صلب) بقوى لندن التشتتية بين الجزيئات، مميّزةً إياها عن الرابطة التساهمية داخل الجزيء.</p>
-      <p><b>معيار النجاح:</b> تجيب إجابة صحيحة عن سؤالين من ثلاثة، وتكمل جملة التفسير بشكل صحيح.</p><p class="muted"><b>الغلق:</b> أكملي الجملة + سؤالان سريعان</p></div></div>
+  <div class="two"><div class="box goalcard"><span class="gnum">الهدف ١</span><p class="gtext">أن تصف الطالبة الخصائص الفيزيائية لعناصر الهالوجينات (الحالة واللون) واستخداماتها، وتكتب توزيعها الإلكتروني العام <span class="f">ns² np⁵</span>.</p></div><div class="box goalcard"><span class="gnum">الهدف ٢</span><p class="gtext">أن تفسّر الطالبة اختلاف الحالة الفيزيائية للهالوجينات (غاز – سائل – صلب) بقوى لندن التشتتية بين الجزيئات، مميّزةً إياها عن الرابطة التساهمية داخل الجزيء.</p></div></div>
   <div class="box"><h3>سير الحصة (٤٥ دقيقة)</h3><ul class="agenda"><li><span>التهيئة: مهمّة اليوم ولغز «من أنا؟»</span><span>٥ د</span></li><li><span>الهدف ١: عائلة المجموعة ١٧ + غلق</span><span>١٢ د</span></li><li><span>الهدف ٢: القوى داخل الجزيء وبين الجزيئات، ومحاكاة الحالة + غلق</span><span>٢٣ د</span></li><li><span>الغلق الختامي: كرت الخروج وسؤال المهمّة</span><span>٥ د</span></li></ul></div>
   <p class="muted">قسّمي الفصل فريقين، وامنحي النقاط من الشريط العلوي. التنقّل بالأسهم أسفل الشاشة أو بأسهم لوحة المفاتيح.</p>
 </section>
@@ -466,9 +475,7 @@ tr.sel { background: rgba(255,255,255,.07); }
 <section class="slide" data-part="2">
   <div class="kicker"><span class="chip">الحصة الثانية</span><span class="chip time">📅 الأحد <span class="f">1/11/2026</span></span><span>أهداف قابلة للقياس</span></div>
   <h2>أهداف الحصة الثانية: التدرّج في الخصائص والهالوجينات كعناصر نقية</h2>
-  <div class="two"><div class="box goalcard"><span class="gnum">الهدف ١</span><p class="gtext">أن تحدّد الطالبة اتجاه تدرّج أربع خصائص أسفل المجموعة السابعة (قوة التجاذب بين الجزيئات، درجة الغليان والانصهار، السالبية الكهربائية، نصف القطر الذري) وتعلّل كل تدرّج.</p>
-      <p><b>معيار النجاح:</b> تجيب إجابة صحيحة عن ٣ أسئلة من ٤ على الأقل.</p><p class="muted"><b>الغلق:</b> أربعة أسئلة سريعة (اختيار من متعدد)</p></div><div class="box goalcard"><span class="gnum">الهدف ٢</span><p class="gtext">أن تفسّر الطالبة امتلاء عبوة البروم بالأبخرة وتسامي اليود، وتحدّد نوع الرابطة (أيونية أو تساهمية) التي يكوّنها الهالوجين مع الفلزات واللافلزات.</p>
-      <p><b>معيار النجاح:</b> تجيب إجابة صحيحة عن سؤالين من ثلاثة في غلق الهدف.</p><p class="muted"><b>الغلق:</b> ثلاثة أسئلة سريعة</p></div></div>
+  <div class="two"><div class="box goalcard"><span class="gnum">الهدف ١</span><p class="gtext">أن تحدّد الطالبة اتجاه تدرّج أربع خصائص أسفل المجموعة السابعة (قوة التجاذب بين الجزيئات، درجة الغليان والانصهار، السالبية الكهربائية، نصف القطر الذري) وتعلّل كل تدرّج.</p></div><div class="box goalcard"><span class="gnum">الهدف ٢</span><p class="gtext">أن تفسّر الطالبة امتلاء عبوة البروم بالأبخرة وتسامي اليود، وتحدّد نوع الرابطة (أيونية أو تساهمية) التي يكوّنها الهالوجين مع الفلزات واللافلزات.</p></div></div>
   <div class="box"><h3>سير الحصة (٤٥ دقيقة)</h3><ul class="agenda"><li><span>التهيئة: مراجعة سريعة</span><span>٥ د</span></li><li><span>الهدف ١: لعبة سهم الاتجاه + غلق</span><span>١٦ د</span></li><li><span>الهدف ٢: أبخرة البروم وتسامي اليود، وأيونية أم تساهمية + غلق</span><span>١٧ د</span></li><li><span>الغلق الختامي: كرت الخروج</span><span>٥ د</span></li></ul></div>
   
 </section>
@@ -596,9 +603,7 @@ tr.sel { background: rgba(255,255,255,.07); }
 <section class="slide" data-part="3">
   <div class="kicker"><span class="chip">الحصة الثالثة</span><span class="chip time">📅 الاثنين <span class="f">2/11/2026</span></span><span>أهداف قابلة للقياس</span></div>
   <h2>أهداف الحصة الثالثة: الهالوجينات عوامل مؤكسدة والهاليدات</h2>
-  <div class="two"><div class="box goalcard"><span class="gnum">الهدف ١</span><p class="gtext">أن تتنبّأ الطالبة بحدوث تفاعل الإحلال بين هالوجين ومحلول هاليد اعتماداً على تدرّج قوة الهالوجينات كعوامل مؤكسدة، وتكتب معادلته.</p>
-      <p><b>معيار النجاح:</b> تكتشف الخطأ في معادلة إحلال وتصحّحه، وتكمل معادلة إحلال صحيحة.</p><p class="muted"><b>الغلق:</b> اكتشفي الخطأ</p></div><div class="box goalcard"><span class="gnum">الهدف ٢</span><p class="gtext">أن تصنّف الطالبة الهاليدات إلى هاليدات فلزات كأملاح، وهاليدات عناصر انتقالية، وهاليدات هيدروجين، وتقارن بين خصائصها.</p>
-      <p><b>معيار النجاح:</b> تجيب إجابة صحيحة عن سؤالين من ثلاثة في غلق الهدف.</p><p class="muted"><b>الغلق:</b> ثلاثة أسئلة سريعة</p></div></div>
+  <div class="two"><div class="box goalcard"><span class="gnum">الهدف ١</span><p class="gtext">أن تتنبّأ الطالبة بحدوث تفاعل الإحلال بين هالوجين ومحلول هاليد اعتماداً على تدرّج قوة الهالوجينات كعوامل مؤكسدة، وتكتب معادلته.</p></div><div class="box goalcard"><span class="gnum">الهدف ٢</span><p class="gtext">أن تصنّف الطالبة الهاليدات إلى هاليدات فلزات كأملاح، وهاليدات عناصر انتقالية، وهاليدات هيدروجين، وتقارن بين خصائصها.</p></div></div>
   <div class="box"><h3>سير الحصة (٤٥ دقيقة)</h3><ul class="agenda"><li><span>التهيئة: مراجعة سريعة</span><span>٤ د</span></li><li><span>الهدف ١: العوامل المؤكسدة، ولعبة من يطرد من؟، والإحلال في الأنابيب + غلق</span><span>١٥ د</span></li><li><span>الهدف ٢: فرز الهاليدات، ثم هاليدات الهيدروجين (الاستقرار الحراري والحمضية والتحضير) + غلق</span><span>٢٢ د</span></li><li><span>الغلق الختامي: كرت الخروج</span><span>٤ د</span></li></ul></div>
   
 </section>
@@ -832,9 +837,7 @@ tr.sel { background: rgba(255,255,255,.07); }
 <section class="slide" data-part="4">
   <div class="kicker"><span class="chip">الحصة الرابعة</span><span class="chip time">📅 الثلاثاء <span class="f">3/11/2026</span></span><span>أهداف قابلة للقياس</span></div>
   <h2>أهداف الحصة الرابعة: استقصاء الكشف عن أيون الهاليد</h2>
-  <div class="two"><div class="box goalcard"><span class="gnum">الهدف ١</span><p class="gtext">تكشف عن الهاليدات باستخدام محلول نترات الفضة ومحلول الأمونيا.</p>
-      <p><b>معيار النجاح:</b> تحدّد أيون الهاليد في عيّنتين مجهولتين.</p><p class="muted"><b>الغلق:</b> عيّنتان مجهولتان</p></div><div class="box goalcard"><span class="gnum">الهدف ٢</span><p class="gtext">تكتب معادلة تفاعل أيونات الهاليدات مع محلول نترات الفضة.</p>
-      <p><b>معيار النجاح:</b> تكتب معادلتين من ثلاث بشكل صحيح.</p><p class="muted"><b>الغلق:</b> أكملي المعادلة</p></div></div>
+  <div class="two"><div class="box goalcard"><span class="gnum">الهدف ١</span><p class="gtext">تكشف عن الهاليدات باستخدام محلول نترات الفضة ومحلول الأمونيا.</p></div><div class="box goalcard"><span class="gnum">الهدف ٢</span><p class="gtext">تكتب معادلة تفاعل أيونات الهاليدات مع محلول نترات الفضة.</p></div></div>
   <div class="box"><h3>سير الحصة (٤٥ دقيقة)</h3><ul class="agenda"><li><span>التهيئة: مراجعة سريعة</span><span>٥ د</span></li><li><span>الهدف ١: الاستقصاء بخطواته الخمس، والعيّنة المجهولة + غلق</span><span>٢٠ د</span></li><li><span>الهدف ٢: كتابة معادلات تفاعل أيونات الهاليدات مع نترات الفضة + غلق</span><span>١٣ د</span></li><li><span>الغلق الختامي: التحدّي النهائي</span><span>٧ د</span></li></ul></div>
   
 </section>
@@ -842,49 +845,36 @@ tr.sel { background: rgba(255,255,255,.07); }
 <section class="slide" data-part="4">
   <div class="kicker"><span class="chip">الحصة الرابعة</span><span class="chip goal">التهيئة</span><span class="chip time">⏱ ٥ د</span><span>مراجعة</span></div>
   <h2>تذكّري من الحصة الماضية</h2>
-  <div class="three"><div class="mcq box" data-answer="0"><p><b>أكملي: <span class="f">Cl₂ + 2KI →</span></b></p><div class="opts"><button class="opt pill"><span class="f">2KCl + I₂</span></button><button class="opt pill">no reaction</button></div><div class="row"><button class="check solid">أظهري الإجابة</button></div></div><div class="mcq box" data-answer="0"><p><b><span class="f">HCl</span> من:</b></p><div class="opts"><button class="opt pill">هاليدات الهيدروجين</button><button class="opt pill">هاليدات الفلزات كأملاح</button><button class="opt pill">هاليدات العناصر الانتقالية</button></div><div class="row"><button class="check solid">أظهري الإجابة</button></div></div><div class="mcq box" data-answer="0"><p><b>اللون الذي يظهر في المحلول عند تكوّن البروم:</b></p><div class="opts"><button class="opt pill">برتقالي</button><button class="opt pill">بنفسجي</button><button class="opt pill">عديم اللون</button></div><div class="row"><button class="check solid">أظهري الإجابة</button></div></div></div>
+  <div class="four warm"><div class="mcq box" data-answer="0"><p><b>أكملي: <span class="f">Cl₂ + 2KI →</span></b></p><div class="opts"><button class="opt pill"><span class="f">2KCl + I₂</span></button><button class="opt pill">no reaction</button></div><div class="row"><button class="check solid">أظهري الإجابة</button></div></div><div class="mcq box" data-answer="1"><p><b>أكملي: <span class="f">I₂ + 2KCl →</span></b></p><div class="opts"><button class="opt pill"><span class="f">2KI + Cl₂</span></button><button class="opt pill">no reaction</button></div><div class="row"><button class="check solid">أظهري الإجابة</button></div></div><div class="mcq box" data-answer="0"><p><b>أقوى الهالوجينات كعامل مؤكسد:</b></p><div class="opts"><button class="opt pill"><span class="f">F₂</span></button><button class="opt pill"><span class="f">Cl₂</span></button><button class="opt pill"><span class="f">I₂</span></button></div><div class="row"><button class="check solid">أظهري الإجابة</button></div></div><div class="mcq box" data-answer="0"><p><b>لون المحلول عند تكوّن البروم:</b></p><div class="opts"><button class="opt pill">برتقالي</button><button class="opt pill">بنفسجي</button><button class="opt pill">عديم اللون</button></div><div class="row"><button class="check solid">أظهري الإجابة</button></div></div><div class="mcq box" data-answer="0"><p><b><span class="f">HCl</span> من:</b></p><div class="opts"><button class="opt pill">هاليدات الهيدروجين</button><button class="opt pill">هاليدات الفلزات</button></div><div class="row"><button class="check solid">أظهري الإجابة</button></div></div><div class="mcq box" data-answer="0"><p><b>أعلى هاليدات الهيدروجين استقراراً حرارياً:</b></p><div class="opts"><button class="opt pill"><span class="f">HF</span></button><button class="opt pill"><span class="f">HI</span></button></div><div class="row"><button class="check solid">أظهري الإجابة</button></div></div><div class="mcq box" data-answer="0"><p><b>صيغة نترات الفضة:</b></p><div class="opts"><button class="opt pill"><span class="f">AgNO₃</span></button><button class="opt pill"><span class="f">AgNO₂</span></button><button class="opt pill"><span class="f">Ag₂NO₃</span></button></div><div class="row"><button class="check solid">أظهري الإجابة</button></div></div><div class="mcq box" data-answer="0"><p><b>الراسب هو:</b></p><div class="opts"><button class="opt pill">مادة صلبة لا تذوب تتكوّن في المحلول</button><button class="opt pill">غاز يتصاعد</button><button class="opt pill">محلول ملوّن</button></div><div class="row"><button class="check solid">أظهري الإجابة</button></div></div></div>
 </section>
 
 <section class="slide" data-part="4">
   <div class="kicker"><span class="chip">الحصة الرابعة</span><span class="chip goal">الهدف ١</span><span class="chip time">⏱ ١٧ د</span><span>استقصاء</span></div>
   <h2>استقصاء: الكشف عن أيون الهاليد بنترات الفضة <span class="f">AgNO₃</span> والأمونيا <span class="f">NH₃</span></h2>
-  <div class="inq">
-    <div><b>١ سؤال الاستقصاء</b><span>كيف نميّز أيونات الهاليد في محاليل عديمة اللون؟</span></div>
-    <div><b>٢ الفرضية</b><span>تكتب كل مجموعة توقّعها قبل التجريب</span></div>
-    <div><b>٣ التجريب</b><span>نترات الفضة ثم الأمونيا المخفّفة فالمركّزة</span></div>
-    <div><b>٤ الملاحظة</b><span>لون الراسب وذوبانه في الجدول</span></div>
-    <div><b>٥ الاستنتاج</b><span>تحديد الأيون، ثم العيّنة المجهولة</span></div>
-  </div>
   <div class="row" role="group" aria-label="نوع التجربة">
     <button id="x-mk" class="pill" aria-pressed="true">الأيونات الأربعة</button>
-    <button id="x-mu" class="pill" aria-pressed="false">عيّنة مجهولة</button>
-    <button id="x-reset">↺ أعيدي الأنابيب</button>
+    <button id="x-mu" class="pill" aria-pressed="false">العيّنات المجهولة</button>
+    <button id="x-reset">↺ من جديد</button>
   </div>
   <div class="two xmain" id="x-slide">
     <div class="box xcard" id="x-tubebox"></div>
     <div class="box" id="x-ctrl">
-      <div id="x-pickwrap">
-        <p class="muted">اختاري أيون الهاليد</p>
-        <div class="xpick" id="x-pick"></div>
+      <div id="x-pickwrap"><div class="xpick" id="x-pick"></div></div>
+      <div id="x-unk" hidden>
+        <div class="xpick" id="x-samples"></div>
+        <p class="xscore" id="x-score"></p>
       </div>
       <div class="xsteps" id="x-steps"></div>
       <div id="x-status"></div>
       <div id="x-concl"></div>
-      <div id="x-unk" hidden class="mcq" data-answer="">
-        <h3>ما أيون الهاليد في العيّنة المجهولة؟</h3>
+      <div id="x-guesswrap" hidden>
+        <p><b id="x-gq"></b></p>
         <div class="opts" id="x-guess"></div>
-        <div class="row"><button class="solid" id="x-reveal">أظهري الإجابة</button><button id="x-new">عيّنة جديدة</button></div>
+        <div class="row"><button class="solid" id="x-reveal">أظهري الإجابة</button><button id="x-all">أظهري كل العيّنات</button></div>
         <p class="answer" id="x-ans" hidden></p>
-      </div>
-      <div class="tablewrap" id="x-tablewrap">
-        <table>
-          <thead><tr><th>الأيون</th><th>مع <span class="f">AgNO₃</span></th><th>مع <span class="f">NH₃</span> مخفّف</th><th>مع <span class="f">NH₃</span> مركّز</th></tr></thead>
-          <tbody id="x-tbody"></tbody>
-        </table>
       </div>
     </div>
   </div>
-  <p class="muted" style="font-size:.95rem">⚠ السلامة: نترات الفضة تترك بقعاً داكنة على الجلد، وغاز الأمونيا المركّزة مهيّج. قفازات ونظارات وتهوية جيدة.</p>
 </section>
 
 <section class="slide" data-part="4">
@@ -894,28 +884,39 @@ tr.sel { background: rgba(255,255,255,.07); }
 </section>
 
 <section class="slide" data-part="4">
-  <div class="kicker"><span class="chip">الحصة الرابعة</span><span class="chip goal">الهدف ٢</span><span class="chip time">⏱ ١٠ د</span><span>بناء المعادلة</span></div>
-  <h2>اكتبي معادلة تفاعل أيون الهاليد مع نترات الفضة</h2>
-  <div class="two">
-    <div class="box">
-      <p class="muted">اختاري الملح، ثم ابني المعادلة خطوة بخطوة باختيار الناتج الصحيح:</p>
-      <div class="row" id="eq-salt" role="group" aria-label="الملح"></div>
-      <div class="eqline" id="eq-line" dir="ltr"></div>
-      <p class="muted" id="eq-ask"></p>
-      <div class="row" id="eq-opts"></div>
-      <p class="answer" id="eq-done" hidden></p>
-      <div class="row"><button class="pill" id="eq-reset">↺ من جديد</button></div>
-    </div>
-    <div class="box">
-      <h3>القاعدة</h3>
-      <p class="note">المعادلة الكاملة:</p>
-      <p class="eqrule" dir="ltr">AgNO₃(aq) + NaX(aq) → AgX(s) + NaNO₃(aq)</p>
-      <p class="note">المعادلة الأيونية النهائية (بعد حذف الأيونات المتفرّجة <span class="f">Na⁺</span> و<span class="f">NO₃⁻</span>):</p>
-      <p class="eqrule" dir="ltr">Ag⁺(aq) + X⁻(aq) → AgX(s)</p>
-      <ul class="clean"><li><span class="f">AgCl(s)</span> راسب أبيض · <span class="f">AgBr(s)</span> راسب أبيض كريمي · <span class="f">AgI(s)</span> راسب أصفر</li>
-      <li>مع الفلوريد لا يتكوّن راسب، لأن <span class="f">AgF</span> ذائب: <span class="f">AgF(aq)</span></li></ul>
-    </div>
+  <div class="kicker"><span class="chip">الحصة الرابعة</span><span class="chip goal">الهدف ٢</span><span class="chip time">⏱ ٣ د</span><span>المعادلة الكاملة</span></div>
+  <h2>١) المعادلة الكاملة: نترات الفضة مع ملح الهاليد</h2>
+  <div class="box calm">
+    <div class="row" id="eq-salt" role="group" aria-label="الملح"></div>
+    <div class="eqline" id="eq-line" dir="ltr"></div>
+    <p class="muted" id="eq-ask"></p>
+    <div class="row" id="eq-opts"></div>
+    <p class="answer" id="eq-done" hidden></p>
+    <div class="row"><button class="pill" id="eq-reset">↺ من جديد</button></div>
   </div>
+</section>
+
+<section class="slide" data-part="4">
+  <div class="kicker"><span class="chip">الحصة الرابعة</span><span class="chip goal">الهدف ٢</span><span class="chip time">⏱ ٣ د</span><span>المعادلة الأيونية</span></div>
+  <h2>٢) المعادلة الأيونية: نحذف الأيونات المتفرّجة</h2>
+  <div class="box calm">
+    <div class="row" id="ion-salt" role="group" aria-label="الملح"></div>
+    <div class="eqline ionline" id="ion-line" dir="ltr"></div>
+    <div class="row"><button class="solid" id="ion-go">احذفي الأيونات المتفرّجة</button><button class="pill" id="ion-reset">↺</button></div>
+    <p class="eqrule" id="ion-net" dir="ltr" hidden></p>
+  </div>
+</section>
+
+<section class="slide" data-part="4">
+  <div class="kicker"><span class="chip">الحصة الرابعة</span><span class="chip goal">الهدف ٢</span><span class="chip time">⏱ ٢ د</span><span>ذوبان الراسب</span></div>
+  <h2>٣) معادلة ذوبان الراسب في الأمونيا</h2>
+  <div class="three" id="nh3-cards"></div>
+</section>
+
+<section class="slide" data-part="4">
+  <div class="kicker"><span class="chip">الحصة الرابعة</span><span class="chip goal">الهدف ٢</span><span class="chip time">⏱ ٢ د</span><span>تدرّبي</span></div>
+  <h2>٤) تدرّبي: اكتبي المعادلة الأيونية في دفترك</h2>
+  <div class="four" id="eq-practice"></div>
 </section>
 
 <section class="slide" data-part="4">
@@ -1440,97 +1441,113 @@ function tubeSVG(t, id) {
   </svg>`;
 }
 function xStatus(t) {
-  const d = XH[t.h], v = xview(t), lines = [];
+  const d = XH[t.h], v = xview(t), lines = [], known = xm === "known";
   if (!t.ag) return `<p class="xstat">محلول عديم اللون، ابدئي بإضافة نترات الفضة ${f("AgNO₃")}</p>`;
-  lines.push(d.ppt ? `<span class="xchip" style="background:${PCOL[d.col][0]};border-color:${PCOL[d.col][1]}">${PNAME[d.col]} ${f(d.ppt + "(s)")}</span>` : `<span class="xchip" style="background:#E9EDF2;border-color:#AEB9C5">لا يتكوّن راسب</span>`);
-  if (xm === "known") lines.push(`<span class="f">AgNO₃ + ${t.h}⁻ → ${d.ppt ? "Ag" + t.h + "↓" : "AgF(aq)"} + NO₃⁻</span>`);
-  if (d.ppt && t.dil) lines.push(d.sol === "dilute" ? "✓ يذوب في الأمونيا المخفّفة (عديم اللون)" : "✗ لا يذوب في الأمونيا المخفّفة");
-  if (d.ppt && t.con) lines.push(d.sol === "conc" ? "✓ يذوب في الأمونيا المركّزة (عديم اللون)" : "✗ لا يذوب في الأمونيا المركّزة أيضاً");
-  if (v.dissolved && xm === "known") lines.push(`<span class="f">${d.ppt} + 2NH₃ → [Ag(NH₃)₂]⁺ + ${t.h}⁻</span>`);
+  lines.push(d.ppt ? `<span class="xchip" style="background:${PCOL[d.col][0]};border-color:${PCOL[d.col][1]}">${PNAME[d.col]}</span>` : `<span class="xchip" style="background:#E9EDF2;border-color:#AEB9C5">لا يتكوّن راسب</span>`);
+  if (known) lines.push(d.ppt ? f(`Ag⁺(aq) + ${t.h}⁻(aq) → Ag${t.h}(s)`) : `${f("AgF(aq)")} ملح ذائب`);
+  if (d.ppt && t.dil) lines.push(d.sol === "dilute" ? "✓ يذوب في الأمونيا المخفّفة" : "✗ لا يذوب في الأمونيا المخفّفة");
+  if (d.ppt && t.con) lines.push(d.sol === "conc" ? "✓ يذوب في الأمونيا المركّزة" : "✗ لا يذوب في الأمونيا المركّزة");
+  if (v.dissolved && known) lines.push(f(`Ag${t.h}(s) + 2NH₃(aq) → [Ag(NH₃)₂]⁺(aq) + ${t.h}⁻(aq)`));
   return `<div class="xstat">${lines.map((l) => `<p>${l}</p>`).join("")}</div>`;
 }
-function xcell(h, k) {
-  const t = xt[h], d = XH[h];
-  if (!t.ag) return "";
-  if (k === 0) return d.ppt ? PNAME[d.col] : "لا راسب (ملح ذائب)";
-  if (!d.ppt) return "—";
-  if (!(k === 1 ? t.dil : t.con)) return d.sol === "dilute" && k === 2 && t.dil ? "—" : "";
-  return d.sol === "dilute" || (k === 2 && d.sol === "conc") ? "✓ يذوب" : "✗ لا يذوب";
-}
+const LET = ["أ", "ب", "ج", "د"];
+let xus = [], xuSel = 0, xg = [], xshown = [];
 function xDraw() {
-  const t = xm === "known" ? xt[xs] : xu, d = XH[t.h], v = xview(t), hidden = xm === "unknown";
+  const unk = xm === "unknown", t = unk ? xus[xuSel] : xt[xs], d = XH[t.h], v = xview(t);
   const done = v.dissolved || (t.dil && t.con) || (t.ag && !d.ppt);
-  $("x-mk").setAttribute("aria-pressed", !hidden); $("x-mu").setAttribute("aria-pressed", hidden);
-  $("x-pickwrap").hidden = hidden; $("x-tablewrap").hidden = hidden; $("x-unk").hidden = !hidden;
+  $("x-mk").setAttribute("aria-pressed", !unk); $("x-mu").setAttribute("aria-pressed", unk);
+  $("x-pickwrap").hidden = unk; $("x-unk").hidden = !unk; $("x-guesswrap").hidden = !unk;
   $("x-pick").innerHTML = XALL.map((h) => `<button class="pill" data-h="${h}" aria-pressed="${h === xs}">${ION[h]}</button>`).join("");
-  $("x-tubebox").innerHTML = `<div class="xhead" style="background:${hidden ? "var(--panel2)" : d.tint}">${hidden ? "عيّنة مجهولة ؟" : `${d.n} ${f(t.h + "⁻")}`}<small>${hidden ? "محلول عديم اللون" : `${d.saltName} ${f("(" + d.salt + ")")}`}</small></div>${tubeSVG(t, "X")}`;
+  $("x-samples").innerHTML = LET.map((l, i) => { const st = xshown[i] ? (xg[i] === xus[i].h ? " done-ok" : " done-no") : "";
+    return `<button class="pill${st}" data-s="${i}" aria-pressed="${i === xuSel}">العيّنة ${l}${xshown[i] ? (xg[i] === xus[i].h ? " ✓" : " ✗") : ""}</button>`; }).join("");
+  const right = xshown.filter((x, i) => x && xg[i] === xus[i].h).length, seen = xshown.filter(Boolean).length;
+  $("x-score").textContent = seen ? `إجابات صحيحة: ${right} من ${seen}` : "اختبري كل عيّنة، ثم حدّدي أيونها.";
+  $("x-tubebox").innerHTML = `<div class="xhead" style="background:${unk ? "var(--panel2)" : d.tint}">${unk ? `العيّنة ${LET[xuSel]} ؟` : `${d.n} ${f(t.h + "⁻")}`}<small>${unk ? "محلول عديم اللون" : `${d.saltName} ${f("(" + d.salt + ")")}`}</small></div>${tubeSVG(t, "X")}`;
   $("x-steps").innerHTML = `
     <button class="gold" data-x="ag" ${t.ag ? "disabled" : ""}><span class="num">1</span> نترات الفضة ${f("AgNO₃")}</button>
     <button class="solid" data-x="dil" ${!t.ag || t.dil || v.dissolved || !d.ppt ? "disabled" : ""}><span class="num">2</span> ${f("NH₃")} مخفّف</button>
     <button class="solid" data-x="con" ${!t.dil || t.con || v.dissolved ? "disabled" : ""}><span class="num">3</span> ${f("NH₃")} مركّز</button>`;
   $("x-status").innerHTML = xStatus(t);
-  $("x-concl").innerHTML = !hidden && done ? `<button class="pill" data-concl="1">أظهري الاستنتاج</button><p class="answer" id="xc-1" hidden>${d.concl}</p>` : "";
-  $("x-tbody").innerHTML = XALL.map((h) => `<tr class="${h === xs ? "sel" : ""}"><td><b>${ION[h]}</b></td><td>${xcell(h, 0)}</td><td>${xcell(h, 1)}</td><td>${xcell(h, 2)}</td></tr>`).join("");
+  $("x-concl").innerHTML = !unk && done ? `<button class="pill" data-concl="1">أظهري الاستنتاج</button><p class="answer" id="xc-1" hidden>${d.concl}</p>` : "";
+  if (unk) {
+    $("x-gq").textContent = `ما أيون الهاليد في العيّنة ${LET[xuSel]}؟`;
+    $("x-guess").innerHTML = XALL.map((h) => { let c = ""; if (xshown[xuSel]) c = h === xus[xuSel].h ? " right" : h === xg[xuSel] ? " wrong" : "";
+      return `<button class="pill opt${c}" data-g="${h}" aria-pressed="${xg[xuSel] === h && !xshown[xuSel]}">${ION[h]}</button>`; }).join("");
+    $("x-ans").hidden = !xshown[xuSel]; $("x-reveal").hidden = !!xshown[xuSel];
+    if (xshown[xuSel]) $("x-ans").innerHTML = `العيّنة ${LET[xuSel]}: ${ION[xus[xuSel].h]}<br>${XH[xus[xuSel].h].concl}`;
+  }
 }
 function xNew() {
-  xu = xfresh(XALL[Math.floor(Math.random() * 4)]);
-  $("x-guess").innerHTML = XALL.map((h) => `<button class="opt pill">${ION[h]}</button>`).join("");
-  const m = $("x-unk"); m.dataset.answer = XALL.indexOf(xu.h); delete m.dataset.locked;
-  $("x-ans").hidden = true; $("x-reveal").hidden = false; xDraw();
+  const order = XALL.slice().sort(() => Math.random() - .5);
+  xus = order.map(xfresh); xuSel = 0; xg = [null, null, null, null]; xshown = [false, false, false, false]; xDraw();
 }
 function xResetAll() { xt = Object.fromEntries(XALL.map((h) => [h, xfresh(h)])); xNew(); }
 $("x-slide").addEventListener("click", (e) => {
-  const p = e.target.closest("[data-h]");
-  if (p && p.closest("#x-pick")) { xs = p.dataset.h; xDraw(); return; }
+  const p = e.target.closest("[data-h]"); if (p) { xs = p.dataset.h; xDraw(); return; }
+  const sm = e.target.closest("[data-s]"); if (sm) { xuSel = Number(sm.dataset.s); xDraw(); return; }
+  const g = e.target.closest("[data-g]"); if (g) { if (!xshown[xuSel]) { xg[xuSel] = g.dataset.g; xDraw(); } return; }
   const b = e.target.closest("[data-x]");
-  if (b) { const t = xm === "known" ? xt[xs] : xu; t[b.dataset.x] = true; t.pour = b.dataset.x; xDraw(); return; }
-  const c = e.target.closest("[data-concl]");
-  if (c) { $("xc-1").hidden = false; c.hidden = true; }
+  if (b) { const t = xm === "unknown" ? xus[xuSel] : xt[xs]; t[b.dataset.x] = true; t.pour = b.dataset.x; xDraw(); return; }
+  const c = e.target.closest("[data-concl]"); if (c) { $("xc-1").hidden = false; c.hidden = true; }
 });
 $("x-mk").onclick = () => { xm = "known"; xDraw(); };
 $("x-mu").onclick = () => { xm = "unknown"; xDraw(); };
 $("x-reset").onclick = xResetAll;
-$("x-new").onclick = xNew;
-$("x-reveal").onclick = () => {
-  const m = $("x-unk"), opts = [...m.querySelectorAll(".opt")], ans = XALL.indexOf(xu.h);
-  opts.forEach((b, k) => { b.setAttribute("aria-pressed", "false"); if (k === ans) b.classList.add("right"); else if (b.dataset.picked) b.classList.add("wrong"); });
-  m.dataset.locked = "1";
-  $("x-ans").innerHTML = "العيّنة كانت: " + ION[xu.h] + "<br>" + XH[xu.h].concl;
-  $("x-ans").hidden = false; $("x-reveal").hidden = true;
-};
+$("x-reveal").onclick = () => { xshown[xuSel] = true; xDraw(); };
+$("x-all").onclick = () => { xshown = [true, true, true, true]; xDraw(); };
 xResetAll();
 
-// ── بناء معادلة تفاعل أيون الهاليد مع نترات الفضة ──
+// ── الهدف الثاني: المعادلة الكاملة ← الأيونية ← الذوبان ← التدريب ──
 (function () {
-  const SALTS = { Cl: ["NaCl", "AgCl(s)", "راسب أبيض"], Br: ["KBr", "AgBr(s)", "راسب أبيض كريمي"], I: ["KI", "AgI(s)", "راسب أصفر"], F: ["NaF", "AgF(aq)", "لا يتكوّن راسب: فلوريد الفضة ذائب"] };
+  const SALTS = { Cl: ["Na", "NaCl", "AgCl(s)", "راسب أبيض"], Br: ["K", "KBr", "AgBr(s)", "راسب أبيض كريمي"], I: ["K", "KI", "AgI(s)", "راسب أصفر"], F: ["Na", "NaF", "AgF(aq)", "لا يتكوّن راسب"] };
+  const KEYS = ["Cl", "Br", "I", "F"];
+  const saltBtns = (id, cur) => { $(id).innerHTML = KEYS.map((k) => `<button class="pill f" data-x="${k}" aria-pressed="${k === cur}">${SALTS[k][1]}</button>`).join(""); };
+  // ١) المعادلة الكاملة
   let x = "Cl", step = 0;
-  const metal = () => SALTS[x][0].startsWith("Na") ? "Na" : "K";
-  const slots = () => [
-    { q: "ما الناتج الذي يحتوي على الفضة؟", a: SALTS[x][1], opts: [SALTS[x][1], "Ag(s)", "Ag" + x + "₂(s)", metal() + "Ag(aq)"] },
-    { q: "ما الناتج الثاني؟", a: metal() + "NO₃(aq)", opts: [metal() + "NO₃(aq)", metal() + "₂NO₃(aq)", "HNO₃(aq)", metal() + "(s)"] },
-    { q: "المعادلة الأيونية النهائية: ما الذي يتفاعل فعلاً؟", a: "Ag⁺(aq) + " + x + "⁻(aq)", opts: ["Ag⁺(aq) + " + x + "⁻(aq)", metal() + "⁺(aq) + NO₃⁻(aq)", "Ag⁺(aq) + NO₃⁻(aq)"] },
-  ];
+  const slots = () => { const m = SALTS[x][0]; return [
+    { q: "ما الناتج الذي يحتوي على الفضة؟", a: SALTS[x][2], opts: [SALTS[x][2], "Ag(s)", m + "Ag(aq)"] },
+    { q: "ما الناتج الثاني؟", a: m + "NO₃(aq)", opts: [m + "NO₃(aq)", "HNO₃(aq)", m + "(s)"] }]; };
   function draw() {
-    document.getElementById("eq-salt").innerHTML = Object.keys(SALTS).map((k) => `<button class="pill f" data-x="${k}" aria-pressed="${k === x}">${SALTS[k][0]}</button>`).join("");
+    saltBtns("eq-salt", x);
     const S = slots(), sl = (i) => `<span class="slot ${step > i ? "ok" : step === i ? "now" : ""}">${step > i ? S[i].a : "؟"}</span>`;
-    document.getElementById("eq-line").innerHTML = step < 2
-      ? `<span>AgNO₃(aq) + ${SALTS[x][0]}(aq) →</span>${sl(0)}<span>+</span>${sl(1)}`
-      : `<span>AgNO₃(aq) + ${SALTS[x][0]}(aq) → ${S[0].a} + ${S[1].a}</span><span style="flex-basis:100%;height:0"></span>${sl(2)}<span>→ ${SALTS[x][1]}</span>`;
+    $("eq-line").innerHTML = `<span>AgNO₃(aq) + ${SALTS[x][1]}(aq) →</span>${sl(0)}<span>+</span>${sl(1)}`;
     const done = step >= S.length;
-    document.getElementById("eq-ask").textContent = done ? "" : S[step].q;
-    document.getElementById("eq-opts").innerHTML = done ? "" : S[step].opts.slice().sort(() => Math.random() - .5).map((o) => `<button class="pill f" data-o="${o}">${o}</button>`).join("");
-    const d = document.getElementById("eq-done"); d.hidden = !done;
-    if (done) d.innerHTML = `✔ أحسنتِ! ${SALTS[x][2]}.<br>${f("Ag⁺(aq) + " + x + "⁻(aq) → " + SALTS[x][1])}`;
+    $("eq-ask").textContent = done ? "" : S[step].q;
+    $("eq-opts").innerHTML = done ? "" : S[step].opts.slice().sort(() => Math.random() - .5).map((o) => `<button class="pill f" data-o="${o}">${o}</button>`).join("");
+    $("eq-done").hidden = !done; if (done) $("eq-done").innerHTML = `✔ ${SALTS[x][3]}`;
   }
-  document.getElementById("eq-salt").onclick = (e) => { const b = e.target.closest("[data-x]"); if (b) { x = b.dataset.x; step = 0; draw(); } };
-  document.getElementById("eq-opts").onclick = (e) => { const b = e.target.closest("[data-o]"); if (!b) return;
-    if (b.dataset.o === slots()[step].a) { step++; draw(); } else { b.classList.remove("shake"); void b.offsetWidth; b.classList.add("shake"); b.classList.add("opt", "wrong"); } };
-  document.getElementById("eq-reset").onclick = () => { step = 0; draw(); };
+  $("eq-salt").onclick = (e) => { const b = e.target.closest("[data-x]"); if (b) { x = b.dataset.x; step = 0; draw(); } };
+  $("eq-opts").onclick = (e) => { const b = e.target.closest("[data-o]"); if (!b) return;
+    if (b.dataset.o === slots()[step].a) { step++; draw(); } else { b.classList.remove("shake"); void b.offsetWidth; b.classList.add("shake", "opt", "wrong"); } };
+  $("eq-reset").onclick = () => { step = 0; draw(); };
   draw();
-  document.getElementById("eq-c2").innerHTML = [
-    mcqHTML("أكملي: " + f("AgNO₃(aq) + KBr(aq) →"), [f("AgBr(s) + KNO₃(aq)"), f("Ag(s) + KBrNO₃"), f("AgK(s) + BrNO₃(aq)")], 0, "يتكوّن راسب AgBr الأبيض الكريمي."),
-    mcqHTML("المعادلة الأيونية لتفاعل أيون اليوديد مع نترات الفضة:", [f("Ag⁺(aq) + I⁻(aq) → AgI(s)"), f("Ag(s) + I₂ → AgI"), f("K⁺ + NO₃⁻ → KNO₃")], 0, "راسب أصفر من AgI."),
-    mcqHTML("ناتج " + f("AgNO₃(aq) + NaF(aq)") + ":", [f("AgF(s)") + " راسب", f("AgF(aq) + NaNO₃(aq)") + " بلا راسب", f("Ag(s) + F₂")], 1, "فلوريد الفضة ملح ذائب."),
+  // ٢) المعادلة الأيونية
+  let y = "Cl";
+  function drawIon() {
+    saltBtns("ion-salt", y);
+    const [m, , p] = SALTS[y], sp = (t) => `<span class="sp">${t}</span>`;
+    $("ion-line").classList.remove("cut"); $("ion-net").hidden = true;
+    $("ion-line").innerHTML = `<span>Ag⁺(aq) +</span>${sp("NO₃⁻(aq)")}<span>+</span>${sp(m + "⁺(aq)")}<span>+ ${y}⁻(aq) →</span><span>${p}</span><span>+</span>${sp(m + "⁺(aq)")}<span>+</span>${sp("NO₃⁻(aq)")}`;
+    $("ion-net").innerHTML = y === "F" ? "لا يتكوّن راسب، فلا توجد معادلة أيونية نهائية" : `Ag⁺(aq) + ${y}⁻(aq) → ${p}`;
+  }
+  $("ion-salt").onclick = (e) => { const b = e.target.closest("[data-x]"); if (b) { y = b.dataset.x; drawIon(); } };
+  $("ion-go").onclick = () => { $("ion-line").classList.add("cut"); setTimeout(() => { $("ion-net").hidden = false; }, 600); };
+  $("ion-reset").onclick = drawIon;
+  drawIon();
+  // ٣) ذوبان الراسب في الأمونيا
+  const NH = [["Cl", "AgCl(s)", "يذوب في الأمونيا المخفّفة", true], ["Br", "AgBr(s)", "يذوب في الأمونيا المركّزة فقط", true], ["I", "AgI(s)", "لا يذوب في الأمونيا", false]];
+  $("nh3-cards").innerHTML = NH.map(([k, p, t, ok], i) => `<div class="box nh3"><h3>${f(p)}</h3><p>${t}</p>
+    <button class="pill solid" data-reveal="nh3-${i}">أظهري المعادلة</button>
+    <p class="eqrule" id="nh3-${i}" dir="ltr" hidden>${ok ? `${p} + 2NH₃(aq) → [Ag(NH₃)₂]⁺(aq) + ${k}⁻(aq)` : "لا يحدث ذوبان"}</p></div>`).join("");
+  // ٤) تدريب
+  $("eq-practice").innerHTML = KEYS.map((k, i) => `<div class="box nh3"><h3 dir="ltr">AgNO₃(aq) + ${SALTS[k][1]}(aq)</h3>
+    <button class="pill solid" data-reveal="pr-${i}">أظهري الإجابة</button>
+    <p class="eqrule" id="pr-${i}" dir="ltr" hidden>${k === "F" ? "AgF(aq) : لا يتكوّن راسب" : `Ag⁺(aq) + ${k}⁻(aq) → ${SALTS[k][2]}`}</p></div>`).join("");
+  // غلق الهدف الثاني
+  $("eq-c2").innerHTML = [
+    mcqHTML("أكملي: " + f("AgNO₃(aq) + KBr(aq) →"), [f("AgBr(s) + KNO₃(aq)"), f("Ag(s) + KBrNO₃(aq)"), f("AgK(s) + BrNO₃(aq)")], 0),
+    mcqHTML("المعادلة الأيونية لتفاعل أيون اليوديد مع نترات الفضة:", [f("Ag⁺(aq) + I⁻(aq) → AgI(s)"), f("Ag(s) + I₂(s) → AgI(s)"), f("K⁺(aq) + NO₃⁻(aq) → KNO₃(s)")], 0),
+    mcqHTML("ناتج " + f("AgNO₃(aq) + NaF(aq)") + ":", [f("AgF(s)") + " راسب", f("AgF(aq) + NaNO₃(aq)"), f("Ag(s) + F₂(g)")], 1, "فلوريد الفضة ملح ذائب."),
   ].join("");
 })();
 
