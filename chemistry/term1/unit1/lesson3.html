@@ -245,6 +245,12 @@ tr.sel { background: rgba(255,255,255,.07); }
 .ionline .sp { transition: opacity .6s, text-decoration-color .6s; text-decoration: line-through; text-decoration-color: transparent; text-decoration-thickness: 3px; }
 .ionline.cut .sp { opacity: .35; text-decoration-color: #C24A33; }
 .nh3 { text-align: center; justify-items: center; }
+.nh3stack { display: grid; gap: 14px; max-width: 1000px; width: 100%; justify-self: center; }
+.nh3row { grid-template-columns: 240px 1fr; align-items: center; gap: 16px; }
+@media (max-width: 760px) { .nh3row { grid-template-columns: 1fr; } }
+.nh3head h3 { margin: 0; font-size: 1.5rem; } .nh3head p { color: var(--muted); }
+.prrow { grid-template-columns: 1fr 1fr; justify-items: center; }
+.nh3eq { margin: 0; text-align: center; font-size: 1.7rem; font-weight: 800; color: var(--gold); white-space: normal; }
 .nh3 .eqrule { font-size: 1.05rem; white-space: nowrap; overflow-x: auto; max-width: 100%; }
 .fill-gas { opacity: 0; }
 .prep-grid { grid-template-columns: 1.7fr 1fr; }
@@ -903,13 +909,13 @@ tr.sel { background: rgba(255,255,255,.07); }
 <section class="slide" data-part="4">
   <div class="kicker"><span class="chip">الحصة الرابعة</span><span class="chip goal">الهدف ٢</span><span class="chip time">⏱ ٢ د</span><span>ذوبان الراسب</span></div>
   <h2>٢) معادلة ذوبان الراسب في الأمونيا</h2>
-  <div class="three" id="nh3-cards"></div>
+  <div class="nh3stack" id="nh3-cards"></div>
 </section>
 
 <section class="slide" data-part="4">
   <div class="kicker"><span class="chip">الحصة الرابعة</span><span class="chip goal">الهدف ٢</span><span class="chip time">⏱ ٢ د</span><span>تدرّبي</span></div>
   <h2>٣) تدرّبي: اكتبي المعادلة في دفترك</h2>
-  <div class="four" id="eq-practice"></div>
+  <div class="nh3stack" id="eq-practice"></div>
 </section>
 
 <section class="slide" data-part="4">
@@ -1516,13 +1522,12 @@ xResetAll();
   draw();
   // ٣) ذوبان الراسب في الأمونيا
   const NH = [["Cl", "AgCl(s)", "يذوب في الأمونيا المخفّفة", true], ["Br", "AgBr(s)", "يذوب في الأمونيا المركّزة فقط", true], ["I", "AgI(s)", "لا يذوب في الأمونيا", false]];
-  $("nh3-cards").innerHTML = NH.map(([k, p, t, ok], i) => `<div class="box nh3"><h3>${f(p)}</h3><p>${t}</p>
-    <button class="pill solid" data-reveal="nh3-${i}">أظهري المعادلة</button>
-    <p class="eqrule" id="nh3-${i}" dir="ltr" hidden>${ok ? `${p} + 2NH₃(aq) → [Ag(NH₃)₂]⁺(aq) + ${k}⁻(aq)` : "لا يحدث ذوبان"}</p></div>`).join("");
+  $("nh3-cards").innerHTML = NH.map(([k, p, t, ok]) => `<div class="box nh3row"><div class="nh3head"><h3>${f(p)}</h3><p>${t}</p></div>
+    <p class="nh3eq" dir="ltr">${ok ? `${p} + 2NH₃(aq) → [Ag(NH₃)₂]⁺(aq) + ${k}⁻(aq)` : "لا يحدث ذوبان"}</p></div>`).join("");
   // ٤) تدريب
-  $("eq-practice").innerHTML = KEYS.map((k, i) => `<div class="box nh3"><h3 dir="ltr">AgNO₃(aq) + ${SALTS[k][1]}(aq)</h3>
-    <button class="pill solid" data-reveal="pr-${i}">أظهري الإجابة</button>
-    <p class="eqrule" id="pr-${i}" dir="ltr" hidden>${`AgNO₃(aq) + ${SALTS[k][1]}(aq) → ${SALTS[k][2]} + ${SALTS[k][0]}NO₃(aq)`}${k === "F" ? "<br>لا يتكوّن راسب" : ""}</p></div>`).join("");
+  $("eq-practice").innerHTML = KEYS.map((k, i) => `<div class="box nh3row prrow"><p class="nh3eq" dir="ltr" style="color:var(--fg)">AgNO₃(aq) + ${SALTS[k][1]}(aq) →</p>
+    <div><button class="pill solid" data-reveal="pr-${i}">أظهري الإجابة</button>
+    <p class="nh3eq" id="pr-${i}" dir="ltr" hidden>${SALTS[k][2]} + ${SALTS[k][0]}NO₃(aq)${k === "F" ? '<br><span style="font-size:1rem;color:var(--muted)">لا يتكوّن راسب</span>' : ""}</p></div></div>`).join("");
   // غلق الهدف الثاني
   $("eq-c2").innerHTML = [
     mcqHTML("أكملي: " + f("AgNO₃(aq) + KBr(aq) →"), [f("AgBr(s) + KNO₃(aq)"), f("Ag(s) + KBrNO₃(aq)"), f("AgK(s) + BrNO₃(aq)")], 0),
