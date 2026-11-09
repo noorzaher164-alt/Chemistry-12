@@ -83,6 +83,31 @@ dl.facts dt { color: var(--muted); } dl.facts dd { margin: 0; font-weight: 700; 
 .mitem[aria-pressed="true"] { border-color: var(--wine); background: var(--blush); }
 .mitem.done { border-color: #2E8A57; background: rgba(46,138,87,.1); cursor: default; }
 .shake { animation: shake .35s; }
+.sports { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.spc { border: 1.5px solid var(--line); border-radius: 16px; background: var(--paper); padding: 8px; display: grid; gap: 6px; justify-items: center; text-align: center; position: relative; overflow: hidden; }
+.spc > img { height: 62px; object-fit: contain; }
+.spc .sb { font: inherit; font-size: .85rem; width: 100%; min-height: 36px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--paper); color: var(--fg); cursor: pointer; }
+.spc .sb:hover { border-color: var(--wine); }
+.spc.ok { border-color: #2E8A57; background: rgba(46,138,87,.1); }
+.spc .win { display: none; gap: 2px; justify-items: center; }
+.spc.ok .win { display: grid; }
+.spc.ok .sb { display: none; }
+.spc .emo { font-size: 2.6rem; line-height: 1; }
+.spc .win b { color: #2E8A57; }
+.spc .win small { color: var(--muted); font-size: .8rem; }
+.spc.ok .emo.bounce { animation: sbounce .7s ease-in infinite alternate; }
+.spc.ok .emo.run { animation: srun 2.2s linear infinite; }
+.spc.ok .emo.lift { animation: slift 1s ease-in-out infinite; }
+@keyframes sbounce { from { transform: translateY(-14px) } to { transform: translateY(6px) scale(1.08, .92) } }
+@keyframes srun { from { transform: translateX(-90px) } to { transform: translateX(90px) } }
+@keyframes slift { 0%,100% { transform: translateY(4px) } 50% { transform: translateY(-10px) scale(1.1) } }
+.sports.big .spc { padding: 16px; gap: 10px; }
+.sports.big .spc > img { height: 150px; }
+.sports.big .spc .sb { font-size: 1rem; min-height: 50px; }
+.sports.big .emo { font-size: 4.5rem; }
+.sports.big .spc.ok .emo.run { animation-name: srunbig; }
+@keyframes srunbig { from { transform: translateX(-140px) } to { transform: translateX(140px) } }
+@media (max-width: 600px) { .sports { grid-template-columns: 1fr; } }
 @keyframes shake { 25% { transform: translateX(-6px) } 75% { transform: translateX(6px) } }
 table.tbl { border-collapse: collapse; width: 100%; }
 .tbl th, .tbl td { border: 1px solid var(--line); padding: 8px; text-align: start; vertical-align: top; }
@@ -532,6 +557,13 @@ table.tbl { border-collapse: collapse; width: 100%; }
     <div class="box"><h3>الأحذية العصرية (الشكل 13-4)</h3><div class="match" id="shoe-match"></div></div>
     <div class="box"><h3>مواد البدلات الرياضية</h3><div class="match" id="suit-match"></div></div>
   </div>
+</section>
+
+<section class="slide" data-part="4">
+  <div class="kicker"><span class="chip goal">الهدف ١</span><span>تحدّي الفرق</span></div>
+  <h2 class="st">🏅 أي رياضة تناسب كل حذاء؟</h2>
+  <p class="muted">اختاري الرياضة المناسبة لكل حذاء… الإجابة الصحيحة تتحرّك!</p>
+  <div class="sports big" id="shoe-sport"></div>
 </section>
 
 <section class="slide" data-part="4">
@@ -1024,6 +1056,30 @@ matchGame("shoe-match", [
   ['<img src="img/shoe-b.webp" alt="">(b) أحذية التدريب', "النعل العريض لثبات أفضل على أسطح غير مستوية، يُصنع من بوليمر الفوم الصلب والخفيف"],
   ['<img src="img/shoe-c.webp" alt="">(c) أحذية بكعب داعم', "كعب إضافي من مواد ذات معامل ارتداد منخفض لتقليل تأثير القوة في الجري الطويل"],
 ]);
+// اختيار الرياضة المناسبة لكل حذاء: الإجابة الصحيحة تُظهر الرياضة متحرّكة
+(function shoeSport() {
+  const SP = [
+    { img: "shoe-a", name: "(a) برقبة عالية", ok: 0, why: "الرقبة العالية تحمي الكاحل عند القفز والهبوط" },
+    { img: "shoe-b", name: "(b) أحذية التدريب", ok: 1, why: "النعل العريض يثبّت القدم في الحركات الجانبية والأسطح المختلفة" },
+    { img: "shoe-c", name: "(c) بكعب داعم", ok: 2, why: "الكعب يمتصّ تأثير القوة مع كل خطوة في المسافات الطويلة" },
+  ];
+  const S = [["🏀", "كرة السلة", "bounce"], ["🏋️‍♀️", "تمارين اللياقة في الصالة", "lift"], ["🏃‍♀️", "الجري لمسافات طويلة", "run"]];
+  const draw = () => {
+    $("shoe-sport").innerHTML = SP.map((c, i) => {
+      const opts = [0, 1, 2].sort(() => Math.random() - .5);
+      return `<div class="spc" data-i="${i}"><img src="img/${c.img}.webp" alt=""><b style="font-size:1.1rem">${c.name}</b>
+        ${opts.map((k) => `<button class="sb" data-k="${k}">${S[k][0]} ${S[k][1]}</button>`).join("")}
+        <div class="win"><span class="emo ${S[c.ok][2]}">${S[c.ok][0]}</span><b>✔ ${S[c.ok][1]}</b><small>${c.why}</small></div></div>`;
+    }).join("");
+  };
+  $("shoe-sport").onclick = (e) => {
+    const b = e.target.closest(".sb"); if (!b) return;
+    const card = b.closest(".spc"), c = SP[Number(card.dataset.i)];
+    if (Number(b.dataset.k) === c.ok) card.classList.add("ok");
+    else { b.classList.remove("shake"); void b.offsetWidth; b.classList.add("shake"); }
+  };
+  draw();
+})();
 matchGame("suit-match", [
   ["النايلون", "لبدلات السحب والاحتكاك وبدلات التمرين، ويُمزج عادة مع السباندكس لإكسابها المرونة"],
   ["السباندكس", "لبدلات المنافسات الرياضية، ويُعرف أيضاً باسم «إليستين» أو «ليكرا»"],
