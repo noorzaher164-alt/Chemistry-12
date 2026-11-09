@@ -105,6 +105,13 @@ svg { display: block; max-width: 100%; height: auto; direction: ltr; }
   .el { transition: transform .8s ease; }
   .photon { animation: photon 1.2s ease-in forwards; }
 }
+.glow { animation: glow 1s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: center; }
+@keyframes glow { from { opacity: .35; transform: scale(.85) } to { opacity: .9; transform: scale(1.15) } }
+.emit { animation: emit 1.6s ease-out infinite; transform-box: fill-box; transform-origin: center; }
+.emit.d2 { animation-delay: .53s } .emit.d3 { animation-delay: 1.06s }
+@keyframes emit { from { transform: scale(.2); opacity: .9 } to { transform: scale(2.4); opacity: 0 } }
+.drop { stroke-dasharray: 160; stroke-dashoffset: 160; animation: drop 1s ease-in forwards; }
+@keyframes drop { to { stroke-dashoffset: 0 } }
 @keyframes photon { from { transform: translateX(-160px); opacity: 0 } 30% { opacity: 1 } to { transform: translateX(0); opacity: 0 } }
 </style>
 </head>
@@ -205,13 +212,15 @@ svg { display: block; max-width: 100%; height: auto; direction: ltr; }
 <!-- ٥ انقسام أفلاك d -->
 <section class="slide">
   <div class="kicker"><span class="chip goal">الهدف ١</span><span>محاكاة</span></div>
-  <h2 class="st">من أين يأتي اللون؟ ثلاث خطوات</h2>
+  <h2 class="st">من أين يأتي اللون؟ أربع خطوات</h2>
   <div class="two">
     <div class="box">
       <div class="stage"><svg viewBox="0 0 460 300" role="img" aria-label="مخطط طاقة أفلاك d قبل ارتباط الليجندات وبعده" id="sp-svg"></svg></div>
       <div class="row">
         <button class="pill solid" id="sp-1">١ اربطي الليجندات</button>
         <button class="pill solid" id="sp-2" disabled>٢ أسقطي ضوءاً أبيض</button>
+        <button class="pill solid" id="sp-3" disabled>٣ حالة الإثارة</button>
+        <button class="pill solid" id="sp-4" disabled>٤ العودة للاستقرار</button>
         <button class="pill" id="sp-reset">↺</button>
       </div>
     </div>
@@ -219,7 +228,8 @@ svg { display: block; max-width: 100%; height: auto; direction: ltr; }
       <ol style="margin:0;padding-inline-start:1.2em;display:grid;gap:10px">
         <li id="st1" class="muted">عند ارتباط الليجندات مع الفلز الانتقالي الموجب <b>تنفصل</b> أفلاك <span class="f">d</span> إلى أفلاك أقل طاقة وأفلاك أعلى طاقة.</li>
         <li id="st2" class="muted"><b>تقفز</b> الإلكترونات من الأفلاك الأقل طاقة إلى الأعلى طاقة عند امتصاصها للفوتونات بلون محدّد.</li>
-        <li id="st3" class="muted"><b>يعكس</b> أيون الفلز الانتقالي اللون <b>المتمّم</b> للون الممتص، فنراه.</li>
+        <li id="st3" class="muted">الإلكترون الذي قفز <b>اكتسب طاقة</b>، فأصبح في <b>حالة الإثارة</b> (غير مستقر).</li>
+        <li id="st4" class="muted"><b>يعود</b> الإلكترون إلى مكانه ليرجع إلى <b>حالة الاستقرار</b>، فيظهر <b>لون</b> المحلول، وهو اللون <b>المتمّم</b> للون الممتص.</li>
       </ol>
       <p class="note" id="sp-msg">اضغطي «اربطي الليجندات» لتبدئي.</p>
     </div>
@@ -416,14 +426,29 @@ function spDraw() {
     el("line", { x1: x, y1: y, x2: x + 44, y2: y, stroke: WINE, "stroke-width": 4 }, g);
     const t = el("text", { x: x + 22, y: y + 22, "text-anchor": "middle", "font-size": 13, fill: INK }, g); t.textContent = n;
     // إلكترون: مثال d⁹ لأيون النحاس، والقفزة من الفلك الأخير الأدنى
-    const arrows = i === 2 && sp.step >= 2 ? "↑" : i < 4 ? "↑↓" : sp.step >= 2 ? "↑↓" : "↑";
+    const up = sp.step === 2 || sp.step === 3; // الإلكترون في الفلك الأعلى أثناء الإثارة فقط
+    const arrows = i === 2 && up ? "↑" : i < 4 ? "↑↓" : up ? "↑↓" : "↑";
+    if (i === 4 && sp.step === 3) el("circle", { cx: x + 22, cy: y - 12, r: 22, fill: "#F5C542", class: "glow" }, g);
     const at = el("text", { x: x + 22, y: y - 6, "text-anchor": "middle", "font-size": 18, "font-weight": 800, fill: INK }, g); at.textContent = arrows;
   });
   if (split) {
     el("path", { d: "M 130 150 L 240 85 M 130 150 L 240 215", stroke: "#9C7B84", "stroke-width": 2, "stroke-dasharray": "4 5", fill: "none" }, svg);
     const mid = el("text", { x: 85, y: 140, "font-size": 13, fill: INK }, svg); mid.textContent = "+ ligands";
   }
-  if (sp.step >= 2) {
+  if (sp.step === 3) {
+    const t1 = el("text", { x: 344, y: 30, "text-anchor": "end", "font-size": 15, "font-weight": 800, fill: "#B07A00" }, svg); t1.textContent = "⚡ حالة الإثارة";
+    const t2 = el("text", { x: 344, y: 48, "text-anchor": "end", "font-size": 12, fill: INK }, svg); t2.textContent = "اكتسب الإلكترون طاقة";
+  }
+  if (sp.step === 4) {
+    el("path", { d: "M 362 96 C 320 125, 330 185, 376 204", stroke: "#2E6FD1", "stroke-width": 3, fill: "none", class: "drop" }, svg);
+    el("path", { d: "M 368 197 L 384 208 L 365 212 Z", fill: "#2E6FD1" }, svg);
+    [1, 2, 3].forEach((k) => el("circle", { cx: 300, cy: 150, r: 18, fill: "none", stroke: "#2E6FD1", "stroke-width": 4, class: "emit" + (k > 1 ? " d" + k : "") }, svg));
+    const t3 = el("text", { x: 396, y: 268, "text-anchor": "middle", "font-size": 14, "font-weight": 800, fill: "#2E8A57" }, svg); t3.textContent = "✔ حالة الاستقرار";
+    el("rect", { x: 70, y: 40, width: 120, height: 54, rx: 12, fill: "#3E86E0", stroke: "#2E6FD1", "stroke-width": 2 }, svg);
+    const t4 = el("text", { x: 130, y: 72, "text-anchor": "middle", "font-size": 14, "font-weight": 800, fill: "#fff" }, svg); t4.setAttribute("direction", "ltr"); t4.textContent = "Cu²⁺";
+    const t5 = el("text", { x: 130, y: 112, "text-anchor": "middle", "font-size": 12, fill: INK }, svg); t5.textContent = "يظهر المحلول أزرق";
+  }
+  if (sp.step === 2) {
     el("path", { d: "M 400 210 C 440 170, 440 120, 410 92", stroke: "#2E8A57", "stroke-width": 3, fill: "none", "marker-end": "" }, svg);
     el("path", { d: "M 404 86 L 414 104 L 420 88 Z", fill: "#2E8A57" }, svg);
     const ph = el("g", { class: "photon" }, svg);
@@ -431,14 +456,18 @@ function spDraw() {
     const pt = el("text", { x: 360, y: 140, "text-anchor": "middle", "font-size": 13, fill: INK }, ph); pt.textContent = "photon";
 
   }
-  ["st1", "st2", "st3"].forEach((id, k) => { $(id).classList.toggle("muted", sp.step < k + 1 && !(k === 2 && sp.step >= 2)); });
-  $("sp-2").disabled = sp.step !== 1; $("sp-1").disabled = sp.step >= 1;
+  ["st1", "st2", "st3", "st4"].forEach((id, k) => { $(id).classList.toggle("muted", sp.step < k + 1); });
+  $("sp-1").disabled = sp.step >= 1; $("sp-2").disabled = sp.step !== 1; $("sp-3").disabled = sp.step !== 2; $("sp-4").disabled = sp.step !== 3;
   $("sp-msg").innerHTML = sp.step === 0 ? "قبل الليجندات: أفلاك d الخمسة لها الطاقة نفسها." :
     sp.step === 1 ? "انفصلت الأفلاك: ثلاثة أقل طاقة (dxy, dyz, dxz) واثنان أعلى طاقة (dx²-y², dz²)." :
-    "امتصّ الإلكترون فوتوناً بلون محدّد فقفز إلى فلك أعلى طاقة، فيعكس الأيون اللون المتمّم للون الممتص، فيظهر المحلول ملوّناً.";
+    sp.step === 2 ? "امتصّ الإلكترون فوتوناً بلون محدّد فقفز إلى فلك أعلى طاقة." :
+    sp.step === 3 ? "⚡ الإلكترون الذي قفز اكتسب طاقة، فأصبح في حالة الإثارة، وهي حالة غير مستقرة." :
+    "🎨 عاد الإلكترون إلى مكانه فرجع إلى حالة الاستقرار، ويظهر المحلول باللون المتمّم للون الممتص (محلول أيون النحاس أزرق).";
 }
 $("sp-1").onclick = () => { sp.step = 1; spDraw(); };
 $("sp-2").onclick = () => { sp.step = 2; spDraw(); };
+$("sp-3").onclick = () => { sp.step = 3; spDraw(); };
+$("sp-4").onclick = () => { sp.step = 4; spDraw(); };
 $("sp-reset").onclick = () => { sp.step = 0; spDraw(); };
 spDraw();
 
