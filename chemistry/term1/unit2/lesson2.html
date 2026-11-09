@@ -161,92 +161,14 @@ svg { display: block; max-width: 100%; height: auto; direction: ltr; }
   <div class="kicker"><span class="chip">أهداف قابلة للقياس</span></div>
   <h2 class="st">أهداف الدرس</h2>
   <div class="two">
-    <div class="box goalcard"><span class="gnum">الهدف ١</span><p class="gtext">أن تفسّر الطالبة سبب ألوان البلورات والمحاليل المائية لأيونات العناصر الانتقالية بانقسام أفلاك <span class="f">d</span> عند ارتباط الليجندات، وتعلّل عدم تلوّن بعض محاليلها.</p><p><b>معيار النجاح:</b> إجابة صحيحة عن سؤالين من ثلاثة في غلق الهدف.</p></div>
-    <div class="box goalcard"><span class="gnum">الهدف ٢</span><p class="gtext">أن تكتب الطالبة التوزيع الإلكتروني لأيونات العناصر الانتقالية، وتحدّد الجسيمات المتساوية إلكترونياً.</p><p><b>معيار النجاح:</b> تكوين الأزواج الثلاثة في اللعبة، وإجابة صحيحة عن سؤالين من ثلاثة.</p></div>
+    <div class="box goalcard"><span class="gnum">الهدف ١</span><p class="gtext">أن تكتب الطالبة التوزيع الإلكتروني لأيونات العناصر الانتقالية، وتحدّد الجسيمات المتساوية إلكترونياً.</p><p><b>معيار النجاح:</b> تكوين الأزواج الثلاثة في اللعبة، وإجابة صحيحة عن سؤالين من ثلاثة.</p></div>
+    <div class="box goalcard"><span class="gnum">الهدف ٢</span><p class="gtext">أن تفسّر الطالبة سبب ألوان البلورات والمحاليل المائية لأيونات العناصر الانتقالية بانقسام أفلاك <span class="f">d</span> عند ارتباط الليجندات، وتعلّل عدم تلوّن بعض محاليلها.</p><p><b>معيار النجاح:</b> إجابة صحيحة عن سؤالين من ثلاثة في غلق الهدف.</p></div>
   </div>
-</section>
-
-<!-- ٣ الليجندات -->
-<section class="slide">
-  <div class="kicker"><span class="chip goal">الهدف ١</span><span>نمذجة</span></div>
-  <h2 class="st">الليجندات: من يرتبط بأيون الفلز؟</h2>
-  <div class="two">
-    <div class="box">
-      <div class="stage"><svg viewBox="0 0 360 320" role="img" aria-label="أيون فلز انتقالي ترتبط به ست جزيئات ماء" id="cx-svg"></svg></div>
-      <div class="row"><button class="pill solid" id="cx-go">💧 أضيفي جزيئات الماء (الليجندات)</button><button class="pill" id="cx-reset">↺ من جديد</button></div>
-    </div>
-    <div class="box">
-      <p>عندما ترتبط أيونات الفلز الانتقالي بجسيمات أخرى، تُسمّى هذه الجسيمات <b>ليجندات</b>.</p>
-      <div class="mcq" data-answer="1">
-        <p><b>الليجندات هي:</b></p>
-        <div class="opts"><button class="opt pill">أيونات موجبة ترتبط بأيون سالب</button><button class="opt pill">جزيئات أو أيونات سالبة ترتبط بأيون فلز موجب</button><button class="opt pill">إلكترونات حرّة في الفلز</button></div>
-        <div class="row"><button class="check pill solid">أظهري الإجابة</button></div>
-        <p class="why answer" hidden>الليجندات جزيئات أو أيونات سالبة ترتبط بأيون فلز موجب، مثل جزيئات الماء <span class="f">H₂O</span> حول <span class="f">Mⁿ⁺</span>.</p>
-      </div>
-      <p class="note">البلورات والمحاليل المائية التي تحتوي على أيونات الفلزات الانتقالية تكون في الغالب <b>ملوّنة</b>، وذلك لوجود أفلاك <span class="f">d</span> المملوءة <b>بشكل جزئي</b>.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ٤ ملوّن أم عديم اللون -->
-<section class="slide">
-  <div class="kicker"><span class="chip goal">الهدف ١</span><span>أداة تفاعلية</span></div>
-  <h2 class="st">ملوّن أم عديم اللون؟ انظري إلى أفلاك d</h2>
-  <div class="two">
-    <div class="box">
-      <p class="muted">اختاري أيوناً، وتوقّعي لونه قبل أن تنظري:</p>
-      <div class="ions" id="ion-pick"></div>
-      <p class="orb-label" id="ion-cfg"></p>
-      <div class="boxes" id="ion-boxes"></div>
-      <p class="orb-label">3d</p>
-    </div>
-    <div class="box beaker-wrap">
-      <svg viewBox="0 0 200 210" width="200" role="img" id="ion-beaker" aria-label="كأس المحلول"><path d="M 30 10 L 30 170 Q 30 190 50 190 L 150 190 Q 170 190 170 170 L 170 10" fill="none" stroke="#8A6E76" stroke-width="5"/><rect id="ion-liq" x="34" y="70" width="132" height="116" rx="14" fill="#CFE3EF" opacity=".7"/></svg>
-      <p class="verdict" id="ion-verdict"></p>
-      <p class="muted" id="ion-why" style="text-align:center"></p>
-    </div>
-  </div>
-  <p class="note">القاعدة: يكون المحلول <b>ملوّناً</b> عندما تكون أفلاك <span class="f">d</span> مملوءة <b>جزئياً</b>، ويكون <b>عديم اللون</b> عندما تكون فارغة (مثل <span class="f">Sc³⁺</span>) أو ممتلئة تماماً (مثل <span class="f">Zn²⁺</span>).</p>
-</section>
-
-<!-- ٥ انقسام أفلاك d -->
-<section class="slide">
-  <div class="kicker"><span class="chip goal">الهدف ١</span><span>محاكاة</span></div>
-  <h2 class="st">من أين يأتي اللون؟ أربع خطوات</h2>
-  <div class="two">
-    <div class="box">
-      <div class="stage"><svg viewBox="0 0 460 300" role="img" aria-label="مخطط طاقة أفلاك d قبل ارتباط الليجندات وبعده" id="sp-svg"></svg></div>
-      <div class="row">
-        <button class="pill solid" id="sp-1">١ اربطي الليجندات</button>
-        <button class="pill solid" id="sp-2" disabled>٢ أسقطي ضوءاً أبيض</button>
-        <button class="pill solid" id="sp-3" disabled>٣ حالة الإثارة</button>
-        <button class="pill solid" id="sp-4" disabled>٤ العودة للاستقرار</button>
-        <button class="pill" id="sp-reset">↺</button>
-      </div>
-    </div>
-    <div class="box">
-      <ol style="margin:0;padding-inline-start:1.2em;display:grid;gap:10px">
-        <li id="st1" class="muted">عند ارتباط الليجندات مع الفلز الانتقالي الموجب <b>تنفصل</b> أفلاك <span class="f">d</span> إلى أفلاك أقل طاقة وأفلاك أعلى طاقة.</li>
-        <li id="st2" class="muted"><b>تقفز</b> الإلكترونات من الأفلاك الأقل طاقة إلى الأعلى طاقة عند امتصاصها للفوتونات بلون محدّد.</li>
-        <li id="st3" class="muted">الإلكترون الذي قفز <b>اكتسب طاقة</b>، فأصبح في <b>حالة الإثارة</b> (غير مستقر).</li>
-        <li id="st4" class="muted"><b>يعود</b> الإلكترون إلى مكانه ليرجع إلى <b>حالة الاستقرار</b>، فيظهر <b>لون</b> المحلول، وهو اللون <b>المتمّم</b> للون الممتص.</li>
-      </ol>
-      <p class="note" id="sp-msg">اضغطي «اربطي الليجندات» لتبدئي.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ٧ غلق الهدف ١ -->
-<section class="slide">
-  <div class="kicker"><span class="chip goal">غلق الهدف ١</span><span>٣ دقائق</span></div>
-  <h2 class="st">غلق الهدف ١: لماذا الألوان؟</h2>
-  <div class="three" id="c1"></div>
-  <p class="note">✔ معيار النجاح: إجابة صحيحة عن سؤالين من ثلاثة.</p>
 </section>
 
 <!-- ٨ مختبر ملء الأفلاك: الإلكترونات تطير إلى أماكنها واحداً بعد الآخر -->
 <section class="slide">
-  <div class="kicker"><span class="chip goal">الهدف ٢</span><span>مختبر ملء الأفلاك</span></div>
+  <div class="kicker"><span class="chip goal">الهدف ١</span><span>مختبر ملء الأفلاك</span></div>
   <h2 class="st">املئي الأفلاك إلكتروناً إلكتروناً… ثم كوّني الأيون</h2>
   <div class="orb-lab">
     <div class="box lab-main">
@@ -278,7 +200,7 @@ svg { display: block; max-width: 100%; height: auto; direction: ltr; }
 
 <!-- ٩ الجسيمات المتساوية إلكترونياً -->
 <section class="slide">
-  <div class="kicker"><span class="chip goal">الهدف ٢</span><span>لعبة الأزواج</span></div>
+  <div class="kicker"><span class="chip goal">الهدف ١</span><span>لعبة الأزواج</span></div>
   <h2 class="st">الجسيمات المتساوية إلكترونياً <span class="f" style="font-size:.7em">(isoelectronic)</span></h2>
   <p class="lead">هي الجسيمات التي لها <b>نفس التوزيع الإلكتروني</b> ونفس عدد إلكترونات التكافؤ. المسي بطاقتين متساويتين إلكترونياً لتكوين زوج.</p>
   <div class="cards4" id="pairs"></div>
@@ -286,12 +208,90 @@ svg { display: block; max-width: 100%; height: auto; direction: ltr; }
   <p class="answer" id="pairs-msg" hidden></p>
 </section>
 
-<!-- ١٠ غلق الهدف ٢ -->
+<!-- ١٠ غلق الهدف ١ -->
 <section class="slide">
-  <div class="kicker"><span class="chip goal">غلق الهدف ٢</span><span>٣ دقائق</span></div>
-  <h2 class="st">غلق الهدف ٢: التوزيع الإلكتروني والجسيمات المتساوية</h2>
+  <div class="kicker"><span class="chip goal">غلق الهدف ١</span><span>٣ دقائق</span></div>
+  <h2 class="st">غلق الهدف ١: التوزيع الإلكتروني والجسيمات المتساوية</h2>
   <div class="three" id="c2"></div>
   <p class="note">✔ معيار النجاح: تكوين الأزواج الثلاثة في اللعبة، وإجابة صحيحة عن سؤالين من ثلاثة.</p>
+</section>
+
+<!-- ٣ الليجندات -->
+<section class="slide">
+  <div class="kicker"><span class="chip goal">الهدف ٢</span><span>نمذجة</span></div>
+  <h2 class="st">الليجندات: من يرتبط بأيون الفلز؟</h2>
+  <div class="two">
+    <div class="box">
+      <div class="stage"><svg viewBox="0 0 360 320" role="img" aria-label="أيون فلز انتقالي ترتبط به ست جزيئات ماء" id="cx-svg"></svg></div>
+      <div class="row"><button class="pill solid" id="cx-go">💧 أضيفي جزيئات الماء (الليجندات)</button><button class="pill" id="cx-reset">↺ من جديد</button></div>
+    </div>
+    <div class="box">
+      <p>عندما ترتبط أيونات الفلز الانتقالي بجسيمات أخرى، تُسمّى هذه الجسيمات <b>ليجندات</b>.</p>
+      <div class="mcq" data-answer="1">
+        <p><b>الليجندات هي:</b></p>
+        <div class="opts"><button class="opt pill">أيونات موجبة ترتبط بأيون سالب</button><button class="opt pill">جزيئات أو أيونات سالبة ترتبط بأيون فلز موجب</button><button class="opt pill">إلكترونات حرّة في الفلز</button></div>
+        <div class="row"><button class="check pill solid">أظهري الإجابة</button></div>
+        <p class="why answer" hidden>الليجندات جزيئات أو أيونات سالبة ترتبط بأيون فلز موجب، مثل جزيئات الماء <span class="f">H₂O</span> حول <span class="f">Mⁿ⁺</span>.</p>
+      </div>
+      <p class="note">البلورات والمحاليل المائية التي تحتوي على أيونات الفلزات الانتقالية تكون في الغالب <b>ملوّنة</b>، وذلك لوجود أفلاك <span class="f">d</span> المملوءة <b>بشكل جزئي</b>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ٤ ملوّن أم عديم اللون -->
+<section class="slide">
+  <div class="kicker"><span class="chip goal">الهدف ٢</span><span>أداة تفاعلية</span></div>
+  <h2 class="st">ملوّن أم عديم اللون؟ انظري إلى أفلاك d</h2>
+  <div class="two">
+    <div class="box">
+      <p class="muted">اختاري أيوناً، وتوقّعي لونه قبل أن تنظري:</p>
+      <div class="ions" id="ion-pick"></div>
+      <p class="orb-label" id="ion-cfg"></p>
+      <div class="boxes" id="ion-boxes"></div>
+      <p class="orb-label">3d</p>
+    </div>
+    <div class="box beaker-wrap">
+      <svg viewBox="0 0 200 210" width="200" role="img" id="ion-beaker" aria-label="كأس المحلول"><path d="M 30 10 L 30 170 Q 30 190 50 190 L 150 190 Q 170 190 170 170 L 170 10" fill="none" stroke="#8A6E76" stroke-width="5"/><rect id="ion-liq" x="34" y="70" width="132" height="116" rx="14" fill="#CFE3EF" opacity=".7"/></svg>
+      <p class="verdict" id="ion-verdict"></p>
+      <p class="muted" id="ion-why" style="text-align:center"></p>
+    </div>
+  </div>
+  <p class="note">القاعدة: يكون المحلول <b>ملوّناً</b> عندما تكون أفلاك <span class="f">d</span> مملوءة <b>جزئياً</b>، ويكون <b>عديم اللون</b> عندما تكون فارغة (مثل <span class="f">Sc³⁺</span>) أو ممتلئة تماماً (مثل <span class="f">Zn²⁺</span>).</p>
+</section>
+
+<!-- ٥ انقسام أفلاك d -->
+<section class="slide">
+  <div class="kicker"><span class="chip goal">الهدف ٢</span><span>محاكاة</span></div>
+  <h2 class="st">من أين يأتي اللون؟ أربع خطوات</h2>
+  <div class="two">
+    <div class="box">
+      <div class="stage"><svg viewBox="0 0 460 300" role="img" aria-label="مخطط طاقة أفلاك d قبل ارتباط الليجندات وبعده" id="sp-svg"></svg></div>
+      <div class="row">
+        <button class="pill solid" id="sp-1">١ اربطي الليجندات</button>
+        <button class="pill solid" id="sp-2" disabled>٢ أسقطي ضوءاً أبيض</button>
+        <button class="pill solid" id="sp-3" disabled>٣ حالة الإثارة</button>
+        <button class="pill solid" id="sp-4" disabled>٤ العودة للاستقرار</button>
+        <button class="pill" id="sp-reset">↺</button>
+      </div>
+    </div>
+    <div class="box">
+      <ol style="margin:0;padding-inline-start:1.2em;display:grid;gap:10px">
+        <li id="st1" class="muted">عند ارتباط الليجندات مع الفلز الانتقالي الموجب <b>تنفصل</b> أفلاك <span class="f">d</span> إلى أفلاك أقل طاقة وأفلاك أعلى طاقة.</li>
+        <li id="st2" class="muted"><b>تقفز</b> الإلكترونات من الأفلاك الأقل طاقة إلى الأعلى طاقة عند امتصاصها للفوتونات بلون محدّد.</li>
+        <li id="st3" class="muted">الإلكترون الذي قفز <b>اكتسب طاقة</b>، فأصبح في <b>حالة الإثارة</b> (غير مستقر).</li>
+        <li id="st4" class="muted"><b>يعود</b> الإلكترون إلى مكانه ليرجع إلى <b>حالة الاستقرار</b>، فيظهر <b>لون</b> المحلول، وهو اللون <b>المتمّم</b> للون الممتص.</li>
+      </ol>
+      <p class="note" id="sp-msg">اضغطي «اربطي الليجندات» لتبدئي.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ٧ غلق الهدف ٢ -->
+<section class="slide">
+  <div class="kicker"><span class="chip goal">غلق الهدف ٢</span><span>٣ دقائق</span></div>
+  <h2 class="st">غلق الهدف ٢: لماذا الألوان؟</h2>
+  <div class="three" id="c1"></div>
+  <p class="note">✔ معيار النجاح: إجابة صحيحة عن سؤالين من ثلاثة.</p>
 </section>
 
 <!-- ١١ التحدّي -->
@@ -471,7 +471,7 @@ $("sp-4").onclick = () => { sp.step = 4; spDraw(); };
 $("sp-reset").onclick = () => { sp.step = 0; spDraw(); };
 spDraw();
 
-// ── غلق الهدف ١ ──
+// ── غلق هدف الألوان ──
 $("c1").innerHTML = [
   mcq("سبب ألوان محاليل أيونات العناصر الانتقالية:", ["وجود أفلاك d مملوءة جزئياً", "امتلاء أفلاك s", "صغر حجم الأيون"], 0, "وجود أفلاك d المملوءة بشكل جزئي، فتقفز الإلكترونات بين الأفلاك المنفصلة."),
   mcq("محلول " + f("Zn²⁺") + " عديم اللون لأن:", ["الخارصين فلز نشط", "أفلاك d فيه ممتلئة تماماً", "أفلاك d فيه مملوءة جزئياً"], 1, f("Zn²⁺ : [Ar] 3d¹⁰") + " فلا تقفز الإلكترونات بين أفلاك d."),
@@ -631,7 +631,7 @@ $("pairs-show").onclick = () => { showCfg = true; pDraw(); };
 $("pairs-reset").onclick = shuffle;
 shuffle();
 
-// ── غلق الهدف ٢ ──
+// ── غلق هدف التوزيع الإلكتروني ──
 $("c2").innerHTML = [
   mcq("التوزيع الإلكتروني لأيون " + f("Fe³⁺") + ":", [f("[Ar] 4s² 3d³"), f("[Ar] 3d⁵"), f("[Ar] 4s¹ 3d⁴")], 1, "يخرج إلكترونا 4s أولاً، ثم إلكترون من 3d."),
   mcq("أيّ الأيونات متساوٍ إلكترونياً مع " + f("Co²⁺") + "؟", [f("Ni³⁺"), f("Fe³⁺"), f("Sc³⁺")], 0, "كلاهما " + f("[Ar] 3d⁷") + "."),
