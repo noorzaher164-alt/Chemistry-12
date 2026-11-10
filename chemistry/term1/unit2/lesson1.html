@@ -1,0 +1,698 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script src="../../../assets/gate.js" data-root="../../../"></script>
+<title>خواص العناصر الانتقالية: حالات التأكسد والعوامل المؤكسدة والمختزلة</title>
+<meta name="theme-color" content="#8C1F3F">
+<link rel="icon" href="../../../assets/avatar.webp">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;800&family=Tajawal:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="../../../assets/site.css">
+<script>try { document.documentElement.dataset.theme = localStorage.getItem("chem-theme") || "light"; } catch (e) { document.documentElement.dataset.theme = "light"; }</script>
+<style>
+/* درس بشرائح بهوية المنصّة: شريط علوي ← شريحة واحدة ← تنقّل سفلي */
+html, body { height: 100%; }
+body { min-height: 0; }
+main { overflow-y: auto; padding-block: 18px 26px; }
+.lesson-bar { position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--ink) 85%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); padding-block: 8px; }
+.lesson-bar .wrap { display: grid; gap: 6px; }
+.bar-row { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; justify-content: space-between; }
+.ltitle { font-family: var(--display); font-weight: 800; color: var(--wine); }
+.score { display: flex; gap: 8px; flex-wrap: wrap; }
+.team { display: flex; align-items: center; gap: 6px; background: var(--paper); border: 1px solid var(--line); border-radius: 999px; padding: 2px 4px 2px 12px; }
+.team b { font-family: var(--display); min-width: 1.6em; text-align: center; font-variant-numeric: tabular-nums; color: var(--wine); }
+.team button { min-height: 36px; min-width: 36px; border-radius: 50%; border: 1px solid var(--line); background: var(--blush); color: var(--fg); font: inherit; font-weight: 700; cursor: pointer; }
+.slide { display: grid; gap: 18px; }
+.kicker { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; color: var(--muted); font-size: .95rem; }
+.kicker .chip.goal { background: var(--wine); border-color: var(--wine); color: var(--on-wine); }
+h2.st { font-size: clamp(1.6rem, 3.4vw, 2.2rem); color: var(--wine); }
+.lead { color: var(--muted); font-size: 1.15rem; max-width: 64ch; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+@media (max-width: 880px) { .two, .three { grid-template-columns: 1fr; } }
+.box { background: var(--paper); border: 1px solid var(--line); border-radius: 22px; padding: 18px; display: grid; gap: 12px; align-content: start; min-width: 0; box-shadow: var(--shadow); }
+.box h3 { color: var(--wine); font-size: 1.2rem; }
+.stage { background: linear-gradient(160deg, var(--paper), var(--blush)); border: 1px solid var(--line); border-radius: 18px; }
+svg { display: block; max-width: 100%; height: auto; direction: ltr; }
+.row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.pill { font: inherit; font-weight: 700; min-height: 46px; padding: 6px 16px; border-radius: 999px; cursor: pointer; border: 1.5px solid var(--line); background: var(--paper); color: var(--fg); }
+.pill:hover:not(:disabled) { border-color: var(--wine); }
+.pill[aria-pressed="true"] { background: var(--wine); border-color: var(--wine); color: var(--on-wine); }
+.pill:disabled { opacity: .45; cursor: not-allowed; }
+.pill.solid { background: var(--wine); border-color: var(--wine); color: var(--on-wine); }
+.answer { border: 1.5px solid #2E8A57; background: rgba(46,138,87,.1); border-radius: 14px; padding: 10px 14px; }
+.note { text-align: start; border: 1.5px solid var(--mauve); background: var(--blush); border-radius: 14px; padding: 10px 14px; color: var(--fg); }
+.opt.right { background: #2E8A57 !important; border-color: #2E8A57 !important; color: #fff !important; }
+.opt.wrong { background: #C24A33 !important; border-color: #C24A33 !important; color: #fff !important; }
+.mcq .opts { display: flex; flex-wrap: wrap; gap: 8px; }
+.bottom { position: sticky; bottom: 0; background: color-mix(in srgb, var(--ink) 88%, transparent); backdrop-filter: blur(10px); border-top: 1px solid var(--line); padding-block: 8px; }
+.bottom .wrap { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.dots { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
+.dot { width: 13px; height: 13px; border-radius: 50%; border: 1.5px solid var(--mauve); background: transparent; padding: 0; cursor: pointer; }
+.dot.on { background: var(--wine); border-color: var(--wine); }
+.counter { color: var(--muted); font-variant-numeric: tabular-nums; }
+.goalcard { border-top: 5px solid var(--wine); }
+.gnum { justify-self: start; background: var(--wine); color: var(--on-wine); border-radius: 999px; padding: 2px 14px; font-weight: 700; }
+.gtext { font-size: 1.15rem; font-weight: 700; }
+/* شريط العناصر وجدول حالات التأكسد */
+.strip { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 8px; direction: ltr; }
+@media (max-width: 880px) { .strip { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+.elc { font: inherit; border: 1.5px solid var(--line); border-radius: 16px; background: var(--paper); color: var(--fg); padding: 8px 4px 10px; display: grid; gap: 6px; justify-items: center; align-content: start; cursor: pointer; min-height: 150px; transition: transform .25s, border-color .25s; }
+.elc:hover { transform: translateY(-3px); border-color: var(--wine); }
+.elc .z { font-size: .78rem; color: var(--muted); }
+.elc .sy { font-family: var(--display); font-size: 1.7rem; font-weight: 800; color: var(--wine); line-height: 1; }
+.ox { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; }
+.ox span { direction: ltr; font-weight: 800; font-size: .92rem; min-width: 34px; padding: 2px 6px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--blush); transition: all .35s; }
+.ox span.hl { background: #F5C542; border-color: #C9A60E; color: #3B1E28; transform: scale(1.15); }
+.ox span.mx { background: var(--wine); border-color: var(--wine); color: var(--on-wine); transform: scale(1.15); }
+.ox span.one { background: #2E8A57; border-color: #2E8A57; color: #fff; transform: scale(1.15); box-shadow: 0 0 0 4px rgba(46,138,87,.25); }
+.ox span.hide { opacity: 0; transform: scale(.4); }
+.elc .cnt { font-size: .78rem; color: var(--muted); }
+/* مخطط الطاقة */
+.lvl-anim { transition: transform .8s ease; }
+/* مختبر نزع الإلكترونات */
+.oxlab { display: grid; grid-template-columns: 1.2fr 1fr; gap: 18px; }
+@media (max-width: 880px) { .oxlab { grid-template-columns: 1fr; } }
+.picker { display: flex; flex-wrap: wrap; gap: 6px; direction: ltr; justify-content: center; }
+.picker .pill { min-width: 54px; }
+.dark { background: linear-gradient(170deg, #2A1820, #3B2230); color: #F8ECEF; border: 0; }
+.dark .muted { color: #D8C0C7; }
+.ionbig { font-family: var(--display); font-size: 3.2rem; font-weight: 800; color: #F2C3CE; direction: ltr; text-align: center; line-height: 1.1; }
+.cfg { direction: ltr; text-align: center; font-size: 1.3rem; font-weight: 700; }
+.shells { display: flex; gap: 18px; justify-content: center; direction: ltr; flex-wrap: wrap; align-items: end; }
+.shell { display: grid; gap: 4px; justify-items: center; }
+.shell .bx { display: flex; }
+.ob { width: 46px; height: 44px; border: 1.5px solid rgba(255,255,255,.35); display: inline-flex; align-items: center; justify-content: center; gap: 2px; font-size: 1.35rem; font-weight: 800; position: relative; }
+.ob + .ob { border-left: 0; }
+.ob i { font-style: normal; display: inline-block; transition: transform .55s ease-in, opacity .55s; }
+.ob i.u { color: #F2C3CE; } .ob i.d { color: #E2B66F; }
+.ob i.fly { transform: translateY(-70px) scale(1.4); opacity: 0; }
+.shell small { color: #D8C0C7; font-weight: 700; }
+.state { text-align: center; font-size: 1.15rem; font-weight: 700; min-height: 2.6em; }
+.state.ok { color: #9BE3B9; } .state.no { color: #F4A79A; } .state.max { color: #F5C542; }
+.ox-counter { display: flex; justify-content: center; gap: 6px; direction: ltr; flex-wrap: wrap; }
+.ox-counter span { min-width: 40px; text-align: center; padding: 3px 6px; border-radius: 999px; border: 1.5px solid rgba(255,255,255,.25); font-weight: 800; opacity: .45; }
+.ox-counter span.real { opacity: 1; border-color: #9BE3B9; }
+.ox-counter span.now { background: #F5C542; color: #3B1E28; border-color: #F5C542; opacity: 1; }
+/* القواعد */
+.rulecards { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
+.rc { font: inherit; text-align: start; color: var(--fg); background: var(--paper); border: 1.5px solid var(--line); border-radius: 20px; padding: 16px; display: grid; gap: 8px; cursor: pointer; min-height: 170px; align-content: start; box-shadow: var(--shadow); }
+.rc .ic { font-size: 2rem; }
+.rc b { color: var(--wine); font-size: 1.1rem; }
+.rc .ans { display: none; }
+.rc.open { border-color: #2E8A57; }
+.rc.open .ans { display: block; animation: pop .4s; }
+.rc.open .tap { display: none; }
+.tap { color: var(--muted); font-size: .9rem; }
+@keyframes pop { from { opacity: 0; transform: translateY(8px) } to { opacity: 1; transform: none } }
+.stable { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.stable div { border: 1.5px dashed var(--mauve); border-radius: 14px; padding: 8px; text-align: center; }
+/* بناء الأكسيد */
+.steps { display: grid; gap: 10px; }
+.stp { border: 1.5px solid var(--line); border-radius: 14px; padding: 10px 14px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; background: var(--paper); animation: pop .4s; }
+.stp .n { width: 32px; height: 32px; border-radius: 50%; background: var(--wine); color: var(--on-wine); display: grid; place-items: center; font-weight: 800; flex: none; }
+.stp .v { direction: ltr; unicode-bidi: isolate; font-weight: 800; font-size: 1.25rem; }
+.stp.final { border-color: #2E8A57; background: rgba(46,138,87,.1); }
+.xdash { stroke-dasharray: 200; stroke-dashoffset: 200; animation: xd 1s ease-out forwards; }
+@keyframes xd { to { stroke-dashoffset: 0 } }
+/* أكاسيد المنجنيز */
+.mncards { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 880px) { .mncards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.mn { font: inherit; perspective: 800px; border: 0; background: none; padding: 0; cursor: pointer; min-height: 190px; }
+.mn .in { display: block; position: relative; width: 100%; height: 100%; min-height: 190px; transition: transform .7s; transform-style: preserve-3d; }
+.mn.open .in { transform: rotateY(180deg); }
+.mn .fc, .mn .bk { position: absolute; inset: 0; backface-visibility: hidden; border-radius: 20px; display: grid; place-items: center; align-content: center; gap: 6px; padding: 10px; border: 1.5px solid var(--line); }
+.mn .fc { background: var(--paper); color: var(--fg); }
+.mn .bk { background: var(--wine); color: var(--on-wine); transform: rotateY(180deg); }
+.mn .big { font-family: var(--display); font-size: 1.9rem; font-weight: 800; direction: ltr; }
+.mn .fc .big { color: var(--wine); }
+.mn small { direction: ltr; opacity: .85; }
+/* العوامل المؤكسدة والمختزلة */
+.defs { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+@media (max-width: 880px) { .defs { grid-template-columns: 1fr; } }
+.def { border-radius: 22px; padding: 18px; display: grid; gap: 10px; align-content: start; border: 2px solid; }
+.def.oxa { border-color: #2E8A57; background: rgba(46,138,87,.08); }
+.def.red { border-color: #B8925A; background: rgba(184,146,90,.1); }
+.def h3 { font-size: 1.4rem; }
+.def.oxa h3 { color: #2E8A57; } .def.red h3 { color: #8A6420; }
+.def .eqx { direction: ltr; unicode-bidi: isolate; text-align: center; font-size: 1.4rem; font-weight: 800; }
+.tag { display: inline-block; padding: 2px 12px; border-radius: 999px; font-weight: 700; font-size: .95rem; }
+.tag.g { background: #2E8A57; color: #fff; } .tag.y { background: #B8925A; color: #fff; }
+.mnemo { text-align: center; font-family: var(--display); font-size: 1.35rem; color: var(--wine); }
+.redox { display: grid; grid-template-columns: 300px 1fr; gap: 18px; }
+@media (max-width: 880px) { .redox { grid-template-columns: 1fr; } }
+.choice { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.choice .pill { min-width: 140px; }
+.eqcols { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.eqcol { border-radius: 16px; padding: 10px; border: 1.5px solid var(--line); display: grid; gap: 6px; align-content: start; min-height: 120px; }
+.eqcol.g { border-color: #2E8A57; } .eqcol.y { border-color: #B8925A; }
+.eqcol h4 { margin: 0; font-size: 1.05rem; }
+.eqcol.g h4 { color: #2E8A57; } .eqcol.y h4 { color: #8A6420; }
+.eqcol .e { direction: ltr; unicode-bidi: isolate; font-weight: 800; font-size: 1.15rem; animation: pop .4s both; }
+.eqcol .none { color: var(--muted); text-align: center; font-size: 2rem; }
+.verd { text-align: center; font-size: 1.25rem; font-weight: 800; min-height: 1.6em; }
+.rgrow { stroke-dasharray: 300; stroke-dashoffset: 300; animation: xd 1s ease-out forwards; }
+.progress { font-weight: 800; color: var(--wine); font-size: 1.15rem; text-align: center; }
+.shake { animation: shake .35s; }
+@keyframes shake { 25% { transform: translateX(-6px) } 75% { transform: translateX(6px) } }
+.hero-q { font-family: var(--display); font-size: clamp(1.6rem, 4vw, 2.4rem); color: var(--fg); text-align: center; line-height: 1.4; }
+.hero-q span { color: var(--wine); }
+.f { unicode-bidi: isolate; direction: ltr; display: inline-block; }
+</style>
+</head>
+<body>
+<div class="lesson-bar gut"><div class="wrap">
+  <nav class="crumbs" aria-label="مكان الدرس في المنصّة">
+    <a href="../../../index.html">الرئيسية</a><span class="sep">›</span><a href="../../../study.html">الدراسة</a><span class="sep">›</span><a href="../../index.html">الكيمياء</a><span class="sep">›</span><a href="../index.html">الفصل الدراسي الأول</a><span class="sep">›</span><a href="index.html">الوحدة الثانية</a><span class="sep">›</span><b>الدرس الأول</b>
+  </nav>
+  <div class="bar-row">
+    <span class="ltitle">خواص العناصر الانتقالية</span>
+    <div class="score" aria-label="نقاط الفريقين">
+      <div class="team"><span>فريق المنجنيز</span><b id="sA">0</b><button data-team="A" data-d="1" aria-label="نقطة لفريق المنجنيز">+</button><button data-team="A" data-d="-1" aria-label="أنقصي نقطة من فريق المنجنيز">−</button></div>
+      <div class="team"><span>فريق الفاناديوم</span><b id="sB">0</b><button data-team="B" data-d="1" aria-label="نقطة لفريق الفاناديوم">+</button><button data-team="B" data-d="-1" aria-label="أنقصي نقطة من فريق الفاناديوم">−</button></div>
+    </div>
+    <div class="tools"><button class="tbtn" id="fs" type="button">🖥️ ملء الشاشة</button><button class="tbtn" id="theme" type="button" aria-label="بدّلي بين الوضع الفاتح والغامق"></button></div>
+  </div>
+</div></div>
+
+<main class="gut" id="main"><div class="wrap">
+
+<!-- ١ التهيئة -->
+<section class="slide">
+  <div class="kicker"><span class="chip">الوحدة الثانية · الدرس الأول</span><span class="chip">التهيئة</span></div>
+  <p class="hero-q">الصوديوم له حالة تأكسد <span>واحدة</span> فقط…<br>فكيف يكوّن المنجنيز <span>خمسة</span> أكاسيد مختلفة؟</p>
+  <div class="stage" style="padding:14px">
+    <svg viewBox="0 0 620 210" style="max-height:260px;width:auto;margin:0 auto" role="img" aria-label="ذرة صوديوم بحالة تأكسد واحدة وذرة منجنيز بخمس حالات تأكسد" id="hook-svg"></svg>
+  </div>
+  <div class="row" style="justify-content:center"><button class="pill" data-reveal="hook">ما السرّ؟ تلميح</button></div>
+  <p class="note" id="hook" hidden>المنجنيز عنصر انتقالي: إلكتروناته الخارجية موزّعة على فلكين <span class="f">4s</span> و<span class="f">3d</span> متقاربين جداً في الطاقة، فيستطيع أن يفقد عدداً مختلفاً منها في كل مركّب.</p>
+</section>
+
+<!-- ٢ الأهداف -->
+<section class="slide">
+  <div class="kicker"><span class="chip">أهداف قابلة للقياس</span></div>
+  <h2 class="st">أهداف الدرس</h2>
+  <div class="three">
+    <div class="box goalcard"><span class="gnum">الهدف ١</span><p class="gtext">أن تفسّر الطالبة تعدّد حالات التأكسد للعناصر الانتقالية، وتحدّد حالة التأكسد الأكثر شيوعاً وأقصى حالة تأكسد للعنصر.</p><p><b>معيار النجاح:</b> إجابة صحيحة عن سؤالين من ثلاثة في غلق الهدف.</p></div>
+    <div class="box goalcard"><span class="gnum">الهدف ٢</span><p class="gtext">أن تكتب الطالبة التوزيع الإلكتروني لأيون العنصر الانتقالي، وتستنتج صيغة أكسيده من حالة تأكسده.</p><p><b>معيار النجاح:</b> كتابة صيغ ثلاثة أكاسيد من خمسة للمنجنيز بشكل صحيح.</p></div>
+    <div class="box goalcard"><span class="gnum">الهدف ٣</span><p class="gtext">أن تحدّد الطالبة إن كانت ذرّة أو أيون العنصر الانتقالي تعمل كعامل مؤكسد أم مختزل أم كليهما، وتكتب نصف المعادلة.</p><p><b>معيار النجاح:</b> تحديد صحيح لثلاثة أيونات من خمسة في الأداة، وإجابة صحيحة عن سؤالين من ثلاثة.</p></div>
+  </div>
+</section>
+
+<!-- ٣ جدول حالات التأكسد -->
+<section class="slide">
+  <div class="kicker"><span class="chip goal">الهدف ١</span><span>استكشاف</span></div>
+  <h2 class="st">خواص العناصر الانتقالية: ١) تعدّد حالات التأكسد</h2>
+  <div class="box">
+    <div class="strip" id="strip"></div>
+    <div class="row" style="justify-content:center">
+      <button class="pill" data-mode="all" aria-pressed="true">كل الحالات</button>
+      <button class="pill" data-mode="common">⭐ الأكثر شيوعاً</button>
+      <button class="pill" data-mode="max">🏁 أقصى حالة</button>
+      <button class="pill" data-mode="one">☝️ حالة واحدة فقط</button>
+    </div>
+    <p class="note" id="strip-msg">اضغطي على أي عنصر لتعرفي عدد حالات تأكسده، أو اختاري أحد الأزرار.</p>
+  </div>
+</section>
+
+<!-- ٤ لماذا تتعدّد؟ -->
+<section class="slide">
+  <div class="kicker"><span class="chip goal">الهدف ١</span><span>تفسير</span></div>
+  <h2 class="st">لماذا تتعدّد حالات التأكسد؟ سببان</h2>
+  <div class="two">
+    <div class="box">
+      <div class="stage"><svg viewBox="0 0 460 300" role="img" aria-label="مخطط طاقة يبيّن تقارب طاقة 4s و3d" id="en-svg"></svg></div>
+      <div class="row"><button class="pill solid" id="en-zoom">🔍 قرّبي الصورة على 4s و 3d</button><button class="pill" id="en-reset">↺</button></div>
+    </div>
+    <div class="box">
+      <div class="steps">
+        <div class="stp"><span class="n">١</span><span>الاختلافات في الطاقة بين أفلاك <span class="f">4s</span> و<span class="f">3d</span> <b>صغيرة جداً</b>، فيمكن أن تُفقد الإلكترونات من الفلكين.</span></div>
+        <div class="stp" id="why2" hidden><span class="n">٢</span><span><b>ترتيب الإلكترونات</b> بالحدّ الأدنى من الطاقة يعتمد على <b>خصائص العنصر الآخر</b> في الرابطة الكيميائية.</span></div>
+      </div>
+      <div class="row"><button class="pill" data-reveal="why2">أظهري السبب الثاني</button></div>
+      <p class="note">في الصوديوم: الفرق في الطاقة بين <span class="f">3s</span> والفلك الذي تحته <b>كبير جداً</b>، فلا يفقد إلا إلكتروناً واحداً.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ٥ مختبر نزع الإلكترونات -->
+<section class="slide">
+  <div class="kicker"><span class="chip goal">الهدف ١</span><span>مختبر تفاعلي</span></div>
+  <h2 class="st">انزعي الإلكترونات واحداً بعد الآخر… وراقبي حالة التأكسد</h2>
+  <div class="oxlab">
+    <div class="box dark">
+      <div class="picker" id="lab-pick"></div>
+      <div class="ionbig" id="lab-ion"></div>
+      <div class="cfg" id="lab-cfg"></div>
+      <div class="shells" id="lab-shells"></div>
+      <div class="ox-counter" id="lab-ox"></div>
+      <p class="state" id="lab-state"></p>
+      <div class="row" style="justify-content:center"><button class="pill solid" id="lab-rm">➖ انزعي إلكتروناً</button><button class="pill" id="lab-reset">↺ من البداية</button></div>
+    </div>
+    <div class="box">
+      <h3>لاحظي</h3>
+      <ol style="margin:0;padding-inline-start:1.2em;display:grid;gap:10px">
+        <li>الإلكترونات تُفقد من <span class="f">4s</span> <b>أولاً</b>، ثم من <span class="f">3d</span>.</li>
+        <li>بعد فقد إلكتروني <span class="f">4s</span> تصبح حالة التأكسد <span class="f">+2</span>، وهي <b>الأكثر شيوعاً</b>.</li>
+        <li><b>أقصى حالة تأكسد</b> = إلكترونات <span class="f">4s</span> + الإلكترونات <b>المفردة</b> في <span class="f">3d</span>.</li>
+      </ol>
+      <p class="answer">جرّبي المنجنيز: <span class="f">2 + 5 = 7</span>، فأقصى حالة تأكسد له <span class="f">+7</span>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ٦ القواعد -->
+<section class="slide">
+  <div class="kicker"><span class="chip goal">الهدف ١</span><span>بطاقات الحفظ</span></div>
+  <h2 class="st">أربع قواعد ذهبية <span class="muted" style="font-size:.6em">اضغطي على البطاقة لتظهر الإجابة</span></h2>
+  <div class="rulecards">
+    <button class="rc"><span class="ic">⭐</span><b>حالة التأكسد الأكثر شيوعاً هي <span class="f">+2</span>… لماذا؟</b><span class="tap">اضغطي للإجابة</span><span class="ans">لأنها تفقد الإلكترونات من <span class="f">4s</span> أولاً، والذي يحتوي على إلكترونين.</span></button>
+    <button class="rc"><span class="ic">🏁</span><b>متى يصل العنصر الانتقالي لأقصى حالة تأكسد؟</b><span class="tap">اضغطي للإجابة</span><span class="ans">عندما يفقد إلكتروني <span class="f">4s</span> أولاً، ويتبعهما بجميع الإلكترونات المفردة في <span class="f">3d</span>.</span></button>
+    <button class="rc"><span class="ic">☝️</span><b>لماذا للسكانديوم <span class="f">Sc</span> حالة تأكسد واحدة <span class="f">+3</span>؟</b><span class="tap">اضغطي للإجابة</span><span class="ans">لأنه يفقد الإلكترون المنفرد في <span class="f">3d</span> مع إلكتروني <span class="f">4s</span> لتقارب طاقة الفلكين، فيصبح <span class="f">Sc³⁺ : [Ar]</span> مستقراً.</span></button>
+    <button class="rc"><span class="ic">🔒</span><b>لماذا <span class="f">Fe³⁺</span> أكثر استقراراً من <span class="f">Fe²⁺</span>؟</b><span class="tap">اضغطي للإجابة</span><span class="ans"><span class="f">Fe³⁺ : [Ar] 3d⁵</span> فلك <span class="f">d</span> نصف ممتلئ، وهو ترتيب مستقر.</span></button>
+  </div>
+  <div class="box">
+    <h3>ترتيبات مستقرة لأفلاك d</h3>
+    <div class="stable"><div><b class="f">d⁰</b><br>فارغ كلياً</div><div><b class="f">d⁵</b><br>نصف ممتلئ</div><div><b class="f">d¹⁰</b><br>ممتلئ بالكامل</div></div>
+  </div>
+</section>
+
+<!-- ٧ غلق الهدف ١ -->
+<section class="slide">
+  <div class="kicker"><span class="chip goal">غلق الهدف ١</span><span>٣ دقائق</span></div>
+  <h2 class="st">غلق الهدف ١: حالات التأكسد</h2>
+  <div class="three" id="c1"></div>
+</section>
+
+<!-- ٨ من الأيون إلى الأكسيد -->
+<section class="slide">
+  <div class="kicker"><span class="chip goal">الهدف ٢</span><span>خطوة بخطوة</span></div>
+  <h2 class="st">من الأيون… إلى التوزيع الإلكتروني… إلى صيغة الأكسيد</h2>
+  <div class="two">
+    <div class="box">
+      <div class="picker" id="ox-pick"></div>
+      <div class="stage"><svg viewBox="0 0 420 200" role="img" aria-label="تبادل الشحنات بين أيون الفلز وأيون الأكسجين" id="ox-svg"></svg></div>
+      <div class="row"><button class="pill solid" id="ox-next">الخطوة التالية ←</button><button class="pill" id="ox-reset">↺</button></div>
+    </div>
+    <div class="box"><div class="steps" id="ox-steps"></div></div>
+  </div>
+</section>
+
+<!-- ٩ أكاسيد المنجنيز -->
+<section class="slide">
+  <div class="kicker"><span class="chip goal">الهدف ٢</span><span>تحدّي الفرق</span></div>
+  <h2 class="st">كم أكسيداً يمكن أن يكوّن المنجنيز <span class="f">Mn</span> مع أيون الأكسجين؟</h2>
+  <p class="lead">حالات تأكسد المنجنيز: <span class="f">+2 , +3 , +4 , +6 , +7</span>. كل فريق يكتب صيغة الأكسيد، ثم اضغطي على البطاقة للتأكّد.</p>
+  <div class="mncards" id="mn"></div>
+  <p class="progress" id="mn-p"></p>
+</section>
+
+<!-- ١٠ غلق الهدف ٢ -->
+<section class="slide">
+  <div class="kicker"><span class="chip goal">غلق الهدف ٢</span><span>٣ دقائق</span></div>
+  <h2 class="st">غلق الهدف ٢: التوزيع الإلكتروني وصيغ الأكاسيد</h2>
+  <div class="three" id="c2"></div>
+</section>
+
+<!-- ١١ العامل المؤكسد والمختزل -->
+<section class="slide">
+  <div class="kicker"><span class="chip goal">الهدف ٣</span><span>مفاهيم</span></div>
+  <h2 class="st">أيونات العناصر الانتقالية كعوامل مؤكسدة ومختزلة</h2>
+  <div class="defs">
+    <div class="def oxa">
+      <h3>⬇ العامل المؤكسد</h3>
+      <p>هو المادة التي <b>تأخذ إلكترونات</b> من مادة أخرى، <b>فتُختزل</b> ويقلّ عدد تأكسدها.</p>
+      <p class="eqx">Cr²⁺ + 2e⁻ → Cr</p>
+      <p><span class="tag g">يكتسب e⁻</span> <span class="tag g">عدد التأكسد يقلّ ⬇</span></p>
+    </div>
+    <div class="def red">
+      <h3>⬆ العامل المختزل</h3>
+      <p>هو المادة التي <b>تمنح إلكترونات</b> لمادة أخرى، <b>فتتأكسد</b> ويزداد عدد تأكسدها.</p>
+      <p class="eqx">Cr²⁺ → Cr³⁺ + e⁻</p>
+      <p><span class="tag y">يفقد e⁻</span> <span class="tag y">عدد التأكسد يزيد ⬆</span></p>
+    </div>
+  </div>
+  <div class="box">
+    <p class="mnemo">🔑 المؤكسد <b>يُختزل</b>… والمختزل <b>يتأكسد</b></p>
+    <div class="row" style="justify-content:center"><button class="pill" data-reveal="rule3">كيف أحدّد؟</button></div>
+    <div class="answer" id="rule3" hidden>
+      نكتب حالات تأكسد العنصر على خط، ونضع الأيون في مكانه:
+      إن وُجدت حالة <b>أقل</b> منه ⬅ يمكن أن يكون <b>عاملاً مؤكسداً</b>. وإن وُجدت حالة <b>أعلى</b> منه ⬅ يمكن أن يكون <b>عاملاً مختزلاً</b>. وإن وُجدتا معاً ⬅ <b>كليهما</b>.
+    </div>
+  </div>
+</section>
+
+<!-- ١٢ أداة التحديد -->
+<section class="slide">
+  <div class="kicker"><span class="chip goal">الهدف ٣</span><span>أداة تفاعلية</span></div>
+  <h2 class="st">حدّدي: عامل مؤكسد أم مختزل أم كليهما؟</h2>
+  <div class="picker" id="rd-pick"></div>
+  <div class="redox">
+    <div class="box"><div class="stage"><svg viewBox="0 0 300 380" role="img" aria-label="خط حالات التأكسد للعنصر وموقع الأيون عليه" id="rd-svg"></svg></div></div>
+    <div class="box">
+      <div class="choice">
+        <button class="pill" data-c="ox">⬇ عامل مؤكسد</button>
+        <button class="pill" data-c="red">⬆ عامل مختزل</button>
+        <button class="pill" data-c="both">⇅ كليهما</button>
+      </div>
+      <p class="verd" id="rd-verd"></p>
+      <div class="eqcols">
+        <div class="eqcol g"><h4>⬇ كعامل مؤكسد (يكتسب e⁻)</h4><div id="rd-ox"></div></div>
+        <div class="eqcol y"><h4>⬆ كعامل مختزل (يفقد e⁻)</h4><div id="rd-red"></div></div>
+      </div>
+      <p class="progress" id="rd-p"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ١٣ غلق الهدف ٣ -->
+<section class="slide">
+  <div class="kicker"><span class="chip goal">غلق الهدف ٣</span><span>٣ دقائق</span></div>
+  <h2 class="st">غلق الهدف ٣: مؤكسد أم مختزل؟</h2>
+  <div class="three" id="c3"></div>
+</section>
+
+<!-- ١١ التحدّي -->
+<section class="slide">
+  <div class="kicker"><span class="chip">الغلق الختامي</span><span>المسابقة</span></div>
+  <h2 class="st">التحدّي النهائي بين الفريقين</h2>
+  <div class="box" style="font-size:1.2rem">
+    <p class="muted" id="ch-n"></p>
+    <p id="ch-q" style="font-size:1.35rem;font-weight:700"></p>
+    <div class="row"><button class="pill solid" id="ch-show">أظهري الإجابة</button></div>
+    <p class="answer" id="ch-a" hidden></p>
+    <div class="row"><button class="pill" data-team="A" data-d="1">+١ لفريق المنجنيز</button><button class="pill" data-team="B" data-d="1">+١ لفريق الفاناديوم</button><button class="pill" id="ch-next">السؤال التالي ←</button></div>
+  </div>
+  <p class="answer" id="winner" hidden></p>
+</section>
+
+</div></main>
+
+<div class="bottom gut"><div class="wrap">
+  <button class="pill" id="prev">→ السابقة</button>
+  <div class="dots" id="dots"></div>
+  <span class="counter" id="counter"></span>
+  <button class="pill solid" id="next">التالية ←</button>
+</div></div>
+
+<script src="../../../assets/theme.js"></script>
+<script>
+const $ = (id) => document.getElementById(id);
+const NS = "http://www.w3.org/2000/svg";
+const el = (t, a = {}, p) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; };
+const f = (s) => `<span class="f">${s}</span>`;
+const WINE = "#8C1F3F", GOLD = "#B8925A", INK = "#3B1E28";
+
+// ── التنقّل ──
+const slides = [...document.querySelectorAll(".slide")];
+let cur = 0;
+slides.forEach((s, i) => { const d = document.createElement("button"); d.className = "dot"; d.setAttribute("aria-label", "الشريحة " + (i + 1)); d.onclick = () => go(i); $("dots").appendChild(d); });
+function go(i) {
+  cur = Math.max(0, Math.min(slides.length - 1, i));
+  slides.forEach((s, k) => (s.hidden = k !== cur));
+  [...$("dots").children].forEach((d, k) => d.classList.toggle("on", k === cur));
+  $("counter").textContent = `${cur + 1} / ${slides.length}`;
+  $("prev").disabled = cur === 0; $("next").disabled = cur === slides.length - 1;
+  $("main").scrollTop = 0;
+}
+$("prev").onclick = () => go(cur - 1); $("next").onclick = () => go(cur + 1);
+document.addEventListener("keydown", (e) => { if (e.key === "ArrowLeft") go(cur + 1); if (e.key === "ArrowRight") go(cur - 1); });
+
+// ── النقاط والإظهار والاختيار من متعدد ──
+const score = { A: 0, B: 0 };
+document.addEventListener("click", (e) => {
+  const t = e.target.closest("[data-team]");
+  if (t) { score[t.dataset.team] = Math.max(0, score[t.dataset.team] + Number(t.dataset.d)); $("sA").textContent = score.A; $("sB").textContent = score.B; }
+  const r = e.target.closest("[data-reveal]");
+  if (r) { $(r.dataset.reveal).hidden = false; r.hidden = true; }
+  const o = e.target.closest(".mcq .opt");
+  if (o && !o.closest(".mcq").dataset.locked) for (const b of o.parentElement.children) { b.setAttribute("aria-pressed", b === o); b.dataset.picked = b === o ? "1" : ""; }
+  const c = e.target.closest(".mcq .check");
+  if (c) {
+    const m = c.closest(".mcq"), ans = Number(m.dataset.answer);
+    [...m.querySelectorAll(".opt")].forEach((b, k) => { b.setAttribute("aria-pressed", "false"); if (k === ans) b.classList.add("right"); else if (b.dataset.picked) b.classList.add("wrong"); });
+    m.dataset.locked = "1"; const w = m.querySelector(".why"); if (w) w.hidden = false; c.hidden = true;
+  }
+});
+const mcq = (q, opts, ans, why) => `<div class="mcq box" data-answer="${ans}"><p><b>${q}</b></p><div class="opts">${opts.map((x) => `<button class="opt pill">${x}</button>`).join("")}</div><div class="row"><button class="check pill solid">أظهري الإجابة</button></div>${why ? `<p class="why answer" hidden>${why}</p>` : ""}</div>`;
+
+// ══════════ بيانات العناصر: الرمز، العدد الذري، إلكترونات 4s و 3d، حالات التأكسد (من ورقة الدرس) ══════════
+const E = [
+  { s: "Sc", z: 21, a: "السكانديوم", s4: 2, d3: 1, ox: [3] },
+  { s: "Ti", z: 22, a: "التيتانيوم", s4: 2, d3: 2, ox: [2, 3, 4] },
+  { s: "V", z: 23, a: "الفاناديوم", s4: 2, d3: 3, ox: [2, 3, 4, 5] },
+  { s: "Cr", z: 24, a: "الكروم", s4: 1, d3: 5, ox: [2, 3, 4, 6] },
+  { s: "Mn", z: 25, a: "المنجنيز", s4: 2, d3: 5, ox: [2, 3, 4, 6, 7] },
+  { s: "Fe", z: 26, a: "الحديد", s4: 2, d3: 6, ox: [2, 3] },
+  { s: "Co", z: 27, a: "الكوبالت", s4: 2, d3: 7, ox: [2, 3] },
+  { s: "Ni", z: 28, a: "النيكل", s4: 2, d3: 8, ox: [2, 3] },
+  { s: "Cu", z: 29, a: "النحاس", s4: 1, d3: 10, ox: [1, 2] },
+  { s: "Zn", z: 30, a: "الخارصين", s4: 2, d3: 10, ox: [2] },
+];
+const SUPN = (n) => String(n).split("").map((c) => "⁰¹²³⁴⁵⁶⁷⁸⁹"[c]).join("");
+const SUBN = (n) => String(n).split("").map((c) => "₀₁₂₃₄₅₆₇₈₉"[c]).join("");
+const ionName = (sym, n) => n === 0 ? sym : sym + (n === 1 ? "" : SUPN(n)) + "⁺";
+const sign = (n) => "+" + n;
+
+// ── التهيئة: صوديوم بحالة واحدة ومنجنيز بخمس ──
+(function hook() {
+  const svg = $("hook-svg");
+  const atom = (cx, sym, col) => { el("circle", { cx, cy: 125, r: 50, fill: col, opacity: .18 }, svg); el("circle", { cx, cy: 125, r: 32, fill: col }, svg); const t = el("text", { x: cx, y: 135, "text-anchor": "middle", "font-size": 28, "font-weight": 800, fill: "#fff" }, svg); t.textContent = sym; };
+  atom(130, "Na", "#8A6E76"); atom(440, "Mn", WINE);
+  const chip = (x, y, txt, d) => { const g = el("g", { style: `opacity:0;transition:opacity .5s ${d}s` }, svg); el("rect", { x: x - 25, y: y - 17, width: 50, height: 32, rx: 16, fill: GOLD }, g); const t = el("text", { x, y: y + 6, "text-anchor": "middle", "font-size": 17, "font-weight": 800, fill: "#fff" }, g); t.textContent = txt; requestAnimationFrame(() => requestAnimationFrame(() => (g.style.opacity = 1))); };
+  chip(130, 40, "+1", .2);
+  [2, 3, 4, 6, 7].forEach((n, i) => { const a = Math.PI * (1.12 + i * 0.19); chip(440 + 115 * Math.cos(a), 125 + 92 * Math.sin(a) + (i === 0 || i === 4 ? 30 : 0), sign(n), .5 + i * .35); });
+})();
+
+// ── جدول حالات التأكسد ──
+let mode = "all";
+function stripDraw() {
+  $("strip").innerHTML = E.map((e, i) => {
+    const mx = Math.max(...e.ox);
+    const cls = (n) => mode === "common" ? (n === 2 ? "hl" : "hide") : mode === "max" ? (n === mx ? "mx" : "hide") : mode === "one" ? (e.ox.length === 1 ? "one" : "hide") : "";
+    return `<button class="elc" data-i="${i}"><span class="z">${e.z}</span><span class="sy">${e.s}</span><span class="ox">${e.ox.map((n) => `<span class="${cls(n)}">${sign(n)}</span>`).join("")}</span><span class="cnt">${e.ox.length} ${e.ox.length === 1 ? "حالة" : e.ox.length === 2 ? "حالتان" : "حالات"}</span></button>`;
+  }).join("");
+}
+const MSG = {
+  all: "اضغطي على أي عنصر لتعرفي عدد حالات تأكسده، أو اختاري أحد الأزرار.",
+  common: "⭐ حالة التأكسد <b>" + f("+2") + "</b> هي الأكثر شيوعاً للعناصر الانتقالية، لأنها تفقد إلكتروني " + f("4s") + " أولاً.",
+  max: "🏁 أعلى حالة تأكسد في الصف هي " + f("+7") + " للمنجنيز = إلكترونا " + f("4s") + " + خمسة إلكترونات مفردة في " + f("3d") + ".",
+  one: "☝️ السكانديوم له " + f("+3") + " فقط، والخارصين له " + f("+2") + " فقط.",
+};
+document.querySelectorAll("[data-mode]").forEach((b) => b.onclick = () => {
+  mode = b.dataset.mode; document.querySelectorAll("[data-mode]").forEach((x) => x.setAttribute("aria-pressed", x === b)); stripDraw(); $("strip-msg").innerHTML = MSG[mode];
+});
+$("strip").onclick = (ev) => {
+  const c = ev.target.closest(".elc"); if (!c) return; const e = E[Number(c.dataset.i)];
+  $("strip-msg").innerHTML = `<b>${e.a}</b> ${f(e.s)}: ${e.ox.length === 1 ? "حالة تأكسد واحدة" : e.ox.length + " حالات تأكسد"} ${f(e.ox.map(sign).join(" , "))}`;
+};
+stripDraw();
+
+// ── مخطط الطاقة: تقارب 4s و 3d ──
+let zoom = false;
+function enDraw() {
+  const svg = $("en-svg"); svg.innerHTML = "";
+  el("line", { x1: 50, y1: 285, x2: 50, y2: 20, stroke: INK, "stroke-width": 3 }, svg);
+  el("path", { d: "M 42 34 L 50 18 L 58 34 Z", fill: INK }, svg);
+  const lab = el("text", { x: 26, y: 160, "font-size": 15, fill: INK, transform: "rotate(-90 26 160)", "text-anchor": "middle" }, svg); lab.textContent = "Energy";
+  const lv = zoom ? [["3p", 330, 3, 0], ["4s", 175, 1, 0], ["3d", 110, 5, 0]] : [["3p", 250, 3, 0], ["4s", 105, 1, 0], ["3d", 85, 5, 0]];
+  lv.forEach(([n, y, k]) => {
+    for (let j = 0; j < k; j++) el("line", { x1: 120 + j * 52, y1: y, x2: 160 + j * 52, y2: y, stroke: n === "3p" ? "#9C7B84" : WINE, "stroke-width": 5, "stroke-linecap": "round", class: "lvl-anim" }, svg);
+    const t = el("text", { x: 100, y: y + 5, "text-anchor": "end", "font-size": 16, "font-weight": 800, fill: INK }, svg); t.textContent = n;
+  });
+  if (zoom) {
+    el("path", { d: "M 400 112 L 400 173", stroke: "#2E8A57", "stroke-width": 3 }, svg);
+    el("path", { d: "M 393 120 L 400 108 L 407 120 Z M 393 165 L 400 177 L 407 165 Z", fill: "#2E8A57" }, svg);
+    const t = el("text", { x: 395, y: 210, "text-anchor": "middle", "font-size": 14, "font-weight": 800, fill: "#2E8A57" }, svg); t.textContent = "فرق صغير جداً";
+  } else {
+    el("path", { d: "M 400 100 L 400 240", stroke: "#C24A33", "stroke-width": 2, "stroke-dasharray": "5 5" }, svg);
+    const t = el("text", { x: 400, y: 180, "text-anchor": "middle", "font-size": 13, fill: "#C24A33" }, svg); t.textContent = "فرق كبير";
+    const t2 = el("text", { x: 300, y: 62, "text-anchor": "middle", "font-size": 13, fill: "#2E8A57", "font-weight": 800 }, svg); t2.textContent = "4s و 3d متلاصقان تقريباً";
+  }
+}
+$("en-zoom").onclick = () => { zoom = true; enDraw(); }; $("en-reset").onclick = () => { zoom = false; enDraw(); }; enDraw();
+
+// ── مختبر نزع الإلكترونات ──
+const lab = { i: 4, lost: 0 };
+$("lab-pick").innerHTML = E.map((e, i) => `<button class="pill" data-i="${i}">${e.s}</button>`).join("");
+const hund = (n) => [0, 1, 2, 3, 4].map((k) => (n > k ? "u" : "") + (n > k + 5 ? "d" : ""));
+function labState() { const e = E[lab.i]; const s4 = Math.max(0, e.s4 - lab.lost); const d3 = e.d3 - Math.max(0, lab.lost - e.s4); return { e, s4, d3 }; }
+function labDraw(flyBox) {
+  const { e, s4, d3 } = labState(), n = lab.lost, mx = Math.max(...e.ox);
+  [...$("lab-pick").children].forEach((b, k) => b.setAttribute("aria-pressed", k === lab.i));
+  $("lab-ion").textContent = ionName(e.s, n);
+  $("lab-cfg").textContent = `[Ar] ${s4 ? "4s" + SUPN(s4) + " " : ""}${d3 ? "3d" + SUPN(d3) : ""}`.trim();
+  const boxS = `<span class="ob">${s4 >= 1 ? '<i class="u">↑</i>' : ""}${s4 >= 2 ? '<i class="d">↓</i>' : ""}</span>`;
+  const boxD = hund(d3).map((v) => `<span class="ob">${v.includes("u") ? '<i class="u">↑</i>' : ""}${v.includes("d") ? '<i class="d">↓</i>' : ""}</span>`).join("");
+  $("lab-shells").innerHTML = `<div class="shell"><div class="bx">${boxS}</div><small>4s</small></div><div class="shell"><div class="bx">${boxD}</div><small>3d</small></div>`;
+  $("lab-ox").innerHTML = Array.from({ length: mx }, (_, k) => k + 1).map((k) => `<span class="${k === n ? "now" : ""} ${e.ox.includes(k) ? "real" : ""}">${sign(k)}</span>`).join("");
+  const st = $("lab-state");
+  if (n === 0) { st.className = "state"; st.innerHTML = `ذرة ${e.a} متعادلة. اضغطي «انزعي إلكتروناً».`; }
+  else if (n === mx) { st.className = "state max"; st.innerHTML = `🏁 وصلتِ لأقصى حالة تأكسد ${f(sign(n))} ${e.s === "Mn" || e.s === "Cr" || e.s === "V" || e.s === "Ti" ? `= إلكترونات ${f("4s")} + الإلكترونات المفردة في ${f("3d")}` : ""}`; }
+  else if (e.ox.includes(n)) { st.className = "state ok"; st.innerHTML = `✔ ${f(sign(n))} حالة تأكسد معروفة لـ${e.a}${n === 2 ? " ⭐ الأكثر شيوعاً" : ""}${e.s === "Fe" && n === 3 ? " 🔒 أكثر استقراراً (3d⁵)" : ""}`; }
+  else { st.className = "state no"; st.innerHTML = `✘ ${f(sign(n))} ليست من حالات تأكسد ${e.a} الشائعة… استمرّي`; }
+  $("lab-rm").disabled = n >= mx;
+  if (flyBox !== undefined) {
+    // الإلكترون الذي خرج يطير لأعلى قبل أن يختفي
+    const host = flyBox.where === "s" ? $("lab-shells").querySelectorAll(".ob")[0] : $("lab-shells").querySelectorAll(".ob")[1 + flyBox.k];
+    const i = document.createElement("i"); i.className = flyBox.cls; i.textContent = flyBox.cls === "u" ? "↑" : "↓"; host.appendChild(i);
+    requestAnimationFrame(() => requestAnimationFrame(() => i.classList.add("fly"))); setTimeout(() => i.remove(), 600);
+  }
+}
+$("lab-pick").onclick = (ev) => { const b = ev.target.closest("[data-i]"); if (b) { lab.i = Number(b.dataset.i); lab.lost = 0; labDraw(); } };
+$("lab-rm").onclick = () => {
+  const before = labState(); lab.lost++; const after = labState();
+  let fly;
+  if (after.s4 < before.s4) fly = { where: "s", cls: before.s4 === 2 ? "d" : "u" };
+  else { const a = hund(before.d3), b = hund(after.d3); const k = a.findIndex((v, j) => v !== b[j]); fly = { where: "d", k, cls: a[k].length > b[k].length && a[k].includes("d") && !b[k].includes("d") ? "d" : "u" }; }
+  labDraw(fly);
+};
+$("lab-reset").onclick = () => { lab.lost = 0; labDraw(); };
+labDraw();
+
+// ── بطاقات القواعد ──
+document.querySelectorAll(".rc").forEach((c) => c.onclick = () => c.classList.add("open"));
+
+// ── غلق الهدف ١ ──
+$("c1").innerHTML = [
+  mcq("حالة التأكسد الأكثر شيوعاً للعناصر الانتقالية:", [f("+1"), f("+2"), f("+3")], 1, "لأنها تفقد إلكتروني " + f("4s") + " أولاً."),
+  mcq("أقصى حالة تأكسد للمنجنيز " + f("Mn : [Ar] 4s² 3d⁵") + ":", [f("+5"), f("+2"), f("+7")], 2, "إلكترونا " + f("4s") + " + خمسة إلكترونات مفردة في " + f("3d") + " = " + f("+7") + "."),
+  mcq("سبب تعدّد حالات التأكسد للعناصر الانتقالية:", ["الفرق في الطاقة بين 4s و 3d صغير جداً", "امتلاء أفلاك 3d دائماً", "كبر حجم الذرة"], 0, "تقارب طاقة " + f("4s") + " و" + f("3d") + " يسمح بفقد الإلكترونات من الفلكين."),
+].join("");
+
+// ── من الأيون إلى الأكسيد ──
+const OXI = [["V", 2], ["V", 3], ["V", 4], ["V", 5], ["Cr", 2], ["Cr", 3], ["Cr", 4], ["Cr", 6], ["Fe", 2], ["Fe", 3]];
+const ox = { k: 9, step: 0 };
+function oxide(sym, n) {
+  const raw = `${sym}₂O${n === 1 ? "" : SUBN(n)}`;
+  const g = n % 2 === 0 ? 2 : 1, a = 2 / g, b = n / g;
+  const simp = `${sym}${a > 1 ? SUBN(a) : ""}O${b > 1 ? SUBN(b) : ""}`;
+  return { raw, simp, reduced: g === 2 };
+}
+$("ox-pick").innerHTML = OXI.map(([s, n], i) => `<button class="pill" data-i="${i}">${ionName(s, n)}</button>`).join("");
+function oxDraw() {
+  const [s, n] = OXI[ox.k], e = E.find((x) => x.s === s);
+  [...$("ox-pick").children].forEach((b, i) => b.setAttribute("aria-pressed", i === ox.k));
+  const s4 = Math.max(0, e.s4 - n), d3 = e.d3 - Math.max(0, n - e.s4), o = oxide(s, n);
+  const cfgA = `${s} : [Ar] 4s${SUPN(e.s4)} 3d${SUPN(e.d3)}`, cfgI = `${ionName(s, n)} : [Ar]${s4 ? " 4s" + SUPN(s4) : ""}${d3 ? " 3d" + SUPN(d3) : ""}`;
+  const S = [
+    ["التوزيع الإلكتروني للذرّة", cfgA],
+    ["التوزيع الإلكتروني للأيون: تخرج إلكترونات " + f("4s") + " أولاً", cfgI],
+    ["نبادل الشحنات بين أيون الفلز وأيون الأكسجين " + f("O²⁻"), `${ionName(s, n)}  ✕  O²⁻`],
+    ["الصيغة قبل الاختصار", o.raw],
+    [o.reduced ? "نختصر الأرقام فتصبح صيغة الأكسيد" : "لا يمكن الاختصار، فصيغة الأكسيد", o.simp],
+  ];
+  $("ox-steps").innerHTML = S.slice(0, ox.step).map(([t, v], i) => `<div class="stp${i === 4 ? " final" : ""}"><span class="n">${i + 1}</span><span>${t}</span><span class="v">${v}</span></div>`).join("") || '<p class="muted">اختاري أيوناً ثم اضغطي «الخطوة التالية».</p>';
+  $("ox-next").disabled = ox.step >= S.length;
+  // رسم تبادل الشحنات
+  const svg = $("ox-svg"); svg.innerHTML = "";
+  const big = (x, txt, col) => { const t = el("text", { x, y: 100, "text-anchor": "middle", "font-size": 44, "font-weight": 800, fill: col }, svg); t.textContent = txt; };
+  big(130, s, WINE); big(290, "O", "#C24A33");
+  const ch = (x, txt) => { const t = el("text", { x, y: 58, "text-anchor": "middle", "font-size": 22, "font-weight": 800, fill: INK }, svg); t.textContent = txt; };
+  ch(130 + 34, sign(n)); ch(290 + 30, "2−");
+  if (ox.step >= 3) {
+    el("path", { d: "M 168 66 C 220 100, 250 120, 302 140", stroke: GOLD, "stroke-width": 3, fill: "none", class: "xdash" }, svg);
+    el("path", { d: "M 318 66 C 260 100, 220 120, 150 140", stroke: GOLD, "stroke-width": 3, fill: "none", class: "xdash" }, svg);
+    const sub = (x, txt) => { const t = el("text", { x, y: 160, "text-anchor": "middle", "font-size": 24, "font-weight": 800, fill: "#2E8A57" }, svg); t.textContent = txt; };
+    sub(150, "2"); sub(306, String(n));
+  }
+  if (ox.step >= 5) { const t = el("text", { x: 210, y: 192, "text-anchor": "middle", "font-size": 24, "font-weight": 800, fill: "#2E8A57" }, svg); t.textContent = "✔ " + o.simp; }
+}
+$("ox-pick").onclick = (ev) => { const b = ev.target.closest("[data-i]"); if (b) { ox.k = Number(b.dataset.i); ox.step = 0; oxDraw(); } };
+$("ox-next").onclick = () => { ox.step++; oxDraw(); }; $("ox-reset").onclick = () => { ox.step = 0; oxDraw(); }; oxDraw();
+
+// ── أكاسيد المنجنيز ──
+const MN = [2, 3, 4, 6, 7];
+let mnOpen = new Set();
+$("mn").innerHTML = MN.map((n, i) => { const o = oxide("Mn", n); return `<button class="mn" data-i="${i}"><span class="in"><span class="fc"><span class="big">${ionName("Mn", n)}</span><small>+ O²⁻</small><span class="muted">؟ صيغة الأكسيد</span></span><span class="bk"><span class="big">${o.simp}</span><small>${o.reduced ? o.raw + " ← " + o.simp : "Mn" + SUPN(n) + "⁺ ✕ O²⁻"}</small></span></span></button>`; }).join("");
+const mnP = () => { $("mn-p").textContent = mnOpen.size === MN.length ? "🎉 خمسة أكاسيد للمنجنيز: MnO · Mn₂O₃ · MnO₂ · MnO₃ · Mn₂O₇" : `اكتشفتِ ${mnOpen.size} من ${MN.length}`; };
+$("mn").onclick = (ev) => { const b = ev.target.closest(".mn"); if (!b) return; b.classList.add("open"); mnOpen.add(b.dataset.i); mnP(); };
+mnP();
+
+// ── غلق الهدف ٢ ──
+$("c2").innerHTML = [
+  mcq("صيغة أكسيد الفاناديوم الذي يكون فيه " + f("V⁵⁺") + ":", [f("VO₅"), f("V₂O₅"), f("V₅O₂")], 1, "نبادل الشحنات: " + f("V⁵⁺ ✕ O²⁻ → V₂O₅") + "."),
+  mcq("حالة تأكسد الكروم في " + f("CrO₃") + ":", [f("+3"), f("+6"), f("+4")], 1, f("Cr₂O₆") + " بعد الاختصار يصبح " + f("CrO₃") + "، فالكروم " + f("+6") + "."),
+  mcq("التوزيع الإلكتروني لأيون " + f("Cr³⁺") + ":", [f("[Ar] 3d³"), f("[Ar] 4s² 3d¹"), f("[Ar] 4s¹ 3d²")], 0, f("Cr : [Ar] 4s¹ 3d⁵") + "، يفقد إلكترون " + f("4s") + " ثم إلكترونين من " + f("3d") + "."),
+].join("");
+
+// ── العوامل المؤكسدة والمختزلة ──
+const RD = [
+  { s: "Cr", n: 2, states: [0, 2, 3, 4, 6], ox: ["Cr²⁺ + 2e⁻ → Cr"], red: ["Cr²⁺ → Cr³⁺ + e⁻", "Cr²⁺ → Cr⁴⁺ + 2e⁻", "Cr²⁺ → Cr⁶⁺ + 4e⁻"] },
+  { s: "Zn", n: 2, states: [0, 2], ox: ["Zn²⁺ + 2e⁻ → Zn"], red: [] },
+  { s: "V", n: 3, states: [0, 2, 3, 4, 5], ox: ["V³⁺ + e⁻ → V²⁺", "V³⁺ + 3e⁻ → V"], red: ["V³⁺ → V⁴⁺ + e⁻", "V³⁺ → V⁵⁺ + 2e⁻"] },
+  { s: "Mn", n: 4, states: [0, 2, 3, 4, 6, 7], ox: ["Mn⁴⁺ + e⁻ → Mn³⁺", "Mn⁴⁺ + 2e⁻ → Mn²⁺", "Mn⁴⁺ + 4e⁻ → Mn"], red: ["Mn⁴⁺ → Mn⁶⁺ + 2e⁻", "Mn⁴⁺ → Mn⁷⁺ + 3e⁻"] },
+  { s: "Cu", n: 1, states: [0, 1, 2], ox: ["Cu⁺ + e⁻ → Cu"], red: ["Cu⁺ → Cu²⁺ + e⁻"] },
+  { s: "Mn", n: 7, states: [0, 2, 3, 4, 6, 7], ox: ["Mn⁷⁺ + e⁻ → Mn⁶⁺", "Mn⁷⁺ + 5e⁻ → Mn²⁺"], red: [] },
+  { s: "Fe", n: 0, states: [0, 2, 3], ox: [], red: ["Fe → Fe²⁺ + 2e⁻", "Fe → Fe³⁺ + 3e⁻"] },
+];
+const rd = { k: 0, shown: false, solved: new Set() };
+const rdKind = (r) => r.ox.length && r.red.length ? "both" : r.ox.length ? "ox" : "red";
+const RDN = { ox: "عامل مؤكسد فقط", red: "عامل مختزل فقط", both: "عامل مؤكسد ومختزل (كليهما)" };
+$("rd-pick").innerHTML = RD.map((r, i) => `<button class="pill" data-i="${i}">${r.n ? ionName(r.s, r.n) : r.s + " (ذرّة)"}</button>`).join("");
+function rdDraw() {
+  const r = RD[rd.k];
+  [...$("rd-pick").children].forEach((b, i) => b.setAttribute("aria-pressed", i === rd.k));
+  const svg = $("rd-svg"); svg.innerHTML = "";
+  const top = 50, bot = 355, mx = Math.max(...r.states), Y = (v) => bot - (v / mx) * (bot - top);
+  el("line", { x1: 90, y1: bot, x2: 90, y2: top - 10, stroke: INK, "stroke-width": 3 }, svg);
+  const head = el("text", { x: 90, y: 16, "text-anchor": "middle", "font-size": 13, fill: INK }, svg); head.textContent = "حالة التأكسد";
+  r.states.forEach((v) => {
+    const me = v === r.n, y = Y(v);
+    el("circle", { cx: 90, cy: y, r: me ? 17 : 9, fill: me ? WINE : "#fff", stroke: me ? WINE : "#9C7B84", "stroke-width": 2 }, svg);
+    const t = el("text", { x: 52, y: y + 6, "text-anchor": "end", "font-size": 18, "font-weight": 800, fill: me ? WINE : INK }, svg); t.textContent = v ? "+" + v : "0";
+    if (me) { const n = el("text", { x: 118, y: y + 6, "font-size": 20, "font-weight": 800, fill: WINE }, svg); n.textContent = r.n ? ionName(r.s, r.n) : r.s; }
+  });
+  if (rd.shown) {
+    const y0 = Y(r.n), lo = r.states.filter((v) => v < r.n), hi = r.states.filter((v) => v > r.n);
+    if (lo.length) { el("path", { d: `M 205 ${y0 + 12} L 205 ${Y(Math.min(...lo)) - 4}`, stroke: "#2E8A57", "stroke-width": 5, class: "rgrow" }, svg); el("path", { d: `M 195 ${Y(Math.min(...lo)) - 14} L 205 ${Y(Math.min(...lo))} L 215 ${Y(Math.min(...lo)) - 14} Z`, fill: "#2E8A57" }, svg); const t = el("text", { x: 222, y: (y0 + Y(Math.min(...lo))) / 2, "font-size": 14, "font-weight": 800, fill: "#2E8A57" }, svg); t.textContent = "+ e⁻"; }
+    if (hi.length) { el("path", { d: `M 250 ${y0 - 12} L 250 ${Y(Math.max(...hi)) + 4}`, stroke: GOLD, "stroke-width": 5, class: "rgrow" }, svg); el("path", { d: `M 240 ${Y(Math.max(...hi)) + 14} L 250 ${Y(Math.max(...hi))} L 260 ${Y(Math.max(...hi)) + 14} Z`, fill: GOLD }, svg); const t = el("text", { x: 262, y: (y0 + Y(Math.max(...hi))) / 2, "font-size": 14, "font-weight": 800, fill: "#8A6420" }, svg); t.textContent = "− e⁻"; }
+  }
+  const list = (a) => a.length ? a.map((e, i) => `<div class="e" style="animation-delay:${i * .25}s">${e}</div>`).join("") : '<div class="none">✕</div>';
+  $("rd-ox").innerHTML = rd.shown ? list(r.ox) : '<p class="muted">؟</p>';
+  $("rd-red").innerHTML = rd.shown ? list(r.red) : '<p class="muted">؟</p>';
+  if (!rd.shown) { $("rd-verd").textContent = "اختاري الإجابة…"; $("rd-verd").style.color = ""; }
+  document.querySelectorAll("[data-c]").forEach((b) => b.classList.remove("right", "wrong", "opt"));
+  $("rd-p").textContent = `حدّدتِ ${rd.solved.size} من ${RD.length}`;
+}
+$("rd-pick").onclick = (ev) => { const b = ev.target.closest("[data-i]"); if (b) { rd.k = Number(b.dataset.i); rd.shown = false; rdDraw(); } };
+document.querySelectorAll("[data-c]").forEach((b) => b.onclick = () => {
+  const r = RD[rd.k], k = rdKind(r);
+  if (b.dataset.c === k) {
+    rd.shown = true; rd.solved.add(rd.k); rdDraw();
+    const v = $("rd-verd"); v.innerHTML = "✔ " + f(r.n ? ionName(r.s, r.n) : r.s) + " " + RDN[k]; v.style.color = "#2E8A57";
+    b.classList.add("opt", "right");
+  } else { b.classList.remove("shake"); void b.offsetWidth; b.classList.add("shake"); $("rd-verd").textContent = "✘ حاولي مرة أخرى… انظري: هل توجد حالة أقل؟ أعلى؟"; $("rd-verd").style.color = "#C24A33"; }
+});
+rdDraw();
+
+// ── غلق الهدف ٣ ──
+$("c3").innerHTML = [
+  mcq("أيون " + f("Zn²⁺") + " يعمل كـ:", ["عامل مؤكسد فقط", "عامل مختزل فقط", "كليهما"], 0, "للخارصين حالة واحدة " + f("+2") + "، فيكتسب إلكترونين فقط: " + f("Zn²⁺ + 2e⁻ → Zn") + "."),
+  mcq("العامل المختزل هو المادة التي:", ["تأخذ إلكترونات فتُختزل", "تمنح إلكترونات فتتأكسد", "لا يتغيّر عدد تأكسدها"], 1, "تمنح إلكترونات لمادة أخرى فتتأكسد ويزداد عدد تأكسدها."),
+  mcq("نصف المعادلة التي يعمل فيها " + f("V³⁺") + " كعامل مختزل:", [f("V³⁺ + e⁻ → V²⁺"), f("V³⁺ → V⁴⁺ + e⁻"), f("V³⁺ + 3e⁻ → V")], 1, "يفقد إلكتروناً فيزداد عدد تأكسده من " + f("+3") + " إلى " + f("+4") + "."),
+].join("");
+
+// ── التحدّي ──
+const CH = [
+  ["لماذا للعناصر الانتقالية حالات تأكسد متعدّدة؟", "لأن الفرق في الطاقة بين " + f("4s") + " و" + f("3d") + " صغير جداً، ولأن ترتيب الإلكترونات يعتمد على خصائص العنصر الآخر في الرابطة."],
+  ["لماذا حالة التأكسد " + f("+2") + " هي الأكثر شيوعاً؟", "لأن العنصر يفقد إلكتروني " + f("4s") + " أولاً."],
+  ["ما أقصى حالة تأكسد للفاناديوم " + f("V : [Ar] 4s² 3d³") + "؟", f("+5") + " = إلكترونا " + f("4s") + " + ثلاثة إلكترونات مفردة في " + f("3d") + "."],
+  ["لماذا للسكانديوم حالة تأكسد واحدة فقط؟", "يفقد إلكترون " + f("3d") + " المنفرد مع إلكتروني " + f("4s") + " لتقارب طاقتيهما، فيكون " + f("Sc³⁺ : [Ar]") + "."],
+  ["اكتبي صيغة أكسيد " + f("Fe³⁺"), f("Fe₂O₃")],
+  ["لماذا " + f("Fe³⁺") + " أكثر استقراراً من " + f("Fe²⁺") + "؟", "لأن " + f("Fe³⁺ : [Ar] 3d⁵") + " فلك d نصف ممتلئ."],
+  ["هل " + f("Cu⁺") + " عامل مؤكسد أم مختزل أم كليهما؟ اكتبي المعادلتين.", "كليهما: " + f("Cu⁺ + e⁻ → Cu") + " (مؤكسد) و " + f("Cu⁺ → Cu²⁺ + e⁻") + " (مختزل)."],
+  ["لماذا " + f("Mn⁷⁺") + " عامل مؤكسد فقط؟", "لأنه في أقصى حالة تأكسد للمنجنيز، فلا يمكنه أن يفقد إلكترونات أخرى، بل يكتسب فقط."],
+];
+
+let ci = 0;
+function ch() { $("ch-n").textContent = `السؤال ${ci + 1} من ${CH.length}`; $("ch-q").innerHTML = CH[ci][0]; $("ch-a").innerHTML = CH[ci][1]; $("ch-a").hidden = true; $("ch-show").hidden = false; $("ch-next").textContent = ci === CH.length - 1 ? "أعلني الفريق الفائز 🏆" : "السؤال التالي ←"; }
+$("ch-show").onclick = () => { $("ch-a").hidden = false; $("ch-show").hidden = true; };
+$("ch-next").onclick = () => { if (ci < CH.length - 1) { ci++; ch(); return; } $("winner").hidden = false;
+  $("winner").innerHTML = score.A === score.B ? `تعادل رائع! ${score.A} – ${score.B} 🎉` : `🏆 فاز ${score.A > score.B ? "فريق المنجنيز" : "فريق الفاناديوم"} بنتيجة ${Math.max(score.A, score.B)} مقابل ${Math.min(score.A, score.B)}. أحسنتنّ!`; };
+ch();
+go(0);
+</script>
+</body>
+</html>
